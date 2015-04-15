@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC166EE5D360E3A6A5ED9AEE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6CEEA943CD8710F860BB632 /* libPods.a */; };
 		CDE2D46B1ADDF35E0099FE0C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE2D46A1ADDF35E0099FE0C /* main.m */; };
 		CDE2D46E1ADDF35F0099FE0C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE2D46D1ADDF35F0099FE0C /* AppDelegate.m */; };
-		CDE2D4711ADDF35F0099FE0C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE2D4701ADDF35F0099FE0C /* ViewController.m */; };
 		CDE2D4741ADDF35F0099FE0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE2D4721ADDF35F0099FE0C /* Main.storyboard */; };
 		CDE2D4761ADDF35F0099FE0C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDE2D4751ADDF35F0099FE0C /* Images.xcassets */; };
 		CDE2D4791ADDF35F0099FE0C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDE2D4771ADDF35F0099FE0C /* LaunchScreen.xib */; };
 		CDE2D4851ADDF35F0099FE0C /* DoubanSameCityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE2D4841ADDF35F0099FE0C /* DoubanSameCityTests.m */; };
+		CDE2D4981ADDFC370099FE0C /* LauchController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE2D4941ADDFC370099FE0C /* LauchController.m */; };
+		CDE2D49A1ADE034E0099FE0C /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDE2D4991ADE034E0099FE0C /* View.xib */; };
+		CDE2D49E1ADE042B0099FE0C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE2D49C1ADE042B0099FE0C /* ViewController.m */; };
+		CDE2D49F1ADE042B0099FE0C /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDE2D49D1ADE042B0099FE0C /* ViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,19 +31,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B9EA1BDC03BF56BBC7AEBDA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A21E842B24FE76340EEC61D6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		B6CEEA943CD8710F860BB632 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE2D4651ADDF35E0099FE0C /* DoubanSameCity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoubanSameCity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE2D4691ADDF35E0099FE0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDE2D46A1ADDF35E0099FE0C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CDE2D46C1ADDF35F0099FE0C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CDE2D46D1ADDF35F0099FE0C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CDE2D46F1ADDF35F0099FE0C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CDE2D4701ADDF35F0099FE0C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CDE2D4731ADDF35F0099FE0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDE2D4751ADDF35F0099FE0C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CDE2D4781ADDF35F0099FE0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		CDE2D47E1ADDF35F0099FE0C /* DoubanSameCityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoubanSameCityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE2D4831ADDF35F0099FE0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDE2D4841ADDF35F0099FE0C /* DoubanSameCityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoubanSameCityTests.m; sourceTree = "<group>"; };
+		CDE2D4931ADDFC370099FE0C /* LauchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauchController.h; sourceTree = "<group>"; };
+		CDE2D4941ADDFC370099FE0C /* LauchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauchController.m; sourceTree = "<group>"; };
+		CDE2D4991ADE034E0099FE0C /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		CDE2D49B1ADE042B0099FE0C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CDE2D49C1ADE042B0099FE0C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CDE2D49D1ADE042B0099FE0C /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC166EE5D360E3A6A5ED9AEE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +72,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D2EFCC766AF6E9CA2EA379F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A21E842B24FE76340EEC61D6 /* Pods.debug.xcconfig */,
+				4B9EA1BDC03BF56BBC7AEBDA /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		70567FEC73D3625C80A68AEF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B6CEEA943CD8710F860BB632 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CDE2D45C1ADDF35E0099FE0C = {
 			isa = PBXGroup;
 			children = (
 				CDE2D4671ADDF35E0099FE0C /* DoubanSameCity */,
 				CDE2D4811ADDF35F0099FE0C /* DoubanSameCityTests */,
 				CDE2D4661ADDF35E0099FE0C /* Products */,
+				6D2EFCC766AF6E9CA2EA379F /* Pods */,
+				70567FEC73D3625C80A68AEF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,10 +112,13 @@
 		CDE2D4671ADDF35E0099FE0C /* DoubanSameCity */ = {
 			isa = PBXGroup;
 			children = (
+				CDE2D4911ADDFC370099FE0C /* API */,
+				CDE2D4921ADDFC370099FE0C /* Controller */,
+				CDE2D4951ADDFC370099FE0C /* Model */,
+				CDE2D4961ADDFC370099FE0C /* SDK */,
+				CDE2D4971ADDFC370099FE0C /* View */,
 				CDE2D46C1ADDF35F0099FE0C /* AppDelegate.h */,
 				CDE2D46D1ADDF35F0099FE0C /* AppDelegate.m */,
-				CDE2D46F1ADDF35F0099FE0C /* ViewController.h */,
-				CDE2D4701ADDF35F0099FE0C /* ViewController.m */,
 				CDE2D4721ADDF35F0099FE0C /* Main.storyboard */,
 				CDE2D4751ADDF35F0099FE0C /* Images.xcassets */,
 				CDE2D4771ADDF35F0099FE0C /* LaunchScreen.xib */,
@@ -119,6 +153,47 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CDE2D4911ADDFC370099FE0C /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		CDE2D4921ADDFC370099FE0C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CDE2D4931ADDFC370099FE0C /* LauchController.h */,
+				CDE2D4941ADDFC370099FE0C /* LauchController.m */,
+				CDE2D4991ADE034E0099FE0C /* View.xib */,
+				CDE2D49B1ADE042B0099FE0C /* ViewController.h */,
+				CDE2D49C1ADE042B0099FE0C /* ViewController.m */,
+				CDE2D49D1ADE042B0099FE0C /* ViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CDE2D4951ADDFC370099FE0C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CDE2D4961ADDFC370099FE0C /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SDK;
+			sourceTree = "<group>";
+		};
+		CDE2D4971ADDFC370099FE0C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,9 +201,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDE2D4881ADDF35F0099FE0C /* Build configuration list for PBXNativeTarget "DoubanSameCity" */;
 			buildPhases = (
+				D2D741FD228FE8E4CB842B34 /* Check Pods Manifest.lock */,
 				CDE2D4611ADDF35E0099FE0C /* Sources */,
 				CDE2D4621ADDF35E0099FE0C /* Frameworks */,
 				CDE2D4631ADDF35E0099FE0C /* Resources */,
+				15A5C5633C8AD655B3AFF3CF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -199,6 +276,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDE2D49F1ADE042B0099FE0C /* ViewController.xib in Resources */,
+				CDE2D49A1ADE034E0099FE0C /* View.xib in Resources */,
 				CDE2D4741ADDF35F0099FE0C /* Main.storyboard in Resources */,
 				CDE2D4791ADDF35F0099FE0C /* LaunchScreen.xib in Resources */,
 				CDE2D4761ADDF35F0099FE0C /* Images.xcassets in Resources */,
@@ -214,14 +293,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		15A5C5633C8AD655B3AFF3CF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2D741FD228FE8E4CB842B34 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CDE2D4611ADDF35E0099FE0C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDE2D4711ADDF35F0099FE0C /* ViewController.m in Sources */,
 				CDE2D46E1ADDF35F0099FE0C /* AppDelegate.m in Sources */,
 				CDE2D46B1ADDF35E0099FE0C /* main.m in Sources */,
+				CDE2D49E1ADE042B0099FE0C /* ViewController.m in Sources */,
+				CDE2D4981ADDFC370099FE0C /* LauchController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +454,7 @@
 		};
 		CDE2D4891ADDF35F0099FE0C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A21E842B24FE76340EEC61D6 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DoubanSameCity/Info.plist;
@@ -351,6 +465,7 @@
 		};
 		CDE2D48A1ADDF35F0099FE0C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B9EA1BDC03BF56BBC7AEBDA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DoubanSameCity/Info.plist;
@@ -412,6 +527,7 @@
 				CDE2D48A1ADDF35F0099FE0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CDE2D48B1ADDF35F0099FE0C /* Build configuration list for PBXNativeTarget "DoubanSameCityTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +536,7 @@
 				CDE2D48D1ADDF35F0099FE0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
