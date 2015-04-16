@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OAutoController.h"
+#import "Config.h"
+#import "LaunchController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

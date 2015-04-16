@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -16,6 +17,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    UINavigationController *nav;
+    if ([Config getLoginUserId]) {//登陆过直接显示launch界面
+    nav = [[UINavigationController alloc] initWithRootViewController:[[LaunchController alloc] init]];
+    }else{
+    nav = [[UINavigationController alloc] initWithRootViewController:[[OAutoController alloc] initWithNibName:@"OAutoController" bundle:nil]];
+                                       }
+    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
     // Override point for customization after application launch.
     return YES;
 }
