@@ -23,6 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController setNavigationBarHidden:YES];
     self.view.backgroundColor = [UIColor blackColor];
     
@@ -31,7 +32,7 @@
     _wallpaperView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:_wallpaperView];
     
-    _shimmeringView = [[FBShimmeringView alloc] init];
+    _shimmeringView = [FBShimmeringView newAutoLayoutView];
     _shimmeringView.shimmering = YES;
     _shimmeringView.shimmeringBeginFadeDuration = 0.2;
     _shimmeringView.shimmeringOpacity = 0.8;
@@ -57,7 +58,11 @@
 }
 
 - (void)pushController{
-    NSLog(@"aaaa");
+//    NavigationController *nav = [[NavigationController alloc] init];
+    RootViewController *root = [[RootViewController alloc] init];
+    [self presentViewController:root animated:NO completion:nil];
+
+    
 }
 
 - (void)updateViewConstraints
@@ -82,7 +87,8 @@
 
 - (void)_tapped:(UITapGestureRecognizer *)tapRecognizer
 {
-    NSLog(@"pan");
+    NavigationController *nav = [[NavigationController alloc] init];
+    
 }
 
 //- (void)_panned:(UIPanGestureRecognizer *)panRecognizer

@@ -12,7 +12,10 @@
 #import "Account.h"
 #import "Config.h"
 #import "LaunchController.h"
+#import <PureLayout.h>
 @interface OAutoController : UIViewController<UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic) MBProgressHUD *hud;
+@property (strong, nonatomic) UIWebView *webView;
+@property (strong, nonatomic) NSString *reqeustToken;
 
 @end

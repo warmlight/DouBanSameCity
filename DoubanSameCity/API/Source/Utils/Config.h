@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "Account.h"
 #import "ConfigUtils.h"
+#import "User.h"
 
 @interface Config : NSObject
 + (void)saveAccount :(Account *)account;
++ (Account *)loadAccount;
++ (void)saveUser :(User *)user;
++ (User *)loadUser;
+
 + (NSString *)getLoginUserId;
 @end

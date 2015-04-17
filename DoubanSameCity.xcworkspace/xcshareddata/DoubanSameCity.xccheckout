@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4909181A-EBDE-4EEC-BF3B-82BF91670F0B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DoubanSameCity</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C33C494F23B4C4B4A096E48CD425AF440CA290E1</key>
+		<string>https://github.com/warmlight/DouBanSameCity.git</string>
+		<key>EA4884386F784AF00DE0D0D3C88B6E19C772BE51</key>
+		<string>https://github.com/warmlight/DoubanSameCity.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DoubanSameCity.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C33C494F23B4C4B4A096E48CD425AF440CA290E1</key>
+		<string>..</string>
+		<key>EA4884386F784AF00DE0D0D3C88B6E19C772BE51</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/warmlight/DouBanSameCity.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C33C494F23B4C4B4A096E48CD425AF440CA290E1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EA4884386F784AF00DE0D0D3C88B6E19C772BE51</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C33C494F23B4C4B4A096E48CD425AF440CA290E1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DoubanSameCity</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -1,3 +1,4 @@
+
 //
 //  OAutoController.m
 //  DoubanSameCity
@@ -16,14 +17,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.alpha = 0;
     
     self.title = @"授权";
-    
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    self. webView = [[UIWebView alloc]initWithFrame:bounds];
+    self.webView.delegate = self;
+    [self.view addSubview:self.webView];
+
     NSString *u = [NSString stringWithFormat:@"https://www.douban.com/service/auth2/auth?client_id=%@&redirect_uri=%@&response_type=code", APIKey, RedirectURL];
     NSURL *url = [NSURL URLWithString:u];
-    
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-    [_webView loadRequest:request];
+    [self.webView loadRequest:request];
     
     
     // Do any additional setup after loading the view from its nib.
@@ -38,22 +44,75 @@
     // 查找code范围
     NSRange range = [url rangeOfString:@"code="];
     if (range.length){                                  // 如果有，取"code="后跟的串，即为requestToken
-        NSInteger index = range.location + range.length;
-        NSString *requestToken = [url substringFromIndex:index];
         
-        Account *account = [API get_access_token:requestToken];
+        NSInteger index = range.location + range.length;
+        _reqeustToken = [url substringFromIndex:index];
+        Account *account = [API get_access_token:_reqeustToken];
+        User *user = [API get_user:account.douban_user_id];
         [account toString];
         [Config saveAccount:account];                   //存储account
-        
+        [Config saveUser:user];
+//        [self performSelectorOnMainThread:@selector(bb) withObject:nil waitUntilDone:YES];
+        [MBProgressHUD hideAllHUDsForView:_webView animated:YES];
         if ([Config getLoginUserId]) {
             LaunchController *lauch = [[LaunchController alloc] init];
             [self.navigationController pushViewController:lauch animated:NO];
         }
+
         
-       
+//        [NSThread detachNewThreadSelector:@selector(aa) toTarget:self withObject:nil];
+
+//        dispatch_queue_t queue =  dispatch_queue_create("myqueue", NULL);
+//        dispatch_async(queue, ^{
+//           
+//            Account *account = [API get_access_token:_reqeustToken];
+//            User *user = [API get_user:account.douban_user_id];
+//            [account toString];
+//            [Config saveAccount:account];                   //存储account
+//            [Config saveUser:user];
+//   
+//            dispatch_sync(dispatch_get_main_queue(), ^{
+//                [MBProgressHUD hideAllHUDsForView:webView animated:YES];
+//                if ([Config getLoginUserId]) {
+//                    LaunchController *lauch = [[LaunchController alloc] init];
+//                    [self.navigationController pushViewController:lauch animated:NO];
+//                }
+//            });
+//        });
         return NO;
     }
     return YES;
+}
+
+- (void)aa{
+    Account *account = [API get_access_token:_reqeustToken];
+    User *user = [API get_user:account.douban_user_id];
+    [account toString];
+    [Config saveAccount:account];                   //存储account
+    [Config saveUser:user];
+    [self performSelectorOnMainThread:@selector(bb) withObject:nil waitUntilDone:YES];
+}
+
+- (void)bb{
+    [MBProgressHUD hideAllHUDsForView:_webView animated:YES];
+    if ([Config getLoginUserId]) {
+        LaunchController *lauch = [[LaunchController alloc] init];
+        [self.navigationController pushViewController:lauch animated:NO];
+    }
+}
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    // 引入第三方框架"MBProgressHUD"添加页面加载提示
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:webView animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.labelText = @"努力加载中";                    // 设置文字
+    hud.labelFont = [UIFont systemFontOfSize:14];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    // 清除页面加载提示
+    [MBProgressHUD hideAllHUDsForView:webView animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
