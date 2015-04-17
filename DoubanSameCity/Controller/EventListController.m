@@ -28,6 +28,7 @@
     NSLog(@"%@",[eventsArray[0] toString]);
     
     
+    
     // Do any additional setup after loading the view.
 }
 

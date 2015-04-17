@@ -10,7 +10,9 @@
 #import "EventList.h"
 #import "Event.h"
 #import "JsonUtils.h"
+#import "Owner.h"
 
 @interface SameCityUtils : NSObject
 + (NSMutableArray *)get_eventArray:(NSArray *)eventlist_events;
++ (Owner *)get_owner:(NSMutableArray *)owner;
 @end
