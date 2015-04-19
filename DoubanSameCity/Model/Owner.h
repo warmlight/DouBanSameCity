@@ -21,4 +21,5 @@
 +(Owner *)fromJsonString: (NSString *)jsonString;
 +(Owner *)fromJsonData: (NSData *)jsonData;
 +(Owner *)fromJsonObject: (NSJSONSerialization *)json;
+-(NSString *)toString;
 @end

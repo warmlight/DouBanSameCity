@@ -14,5 +14,6 @@
 
 @interface SameCityUtils : NSObject
 + (NSMutableArray *)get_eventArray:(NSArray *)eventlist_events;
-+ (Owner *)get_owner:(NSMutableArray *)owner;
++ (Owner *)get_owner:(NSMutableDictionary *)owner;
+
 @end

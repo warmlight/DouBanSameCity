@@ -18,7 +18,7 @@
     return eventArray;
 }
 
-+ (Owner *)get_owner:(NSMutableArray *)owner{
++ (Owner *)get_owner:(NSMutableDictionary *)owner{
     Owner *host = [Owner fromJsonObject:(NSJSONSerialization *)owner];
     return host;
 }
