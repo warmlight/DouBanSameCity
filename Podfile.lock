@@ -1,16 +1,24 @@
 PODS:
   - MBProgressHUD (0.9.1)
+  - MJRefresh (1.4.5)
   - PureLayout (2.0.5)
+  - SDWebImage (3.7.2):
+    - SDWebImage/Core (= 3.7.2)
+  - SDWebImage/Core (3.7.2)
   - Shimmer (1.0.2)
 
 DEPENDENCIES:
   - MBProgressHUD (~> 0.9.1)
+  - MJRefresh (~> 1.4.5)
   - PureLayout (~> 2.0.5)
+  - SDWebImage (~> 3.7.2)
   - Shimmer (~> 1.0.2)
 
 SPEC CHECKSUMS:
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MJRefresh: 4b24394e577ea399fbc926e5b6072317aae2c152
   PureLayout: a0fe75f1cf485801e7e00b723b8a3c32dca558e2
+  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
 
 COCOAPODS: 0.36.3

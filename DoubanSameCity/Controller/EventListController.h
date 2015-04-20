@@ -10,7 +10,12 @@
 #import "UIViewController+SideMenu.h"
 #import "API.h"
 #import "SameCityUtils.h"
+#import "Owner.h"
+#import "EventCell.h"
+#import <UIImageView+WebCache.h>
 
-@interface EventListController : UIViewController
+@interface EventListController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) UITableView *tabelView;
+@property (strong, nonatomic) NSMutableArray *eventsArray;
 
 @end

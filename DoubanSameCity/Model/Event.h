@@ -16,11 +16,11 @@
 @property (strong, nonatomic) NSString *loc_name;
 @property (strong, nonatomic) NSString *id;
 @property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) NSNumber *wisher_count;
+@property (strong, nonatomic) NSNumber *wisher_count;           //感兴趣人数
 @property (strong, nonatomic) NSString *content;
-@property (strong, nonatomic) NSString *participant_count;
+@property (strong, nonatomic) NSString *participant_count;      //参加人数
 @property (strong, nonatomic) NSString *album;
-@property (strong, nonatomic) NSString *geo;
+@property (strong, nonatomic) NSString *geo;                    //经纬度
 @property (strong, nonatomic) NSString *category_name;
 @property (strong, nonatomic) NSString *loc_id;
 @property (strong, nonatomic) NSString *end_time;

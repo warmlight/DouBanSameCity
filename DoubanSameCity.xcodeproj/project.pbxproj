@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		AC166EE5D360E3A6A5ED9AEE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6CEEA943CD8710F860BB632 /* libPods.a */; };
+		CD1996581AE4DCBD0064B3DE /* address.png in Resources */ = {isa = PBXBuildFile; fileRef = CD1996541AE4DCBD0064B3DE /* address.png */; };
+		CD1996591AE4DCBD0064B3DE /* end.png in Resources */ = {isa = PBXBuildFile; fileRef = CD1996551AE4DCBD0064B3DE /* end.png */; };
+		CD19965A1AE4DCBD0064B3DE /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = CD1996561AE4DCBD0064B3DE /* star.png */; };
+		CD19965B1AE4DCBD0064B3DE /* type.png in Resources */ = {isa = PBXBuildFile; fileRef = CD1996571AE4DCBD0064B3DE /* type.png */; };
 		CD9F7BB81ADF50680025F34F /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = CD9F7BB71ADF50680025F34F /* launch.png */; };
 		CD9F7BC21ADF5AE20025F34F /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BC01ADF5AE20025F34F /* LaunchController.m */; };
 		CD9F7BC51ADF652E0025F34F /* bkg.png in Resources */ = {isa = PBXBuildFile; fileRef = CD9F7BC41ADF652E0025F34F /* bkg.png */; };
@@ -19,6 +23,7 @@
 		CD9F7BE31ADFA78A0025F34F /* ConfigUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BE21ADFA78A0025F34F /* ConfigUtils.m */; };
 		CD9F7BE61ADFA7DE0025F34F /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BE51ADFA7DE0025F34F /* Config.m */; };
 		CD9F7BE91ADFBF6B0025F34F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BE81ADFBF6B0025F34F /* User.m */; };
+		CDD975101AE486CD00C8C79C /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD9750F1AE486CD00C8C79C /* EventCell.m */; };
 		CDE14F431AE0B87100B1C60F /* LaunchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDE14F421AE0B87100B1C60F /* LaunchController.xib */; };
 		CDE14F461AE0CAEE00B1C60F /* EventList.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE14F451AE0CAEE00B1C60F /* EventList.m */; };
 		CDE14F491AE0D0EA00B1C60F /* TabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE14F481AE0D0EA00B1C60F /* TabController.m */; };
@@ -55,6 +60,10 @@
 		4B9EA1BDC03BF56BBC7AEBDA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A21E842B24FE76340EEC61D6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B6CEEA943CD8710F860BB632 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD1996541AE4DCBD0064B3DE /* address.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = address.png; sourceTree = "<group>"; };
+		CD1996551AE4DCBD0064B3DE /* end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = end.png; sourceTree = "<group>"; };
+		CD1996561AE4DCBD0064B3DE /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		CD1996571AE4DCBD0064B3DE /* type.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = type.png; sourceTree = "<group>"; };
 		CD9F7BB71ADF50680025F34F /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launch.png; path = ../../../../DoubanSameCityTests/launch.png; sourceTree = "<group>"; };
 		CD9F7BBF1ADF5AE20025F34F /* LaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
 		CD9F7BC01ADF5AE20025F34F /* LaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
@@ -75,6 +84,8 @@
 		CD9F7BE51ADFA7DE0025F34F /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
 		CD9F7BE71ADFBF6B0025F34F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		CD9F7BE81ADFBF6B0025F34F /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		CDD9750E1AE486CD00C8C79C /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
+		CDD9750F1AE486CD00C8C79C /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
 		CDE14F421AE0B87100B1C60F /* LaunchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchController.xib; sourceTree = "<group>"; };
 		CDE14F441AE0CAEE00B1C60F /* EventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventList.h; sourceTree = "<group>"; };
 		CDE14F451AE0CAEE00B1C60F /* EventList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventList.m; sourceTree = "<group>"; };
@@ -164,6 +175,10 @@
 		CD9F7BBA1ADF50AA0025F34F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CD1996541AE4DCBD0064B3DE /* address.png */,
+				CD1996551AE4DCBD0064B3DE /* end.png */,
+				CD1996561AE4DCBD0064B3DE /* star.png */,
+				CD1996571AE4DCBD0064B3DE /* type.png */,
 				CD9F7BC41ADF652E0025F34F /* bkg.png */,
 				CD9F7BB71ADF50680025F34F /* launch.png */,
 				CDED4BCA1AE0EA80006AAB9F /* menu.png */,
@@ -316,6 +331,8 @@
 		CDE2D4971ADDFC370099FE0C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CDD9750E1AE486CD00C8C79C /* EventCell.h */,
+				CDD9750F1AE486CD00C8C79C /* EventCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -403,7 +420,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDE2D4741ADDF35F0099FE0C /* Main.storyboard in Resources */,
+				CD19965B1AE4DCBD0064B3DE /* type.png in Resources */,
+				CD1996591AE4DCBD0064B3DE /* end.png in Resources */,
+				CD19965A1AE4DCBD0064B3DE /* star.png in Resources */,
 				CD9F7BC51ADF652E0025F34F /* bkg.png in Resources */,
+				CD1996581AE4DCBD0064B3DE /* address.png in Resources */,
 				CDED4BCB1AE0EA80006AAB9F /* menu.png in Resources */,
 				CDE2D4791ADDF35F0099FE0C /* LaunchScreen.xib in Resources */,
 				CDE2D4761ADDF35F0099FE0C /* Images.xcassets in Resources */,
@@ -475,6 +496,7 @@
 				CD9F7BE91ADFBF6B0025F34F /* User.m in Sources */,
 				CD9F7BDD1ADF89F50025F34F /* JsonUtils.m in Sources */,
 				CDE14F581AE0D20B00B1C60F /* SideMenu.m in Sources */,
+				CDD975101AE486CD00C8C79C /* EventCell.m in Sources */,
 				CD9F7BC21ADF5AE20025F34F /* LaunchController.m in Sources */,
 				CDED4BC91AE0E5CC006AAB9F /* RootViewController.m in Sources */,
 				CDE14F4F1AE0D14C00B1C60F /* MyEventController.m in Sources */,

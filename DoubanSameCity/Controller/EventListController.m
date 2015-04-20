@@ -24,14 +24,52 @@
     
     EventList *eventlist = [API get_eventlist:nil star:nil loc:@"shanghai" type:nil day_type:nil];
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[eventlist.events mutableCopy]];
-    NSMutableArray *eventsArray = [SameCityUtils get_eventArray:array];
-    NSLog(@"%@",[eventsArray[0] toString]);
+    self.eventsArray = [SameCityUtils get_eventArray:array];
+    NSLog(@"%@",[self.eventsArray[0] toString]);
     
-    
-    
+    [self initUI];
     // Do any additional setup after loading the view.
 }
 
+- (void)initUI{
+    CGFloat tableX = 0;
+    CGFloat tableY = 0;
+    CGFloat tableW = self.view.frame.size.width;
+    CGFloat tableH = self.view.frame.size.height - 64;
+    self.tabelView = [[UITableView alloc] initWithFrame:CGRectMake(tableX, tableY, tableW, tableH)];
+    self.tabelView.delegate = self;
+    self.tabelView.dataSource = self;
+    [self.view addSubview:self.tabelView];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.eventsArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellIdentifier = @"cell";
+    EventCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[EventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.tag = indexPath.row + 100;
+    Event *event = self.eventsArray[indexPath.row];
+    cell.titleLabel.text = event.title;
+    cell.bengin_event_time_Label.text = event.begin_time;
+    cell.end_event_time_Label.text = event.end_time;
+    cell.eventTypeLabel.text = event.category_name;
+    cell.eventAdressLabel.text = event.address;
+    cell.wish_count_Label.text = [NSString stringWithFormat:@"%@", event.wisher_count];
+    cell.participant_count_label.text = [NSString stringWithFormat:@"%@", event.participant_count];
+    [cell.eventImage setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"bkg.png"]];
+    [cell createFrame];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    Event *event = self.eventsArray[indexPath.row];
+    return [EventCell cellHeight:event];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

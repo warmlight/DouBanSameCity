@@ -85,11 +85,11 @@
 //    _shimmeringView.frame = shimmeringFrame;
 //}
 
-- (void)_tapped:(UITapGestureRecognizer *)tapRecognizer
-{
-    NavigationController *nav = [[NavigationController alloc] init];
-    
-}
+//- (void)_tapped:(UITapGestureRecognizer *)tapRecognizer
+//{
+//    NavigationController *nav = [[NavigationController alloc] init];
+//    
+//}
 
 //- (void)_panned:(UIPanGestureRecognizer *)panRecognizer
 //{
