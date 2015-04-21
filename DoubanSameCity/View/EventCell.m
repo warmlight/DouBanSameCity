@@ -13,7 +13,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.contentView.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.1];
+        self.contentView.backgroundColor = [UIColor clearColor];
         [self createSubview];
 //        self.contentView.layer.cornerRadius = 10.0;
 //        self.contentView.layer.borderWidth = 1;
@@ -24,12 +24,21 @@
 }
 
 - (void)createSubview{
+    //bkgView
+    self.bkgView = [[UIView alloc] init];
+    self.bkgView.backgroundColor = UIColorFromRGB(0xD1EEEE);
+    self.bkgView.layer.cornerRadius = 5.0;
+//    self.bkgView.layer.borderWidth = 1;
+//    self.bkgView.layer.borderColor = [[UIColor redColor] CGColor];
+    self.bkgView.layer.masksToBounds = YES;
+    [self.contentView addSubview:self.bkgView];
+    
     //titile
     self.titleLabel = [[UILabel alloc] init];
-    self.titleLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:1 alpha:0.1];
+    self.titleLabel.backgroundColor = UIColorFromRGB(0xFFC1C1);
     self.titleLabel.font = TitleFont;
     self.titleLabel.numberOfLines = 0;
-    [self.contentView addSubview:self.titleLabel];
+    [self.bkgView addSubview:self.titleLabel];
     
     //image
     self.eventImage = [[UIImageView alloc] init];
@@ -110,18 +119,18 @@
 - (void)createFrame{
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
     //title
-    CGFloat titleX = Margin;
-    CGFloat titleY = 2 * Margin;
-    CGSize titleConstraint = CGSizeMake(screenSize.width- 2 * Margin, 20000.0);
+    CGFloat titleX = 0;
+    CGFloat titleY = 0;
+    CGSize titleConstraint = CGSizeMake(screenSize.width- 8 * Margin, 20000.0);
     CGSize titleSize = [self.titleLabel.text sizeWithFont:TitleFont constrainedToSize:titleConstraint];
-    self.titleLabel.frame = (CGRect){{titleX, titleY}, {screenSize.width- 2 * Margin, titleSize.height}};
+    self.titleLabel.frame = (CGRect){{titleX, titleY}, {screenSize.width- 6 * Margin, titleSize.height}};
     
     //image
-    CGFloat imageY = titleY + self.titleLabel.frame.size.height + 2 * Margin;
-    self.eventImage.frame = CGRectMake(Margin, imageY, ImageW, ImageH);
+    CGFloat imageY = titleSize.height + 4 * Margin;
+    self.eventImage.frame = CGRectMake(5 *Margin, imageY, ImageW, ImageH);
     
     //begin time
-    CGFloat begin_timeX = self.imageView.frame.origin.x + ImageW + 10;
+    CGFloat begin_timeX = 5 *Margin + ImageW + 2 *Margin;
     CGFloat begin_timeY = imageY;
     CGSize begintimeSize = [@"测量字体高度" sizeWithFont:TextFont constrainedToSize:CGSizeMake(200, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
     self.begin_time_image.frame = CGRectMake(begin_timeX, begin_timeY, begintimeSize.height, begintimeSize.height);
@@ -129,7 +138,7 @@
     //begin eventtime
     CGFloat eventTimeX = begin_timeX + begintimeSize.height + Margin;
     CGFloat eventTimeY = begin_timeY;
-    CGFloat eventTimeW = screenSize.width - eventTimeX - Margin;
+    CGFloat eventTimeW = screenSize.width - eventTimeX - 3 *Margin;
     CGFloat eventTimeH = begintimeSize.height;
     self.bengin_event_time_Label.frame = CGRectMake(eventTimeX, eventTimeY, eventTimeW, eventTimeH);
     
@@ -156,7 +165,7 @@
     CGFloat addressLabelX = end_eventTimeX;
     CGFloat addressLabelY = addressImageY;
     CGFloat addressLabelW = end_eventTimeW;
-    CGSize typeConstraint = CGSizeMake(screenSize.width- addressLabelX - Margin, 20000.0);
+    CGSize typeConstraint = CGSizeMake(screenSize.width- addressLabelX - 4 *Margin, 20000.0);
     CGSize addressSize = [self.eventAdressLabel.text sizeWithFont:TextFont constrainedToSize:typeConstraint];
     self.eventAdressLabel.frame = CGRectMake(addressLabelX, addressLabelY,addressLabelW, addressSize.height);
 
@@ -175,8 +184,8 @@
     
     //wish label
     CGSize wishSize = [@"人感兴趣" sizeWithFont:TextFont constrainedToSize:CGSizeMake(200, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
-    CGFloat wishX = screenSize.width - Margin - wishSize.width;
-    CGFloat wishY = self.eventTypeLabel.frame.size.height + self.eventTypeLabel.frame.origin.y + 20;
+    CGFloat wishX = screenSize.width - 4 *Margin - wishSize.width;
+    CGFloat wishY = begintimeSize.height + typeLabelY + 20;//2232323
     self.wishLabel.frame = CGRectMake(wishX, wishY, wishSize.width, wishSize.height);
     
     //wish number label
@@ -198,18 +207,25 @@
     CGFloat parNumW = 50;
     CGFloat parNumH = wishNumberH;
     self.participant_count_label.frame = CGRectMake(parNumX, parNumY, parNumW, parNumH);
+    
+    //bkgView
+    CGFloat bkgViewX = 3 * Margin;
+    CGFloat bkgViewY = 2 *Margin;
+    CGFloat bkgViewW = screenSize.width- 6 * Margin;
+    CGFloat bkgViewH = parNumH + parNumY + 2 * Margin;
+    self.bkgView.frame = CGRectMake(bkgViewX, bkgViewY, bkgViewW, bkgViewH);
 }
 
 + (CGFloat)cellHeight:(Event *)event{
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    CGSize titleConstraint = CGSizeMake(screenSize.width- 2 * Margin, 20000.0);
+    CGSize titleConstraint = CGSizeMake(screenSize.width- 8 * Margin, 20000.0);
     CGSize titleSize = [event.title sizeWithFont:TitleFont constrainedToSize:titleConstraint];
     CGSize labelSize = [@"测量字体高度" sizeWithFont:TextFont constrainedToSize:CGSizeMake(100, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
-    CGSize addressConstraint = CGSizeMake(screenSize.width- (3 * Margin + ImageW) - Margin - labelSize.height, 20000.0);
+    CGSize addressConstraint = CGSizeMake(screenSize.width- 12 * Margin -ImageW - labelSize.height, 20000.0);
     CGSize addressSize = [event.address sizeWithFont:TextFont constrainedToSize:addressConstraint]; //self.imageView.frame.origin.x + ImageW + 10
 
 
-    return 10 + titleSize.height + 10 + labelSize.height * 3 + 15 + addressSize.height + 11 + 20 + labelSize.height;
+    return 10 + titleSize.height + 10 + labelSize.height * 3 + 15 + addressSize.height + 20 + labelSize.height + 50;
 }
 
 @end

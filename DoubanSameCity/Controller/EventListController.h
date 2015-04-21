@@ -13,9 +13,20 @@
 #import "Owner.h"
 #import "EventCell.h"
 #import <UIImageView+WebCache.h>
+#import <MBProgressHUD.h>
+#import <CoreLocation/CoreLocation.h>
+#import "LocationUtils.h"
+#import <MJRefresh.h>
+#import "Toast.h"
 
-@interface EventListController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+
+#define Count 10
+
+@interface EventListController : UIViewController<UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 @property (strong, nonatomic) UITableView *tabelView;
 @property (strong, nonatomic) NSMutableArray *eventsArray;
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (assign, nonatomic) int page;
+@property (strong, nonatomic) NSNumber *totalEvent;
 
 @end

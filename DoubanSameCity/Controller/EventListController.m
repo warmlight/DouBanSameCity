@@ -18,20 +18,95 @@
     [super viewDidLoad];
     self.title = @"活动";
     self.view.backgroundColor = [UIColor redColor];
+    self.eventsArray = [[NSMutableArray alloc] init];
+    [self initUI];
+    
+    //显示页面的时候异步加载 并给予等待页面
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"努力加载中";                    // 设置文字
+    hud.labelFont = [UIFont systemFontOfSize:14];
+    dispatch_queue_t queue =  dispatch_queue_create("myqueue", NULL);
+    dispatch_async(queue, ^{
+         [self latestEvent:@"shanghai" type:@"all" day_type:@"future"];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [self afterRefresh];
+        });
+    });
+    
+    //table下拉刷新
+    __weak typeof(self) weakSelf = self;
+    [self.tabelView addLegendHeaderWithRefreshingBlock:^{
+        dispatch_queue_t queueToDown =  dispatch_queue_create("myqueue", NULL);
+        dispatch_async(queueToDown, ^{
+            [weakSelf latestEvent:@"shanghai" type:@"all" day_type:@"future"];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                [weakSelf afterRefresh];
+            });
+        });
+    }];
+    //table上拉刷新
+    [self.tabelView addLegendFooterWithRefreshingBlock:^{
+        dispatch_queue_t queueToUp =  dispatch_queue_create("myqueue", NULL);
+        dispatch_async(queueToUp, ^{
+            [weakSelf getMoreEvent:@"shanghai" type:@"all" day_type:@"future"];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                [weakSelf afterRefresh];
+            });
+        });
+
+    }];
+    
+    [self initLocationManager];
+    // Do any additional setup after loading the view.
+}
+
+
+- (void)initLocationManager{
+        if([CLLocationManager locationServicesEnabled]){
+        self.locationManager = [[CLLocationManager alloc] init];
+            [self.locationManager requestWhenInUseAuthorization];
+
+        self.locationManager.delegate = self;
+        self.locationManager.distanceFilter = 300;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            [self.locationManager requestAlwaysAuthorization];//ios8要添加 还要在plist里添加
+        }
+            [self.locationManager startUpdatingLocation];
+            [self.locationManager stopUpdatingLocation];
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *currentLocation = [locations lastObject];
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder  reverseGeocodeLocation:currentLocation completionHandler:^(NSArray
+                                                                          *placemarks, NSError *error) {
+        for (CLPlacemark *place in placemarks)
+        {
+           NSLog(@"name,%@",place.name);
+            NSLog(@"thoroughfare,%@",place.thoroughfare);
+            NSLog(@"subThoroughfare,%@",place.subThoroughfare);
+            NSLog(@"locality,%@",place.locality);
+            NSLog(@"subLocality,%@",place.subLocality);
+            NSLog(@"country,%@",place.country);
+        }
+    }];
+}
+
+
+
+- (void)initUI{
+    //没有效果
     UIImage * img = [UIImage imageNamed:@"menu"];
     UIBarButtonItem * menuButton = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(presentLeftMenuViewController:)];
     self.navigationItem.leftBarButtonItem = menuButton;
     
-    EventList *eventlist = [API get_eventlist:nil star:nil loc:@"shanghai" type:nil day_type:nil];
-    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[eventlist.events mutableCopy]];
-    self.eventsArray = [SameCityUtils get_eventArray:array];
-    NSLog(@"%@",[self.eventsArray[0] toString]);
-    
-    [self initUI];
-    // Do any additional setup after loading the view.
-}
-
-- (void)initUI{
     CGFloat tableX = 0;
     CGFloat tableY = 0;
     CGFloat tableW = self.view.frame.size.width;
@@ -40,8 +115,39 @@
     self.tabelView.delegate = self;
     self.tabelView.dataSource = self;
     [self.view addSubview:self.tabelView];
+    [self.tabelView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];//隐藏没有内容的cell的分割线
 }
 
+- (void)latestEvent:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type{
+    self.page = 0;
+    EventList *eventlist = [API get_eventlist:[NSNumber numberWithInt:10] star:[NSNumber numberWithInt:self.page] loc:loc type:type day_type:day_type];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[eventlist.events mutableCopy]];
+    NSMutableArray *events = [SameCityUtils get_eventArray:array];
+    [self.eventsArray insertObjects:events atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, events.count)]];
+    self.totalEvent = eventlist.total;
+    self.page ++;
+}
+
+- (void)getMoreEvent:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type{
+    int starPage = self.page *Count;
+    EventList *eventlist = [API get_eventlist:[NSNumber numberWithInt:10] star:[NSNumber numberWithInt:starPage] loc:loc type:type day_type:day_type];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[eventlist.events mutableCopy]];
+    NSMutableArray *events = [SameCityUtils get_eventArray:array];
+    [self.eventsArray insertObjects:events atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(starPage, events.count)]];
+    self.page ++;
+}
+
+- (void)afterRefresh{
+    [self.tabelView reloadData];
+    if ([self.tabelView.header isRefreshing]) {
+        [self.tabelView.header endRefreshing];
+        [[[Toast makeText:[NSString stringWithFormat:@"一共找到%@个活动", self.totalEvent]] setGravity:ToastGravityBottom] show];
+    }else if ([self.tabelView.footer isRefreshing]){
+        [self.tabelView.footer endRefreshing];
+    }
+}
+
+#pragma mark -tableview delegate datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.eventsArray.count;
 }
@@ -54,7 +160,7 @@
     }
     cell.tag = indexPath.row + 100;
     Event *event = self.eventsArray[indexPath.row];
-    cell.titleLabel.text = event.title;
+    cell.titleLabel.text = [NSString stringWithFormat:@" %@", event.title];
     cell.bengin_event_time_Label.text = event.begin_time;
     cell.end_event_time_Label.text = event.end_time;
     cell.eventTypeLabel.text = event.category_name;
@@ -69,6 +175,14 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     Event *event = self.eventsArray[indexPath.row];
     return [EventCell cellHeight:event];
+}
+
+- (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath
+{
+    UIColor *CellColor = [UIColor colorWithWhite:1.0 alpha:0.4];
+    cell.backgroundColor = CellColor;
+    //去除有内容的Cell分割线
+    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
 }
 
 - (void)didReceiveMemoryWarning {

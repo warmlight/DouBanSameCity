@@ -10,10 +10,11 @@
 #import "Event.h"
 
 #define Margin 5
-#define TitleFont [UIFont systemFontOfSize:14]
+#define TitleFont [UIFont systemFontOfSize:16]
 #define TextFont [UIFont systemFontOfSize:12]
 #define ImageW 57
 #define ImageH 85
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @interface EventCell : UITableViewCell
 
@@ -33,6 +34,8 @@
 //@property (strong, nonatomic) UILabel *dayLabel;
 @property (strong, nonatomic) UILabel *participant_count_label;
 @property (strong, nonatomic) UILabel *participant_label;
+@property (strong, nonatomic) UIView *bkgView;
+@property (strong, nonatomic) Event *singleEvent;
 
 -(void)createSubview;
 - (void)createFrame;

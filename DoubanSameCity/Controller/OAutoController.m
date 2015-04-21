@@ -47,59 +47,29 @@
         
         NSInteger index = range.location + range.length;
         _reqeustToken = [url substringFromIndex:index];
-        Account *account = [API get_access_token:_reqeustToken];
-        User *user = [API get_user:account.douban_user_id];
-        [account toString];
-        [Config saveAccount:account];                   //存储account
-        [Config saveUser:user];
-//        [self performSelectorOnMainThread:@selector(bb) withObject:nil waitUntilDone:YES];
-        [MBProgressHUD hideAllHUDsForView:_webView animated:YES];
-        if ([Config getLoginUserId]) {
-            LaunchController *lauch = [[LaunchController alloc] init];
-            [self.navigationController pushViewController:lauch animated:NO];
-        }
 
-        
-//        [NSThread detachNewThreadSelector:@selector(aa) toTarget:self withObject:nil];
-
-//        dispatch_queue_t queue =  dispatch_queue_create("myqueue", NULL);
-//        dispatch_async(queue, ^{
-//           
-//            Account *account = [API get_access_token:_reqeustToken];
-//            User *user = [API get_user:account.douban_user_id];
-//            [account toString];
-//            [Config saveAccount:account];                   //存储account
-//            [Config saveUser:user];
-//   
-//            dispatch_sync(dispatch_get_main_queue(), ^{
-//                [MBProgressHUD hideAllHUDsForView:webView animated:YES];
-//                if ([Config getLoginUserId]) {
-//                    LaunchController *lauch = [[LaunchController alloc] init];
-//                    [self.navigationController pushViewController:lauch animated:NO];
-//                }
-//            });
-//        });
+        dispatch_queue_t queue =  dispatch_queue_create("myqueue", NULL);
+        dispatch_async(queue, ^{
+           
+            Account *account = [API get_access_token:_reqeustToken];
+            User *user = [API get_user:account.douban_user_id];
+            [account toString];
+            [Config saveAccount:account];                   //存储account
+            [Config saveUser:user];
+   
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideAllHUDsForView:_webView animated:YES];
+                if ([Config getLoginUserId]) {
+                    LaunchController *lauch = [[LaunchController alloc] init];
+                    [self.navigationController pushViewController:lauch animated:NO];
+                }
+            });
+        });
         return NO;
     }
     return YES;
 }
 
-- (void)aa{
-    Account *account = [API get_access_token:_reqeustToken];
-    User *user = [API get_user:account.douban_user_id];
-    [account toString];
-    [Config saveAccount:account];                   //存储account
-    [Config saveUser:user];
-    [self performSelectorOnMainThread:@selector(bb) withObject:nil waitUntilDone:YES];
-}
-
-- (void)bb{
-    [MBProgressHUD hideAllHUDsForView:_webView animated:YES];
-    if ([Config getLoginUserId]) {
-        LaunchController *lauch = [[LaunchController alloc] init];
-        [self.navigationController pushViewController:lauch animated:NO];
-    }
-}
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     // 引入第三方框架"MBProgressHUD"添加页面加载提示

@@ -23,6 +23,10 @@
 		CD9F7BE31ADFA78A0025F34F /* ConfigUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BE21ADFA78A0025F34F /* ConfigUtils.m */; };
 		CD9F7BE61ADFA7DE0025F34F /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BE51ADFA7DE0025F34F /* Config.m */; };
 		CD9F7BE91ADFBF6B0025F34F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BE81ADFBF6B0025F34F /* User.m */; };
+		CDD360E51AE5DC8A001B08FF /* LocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD360E41AE5DC8A001B08FF /* LocationUtils.m */; };
+		CDD360E71AE62D35001B08FF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD360E61AE62D35001B08FF /* MapKit.framework */; };
+		CDD360E91AE62D3D001B08FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD360E81AE62D3D001B08FF /* CoreLocation.framework */; };
+		CDD360ED1AE63BB2001B08FF /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD360EC1AE63BB2001B08FF /* Toast.m */; };
 		CDD975101AE486CD00C8C79C /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD9750F1AE486CD00C8C79C /* EventCell.m */; };
 		CDE14F431AE0B87100B1C60F /* LaunchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDE14F421AE0B87100B1C60F /* LaunchController.xib */; };
 		CDE14F461AE0CAEE00B1C60F /* EventList.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE14F451AE0CAEE00B1C60F /* EventList.m */; };
@@ -84,6 +88,12 @@
 		CD9F7BE51ADFA7DE0025F34F /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
 		CD9F7BE71ADFBF6B0025F34F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		CD9F7BE81ADFBF6B0025F34F /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		CDD360E31AE5DC8A001B08FF /* LocationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationUtils.h; sourceTree = "<group>"; };
+		CDD360E41AE5DC8A001B08FF /* LocationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationUtils.m; sourceTree = "<group>"; };
+		CDD360E61AE62D35001B08FF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CDD360E81AE62D3D001B08FF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CDD360EB1AE63BB2001B08FF /* Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toast.h; sourceTree = "<group>"; };
+		CDD360EC1AE63BB2001B08FF /* Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toast.m; sourceTree = "<group>"; };
 		CDD9750E1AE486CD00C8C79C /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
 		CDD9750F1AE486CD00C8C79C /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
 		CDE14F421AE0B87100B1C60F /* LaunchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchController.xib; sourceTree = "<group>"; };
@@ -130,6 +140,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD360E91AE62D3D001B08FF /* CoreLocation.framework in Frameworks */,
+				CDD360E71AE62D35001B08FF /* MapKit.framework in Frameworks */,
 				AC166EE5D360E3A6A5ED9AEE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,6 +168,8 @@
 		70567FEC73D3625C80A68AEF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDD360E81AE62D3D001B08FF /* CoreLocation.framework */,
+				CDD360E61AE62D35001B08FF /* MapKit.framework */,
 				B6CEEA943CD8710F860BB632 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -164,7 +178,6 @@
 		CD9F7BB91ADF50980025F34F /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				CDE14F531AE0D20B00B1C60F /* SideMenu */,
 				CD9F7BD71ADF89F50025F34F /* Utils */,
 				CD9F7BBA1ADF50AA0025F34F /* Image */,
 			);
@@ -213,6 +226,8 @@
 		CD9F7BD71ADF89F50025F34F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CDD360EA1AE63BB2001B08FF /* Toast */,
+				CDE14F531AE0D20B00B1C60F /* SideMenu */,
 				CD9F7BE11ADFA78A0025F34F /* ConfigUtils.h */,
 				CD9F7BE21ADFA78A0025F34F /* ConfigUtils.m */,
 				CD9F7BD81ADF89F50025F34F /* HttpUtils.h */,
@@ -223,8 +238,19 @@
 				CD9F7BE51ADFA7DE0025F34F /* Config.m */,
 				CDED4BCF1AE0F484006AAB9F /* SameCityUtils.h */,
 				CDED4BD01AE0F484006AAB9F /* SameCityUtils.m */,
+				CDD360E31AE5DC8A001B08FF /* LocationUtils.h */,
+				CDD360E41AE5DC8A001B08FF /* LocationUtils.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		CDD360EA1AE63BB2001B08FF /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				CDD360EB1AE63BB2001B08FF /* Toast.h */,
+				CDD360EC1AE63BB2001B08FF /* Toast.m */,
+			);
+			path = Toast;
 			sourceTree = "<group>";
 		};
 		CDE14F531AE0D20B00B1C60F /* SideMenu */ = {
@@ -235,7 +261,8 @@
 				CDE14F561AE0D20B00B1C60F /* UIViewController+SideMenu.h */,
 				CDE14F571AE0D20B00B1C60F /* UIViewController+SideMenu.m */,
 			);
-			path = SideMenu;
+			name = SideMenu;
+			path = ../SideMenu;
 			sourceTree = "<group>";
 		};
 		CDE2D45C1ADDF35E0099FE0C = {
@@ -388,9 +415,11 @@
 				TargetAttributes = {
 					CDE2D4641ADDF35E0099FE0C = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = KKB2HU8MUC;
 					};
 					CDE2D47D1ADDF35F0099FE0C = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = KKB2HU8MUC;
 						TestTargetID = CDE2D4641ADDF35E0099FE0C;
 					};
 				};
@@ -487,10 +516,12 @@
 				CDE14F521AE0D17C00B1C60F /* EventListController.m in Sources */,
 				CDED4BD41AE10D4A006AAB9F /* Owner.m in Sources */,
 				CDE14F491AE0D0EA00B1C60F /* TabController.m in Sources */,
+				CDD360ED1AE63BB2001B08FF /* Toast.m in Sources */,
 				CDE2D46E1ADDF35F0099FE0C /* AppDelegate.m in Sources */,
 				CDED4BCE1AE0EDE8006AAB9F /* Event.m in Sources */,
 				CDE2D46B1ADDF35E0099FE0C /* main.m in Sources */,
 				CDE14F461AE0CAEE00B1C60F /* EventList.m in Sources */,
+				CDD360E51AE5DC8A001B08FF /* LocationUtils.m in Sources */,
 				CD9F7BDC1ADF89F50025F34F /* HttpUtils.m in Sources */,
 				CD9F7BE61ADFA7DE0025F34F /* Config.m in Sources */,
 				CD9F7BE91ADFBF6B0025F34F /* User.m in Sources */,
@@ -649,6 +680,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -660,6 +693,7 @@
 				INFOPLIST_FILE = DoubanSameCityTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DoubanSameCity.app/DoubanSameCity";
 			};
 			name = Debug;
@@ -668,6 +702,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -675,6 +711,7 @@
 				INFOPLIST_FILE = DoubanSameCityTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DoubanSameCity.app/DoubanSameCity";
 			};
 			name = Release;
