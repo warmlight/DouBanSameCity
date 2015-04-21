@@ -42,7 +42,6 @@
         dispatch_async(queueToDown, ^{
             [weakSelf latestEvent:@"shanghai" type:@"all" day_type:@"future"];
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 [weakSelf afterRefresh];
             });
         });
@@ -53,7 +52,6 @@
         dispatch_async(queueToUp, ^{
             [weakSelf getMoreEvent:@"shanghai" type:@"all" day_type:@"future"];
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 [weakSelf afterRefresh];
             });
         });
@@ -61,6 +59,15 @@
     }];
     
     [self initLocationManager];
+    
+//    LocationUtils *location = [[LocationUtils alloc] init:Get_Place];
+//    CLPlacemark *mark = [location getPlaceInfomation];
+////    mark.location;
+//    NSLog(@"%@", mark.locality);
+    
+//    LocationUtils *location = [[LocationUtils alloc] init];
+//    [location initLocationManager];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -68,16 +75,13 @@
 - (void)initLocationManager{
         if([CLLocationManager locationServicesEnabled]){
         self.locationManager = [[CLLocationManager alloc] init];
-            [self.locationManager requestWhenInUseAuthorization];
-
         self.locationManager.delegate = self;
         self.locationManager.distanceFilter = 300;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-            [self.locationManager requestAlwaysAuthorization];//ios8要添加 还要在plist里添加
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+            [self.locationManager requestWhenInUseAuthorization];//ios8要添加 还要在plist里添加
         }
             [self.locationManager startUpdatingLocation];
-            [self.locationManager stopUpdatingLocation];
     }
 }
 
@@ -95,8 +99,10 @@
             NSLog(@"locality,%@",place.locality);
             NSLog(@"subLocality,%@",place.subLocality);
             NSLog(@"country,%@",place.country);
+            [manager stopUpdatingLocation];
         }
     }];
+  
 }
 
 
@@ -120,6 +126,7 @@
 
 - (void)latestEvent:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type{
     self.page = 0;
+    [self.eventsArray removeAllObjects];
     EventList *eventlist = [API get_eventlist:[NSNumber numberWithInt:10] star:[NSNumber numberWithInt:self.page] loc:loc type:type day_type:day_type];
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[eventlist.events mutableCopy]];
     NSMutableArray *events = [SameCityUtils get_eventArray:array];

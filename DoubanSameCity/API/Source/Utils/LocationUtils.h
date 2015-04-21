@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+typedef enum
+{
+    Get_Place = 0,
+    Get_Altitude
+}LocationType;
+
 @interface LocationUtils : NSObject<CLLocationManagerDelegate>
 @property (strong, nonatomic) CLLocationManager *locationManager;
 //@property (assign, nonatomic) double distance;                      //移动多少距离开始重新定位、
@@ -33,14 +39,20 @@
 
 @property (assign, nonatomic) NSInteger type;
 @property (strong, nonatomic) CLPlacemark *placeInfomation;
+@property (assign, nonatomic) CLLocationCoordinate2D coordinate;
+@property (strong, nonatomic) CLLocation *currentLocation;
 
 - (CLPlacemark *)getPlaceInfomation;
 + (CLPlacemark *)getPlaceInfomation:(NSString *)latitude longtitude:(NSString *)longtitude;
 - (CLLocationCoordinate2D)getlatitude_longitude;
 + (CLLocationCoordinate2D)getlatitude_longitude:(NSString *)placeName;
+- (CLLocation*)getCurrentLocation;
 
-- (instancetype)init:(NSInteger)type;
-- (instancetype)init:(double)distance desiredAccuracy:(double)desiredAccuracy type:(NSInteger)type;
+- (instancetype)init:(LocationType)type;
+- (instancetype)init:(double)distance desiredAccuracy:(double)desiredAccuracy type:(LocationType)type;
+
+
+- (void)initLocationManager;//就是这个 和后面的那个代理！！！！！！！！！！！！！！！在外面走的很好 里面就不行
 
 
 @end

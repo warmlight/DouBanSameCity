@@ -5,7 +5,7 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Location is required to find your city</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location is required to find your city</string>
+	<string>请打开定位，获取您当前城市活动</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
