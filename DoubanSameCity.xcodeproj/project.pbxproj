@@ -52,6 +52,7 @@
 		CDED4BCE1AE0EDE8006AAB9F /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED4BCD1AE0EDE8006AAB9F /* Event.m */; };
 		CDED4BD11AE0F484006AAB9F /* SameCityUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED4BD01AE0F484006AAB9F /* SameCityUtils.m */; };
 		CDED4BD41AE10D4A006AAB9F /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED4BD31AE10D4A006AAB9F /* Owner.m */; };
+		E486C67E1AE7EFE300F2CF9A /* FreeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E486C67D1AE7EFE300F2CF9A /* FreeLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +144,8 @@
 		CDED4BD01AE0F484006AAB9F /* SameCityUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SameCityUtils.m; sourceTree = "<group>"; };
 		CDED4BD21AE10D4A006AAB9F /* Owner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Owner.h; sourceTree = "<group>"; };
 		CDED4BD31AE10D4A006AAB9F /* Owner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Owner.m; sourceTree = "<group>"; };
+		E486C67C1AE7EFE300F2CF9A /* FreeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeLabel.h; sourceTree = "<group>"; };
+		E486C67D1AE7EFE300F2CF9A /* FreeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -376,6 +379,8 @@
 				CDD9750F1AE486CD00C8C79C /* EventCell.m */,
 				CDB401F91AE78A730067E61F /* EventDetailScrollerVIew.h */,
 				CDB401FA1AE78A730067E61F /* EventDetailScrollerVIew.m */,
+				E486C67C1AE7EFE300F2CF9A /* FreeLabel.h */,
+				E486C67D1AE7EFE300F2CF9A /* FreeLabel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 				CDD975101AE486CD00C8C79C /* EventCell.m in Sources */,
 				CD9F7BC21ADF5AE20025F34F /* LaunchController.m in Sources */,
 				CDED4BC91AE0E5CC006AAB9F /* RootViewController.m in Sources */,
+				E486C67E1AE7EFE300F2CF9A /* FreeLabel.m in Sources */,
 				CDE14F4F1AE0D14C00B1C60F /* MyEventController.m in Sources */,
 				CDB401FB1AE78A730067E61F /* EventDetailScrollerVIew.m in Sources */,
 				CD9F7BD01ADF87CB0025F34F /* API.m in Sources */,

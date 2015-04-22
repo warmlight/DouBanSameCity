@@ -29,7 +29,8 @@
     CGFloat scrollerW = screenWidth;
     CGFloat scrollerH = self.view.frame.size.height;
     self.scrollerView.frame = CGRectMake(scrollerX, scrollerY, scrollerW, scrollerH);
-//    self.scrollerView.backgroundColor = [UIColor orangeColor];
+    self.scrollerView.contentSize = CGSizeMake(screenWidth, contentSizeHeigth);
+    //    self.scrollerView.backgroundColor = [UIColor orangeColor];
     [self.view addSubview:self.scrollerView];
 }
 

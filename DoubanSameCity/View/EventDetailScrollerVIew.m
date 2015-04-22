@@ -36,6 +36,7 @@
         [self addSubview:self.ownerImg];
         
         self.typeImg = [[UIImageView alloc] init];
+        [self addSubview:self.typeImg];
         
         self.beginTimeLabel = [[UILabel alloc] init];
         self.beginTimeLabel.font = TextF;
@@ -62,11 +63,26 @@
         [self addSubview:self.ownerLabel];
         
         self.typeLabel = [[UILabel alloc] init];
+        self.typeLabel.font = TextF;
+        [self addSubview:self.typeLabel];
+        
+        self.bandLabel = [[UILabel alloc] init];
+        self.bandLabel.font = TitleF;
+        self.bandLabel.backgroundColor = UIColorFromRGB(0xEEE685);
+        [self addSubview:self.bandLabel];
+        
+        self.contentLabel = [[FreeLabel alloc] init];
+        self.contentLabel.numberOfLines = 0;
+        self.contentLabel.font = TextF;
+        self.contentLabel.backgroundColor = UIColorFromRGB(0xEE9572);
+        [self.contentLabel setVerticalAlignment:VerticalAlignmentTop];
+        [self addSubview:self.contentLabel];
     }
     return self;
 }
 
 - (CGFloat)setViewFrame_Content:(Event *)event{
+    self.event = event;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
 
     
@@ -169,12 +185,65 @@
     CGFloat ownerLabelH = ownerSize.height;
     self.ownerLabel.frame = CGRectMake(ownerLabelX, ownerLabelY, ownerLabelW, ownerLabelH);
     
-    return eventImgY + eventImgH + BigMargin;
+    //type image
+    self.typeImg.image = [UIImage imageNamed:@"type.png"];
+    
+    CGFloat typeImgX = ownerImgX;
+    CGFloat typeImgY = ownerLabelY + ownerLabelH + SmallMargin;
+    CGFloat typeImgW = ownerImgW;
+    CGFloat typeImgH = typeImgW;
+    self.typeImg.frame = CGRectMake(typeImgX, typeImgY, typeImgW, typeImgH);
+    
+    //type label
+    self.typeLabel.text = event.category_name;
+    
+    CGFloat typeLabelX = ownerLabelX;
+    CGFloat typeLabelY = typeImgY;
+    CGFloat typeLabelW = ownerLabelW;
+    CGFloat typeLabelH = typeImgH;
+    self.typeLabel.frame = CGRectMake(typeLabelX, typeLabelY, typeLabelW, typeLabelH);
+    
+    //band label
+    self.bandLabel.text = @"  活动详情";
+    
+    CGFloat bandX = 0;
+    CGFloat bandY = typeLabelY + typeLabelH + 2 *BigMargin;
+    CGFloat bandW = screenWidth;
+    CGSize bandConstraint = CGSizeMake(bandW, 20000.0);
+    CGSize bandSize = [self.bandLabel.text sizeWithFont:TitleF constrainedToSize:bandConstraint];
+    CGFloat bandH = bandSize.height;
+    self.bandLabel.frame = CGRectMake(bandX, bandY, bandW, bandH);
+    
+    //contentlabel
+    self.contentLabel.text = [NSString stringWithFormat:@"\n%@", event.content];
+    
+    CGFloat contentX = 0;
+    CGFloat contentY = bandY + bandH;
+    CGFloat contentW = screenWidth;
+    CGSize contentConstraint = CGSizeMake(contentW, 20000.0);
+    CGSize contentSize = [self.contentLabel.text sizeWithFont:TextF constrainedToSize:contentConstraint];
+    CGFloat contentH = contentSize.height;
+    if (contentH  <  ([UIScreen mainScreen].bounds.size.height - contentY)) {
+        contentH = [UIScreen mainScreen].bounds.size.height - contentY;
+    }
+    self.contentLabel.frame = CGRectMake(contentX, contentY, contentW, contentH);
+
+    
+    return contentY + contentH;
     
 }
 
 - (void)callMap:(UIButton *)sender{
-    NSLog(@"tap button");
+    NSLog(@"tap button %@", self.event.geo);
+    MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+    NSArray *location = [self.event.geo componentsSeparatedByString:@" "];
+    CLLocationCoordinate2D  endCoor = {[location[0] intValue], [location[1] intValue]};
+    MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:endCoor addressDictionary:nil]];
+    toLocation.name = @"to name";
+    
+    [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
+                   launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
+
 }
 
 

@@ -11,6 +11,8 @@
 #import <UIImageView+WebCache.h>
 #import "Owner.h"
 #import "SameCityUtils.h"
+#import <MapKit/MapKit.h>
+#import "FreeLabel.h"
 #define TitleBoldFont [UIFont fontWithName:@"TrebuchetMS-Bold" size:17];
 #define TitleF [UIFont systemFontOfSize:17]
 #define TextF [UIFont systemFontOfSize:14]
@@ -33,6 +35,10 @@
 @property (strong, nonatomic) UIButton *addressButton;
 @property (strong, nonatomic) UILabel *ownerLabel;
 @property (strong, nonatomic) UILabel *typeLabel;
+
+@property (strong, nonatomic) UILabel *bandLabel;
+@property (strong, nonatomic) FreeLabel *contentLabel;
+@property (strong, nonatomic) Event *event;
 
 - (CGFloat)setViewFrame_Content:(Event *)event;
 
