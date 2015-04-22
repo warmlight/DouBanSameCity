@@ -47,9 +47,13 @@
 
         self.addressButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.addressButton.titleLabel.numberOfLines = 0;
-        self.addressButton.backgroundColor = [UIColor blueColor];
-        self.addressButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//        self.addressButton.backgroundColor = [UIColor blueColor];
+//        self.addressButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [self.addressButton addTarget:self action:@selector(callMap:) forControlEvents:UIControlEventTouchDown];
+        self.addressButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.addressButton.layer.borderWidth = 1;
+        self.addressButton.layer.cornerRadius = 8.f;
+        self.addressButton.layer.masksToBounds = YES;
         [self addSubview:self.addressButton];
         
         self.ownerLabel = [[UILabel alloc] init];
@@ -161,7 +165,7 @@
     CGFloat ownerLabelY = ownerImgY;
     CGFloat ownerLabelW = addressBtnW;
     CGSize ownerConstraint = CGSizeMake(addressBtnW, 20000.0);
-    CGSize ownerSize = [owner.name sizeWithFont:TitleF constrainedToSize:ownerConstraint];
+    CGSize ownerSize = [self.ownerLabel.text sizeWithFont:TitleF constrainedToSize:ownerConstraint];
     CGFloat ownerLabelH = ownerSize.height;
     self.ownerLabel.frame = CGRectMake(ownerLabelX, ownerLabelY, ownerLabelW, ownerLabelH);
     
