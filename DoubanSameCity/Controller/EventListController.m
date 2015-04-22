@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"活动";
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor blackColor];
     self.eventsArray = [[NSMutableArray alloc] init];
     [self initUI];
     
@@ -60,14 +60,6 @@
     
     [self initLocationManager];
     
-//    LocationUtils *location = [[LocationUtils alloc] init:Get_Place];
-//    CLPlacemark *mark = [location getPlaceInfomation];
-////    mark.location;
-//    NSLog(@"%@", mark.locality);
-    
-//    LocationUtils *location = [[LocationUtils alloc] init];
-//    [location initLocationManager];
-    
     // Do any additional setup after loading the view.
 }
 
@@ -99,19 +91,20 @@
             NSLog(@"locality,%@",place.locality);
             NSLog(@"subLocality,%@",place.subLocality);
             NSLog(@"country,%@",place.country);
-            [manager stopUpdatingLocation];
         }
+        [manager stopUpdatingLocation];
     }];
   
 }
-
-
 
 - (void)initUI{
     //没有效果
     UIImage * img = [UIImage imageNamed:@"menu"];
     UIBarButtonItem * menuButton = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(presentLeftMenuViewController:)];
     self.navigationItem.leftBarButtonItem = menuButton;
+    
+    UIImageView *image = [[UIImageView alloc] initWithFrame:self.view.frame];
+    image.image = [UIImage imageNamed:@"table_bkg.png"];
     
     CGFloat tableX = 0;
     CGFloat tableY = 0;
@@ -120,19 +113,24 @@
     self.tabelView = [[UITableView alloc] initWithFrame:CGRectMake(tableX, tableY, tableW, tableH)];
     self.tabelView.delegate = self;
     self.tabelView.dataSource = self;
+    self.tabelView.backgroundView = image;
+//    self.tabelView.backgroundColor = UIColorFromRGB(0xEEEF98);
     [self.view addSubview:self.tabelView];
     [self.tabelView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];//隐藏没有内容的cell的分割线
 }
 
 - (void)latestEvent:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type{
-    self.page = 0;
-    [self.eventsArray removeAllObjects];
-    EventList *eventlist = [API get_eventlist:[NSNumber numberWithInt:10] star:[NSNumber numberWithInt:self.page] loc:loc type:type day_type:day_type];
-    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[eventlist.events mutableCopy]];
-    NSMutableArray *events = [SameCityUtils get_eventArray:array];
-    [self.eventsArray insertObjects:events atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, events.count)]];
-    self.totalEvent = eventlist.total;
-    self.page ++;
+    if (![self.tabelView.header isRefreshing]){
+        self.page = 0;
+        [self.eventsArray removeAllObjects];
+        EventList *eventlist = [API get_eventlist:[NSNumber numberWithInt:10] star:[NSNumber numberWithInt:self.page] loc:loc type:type day_type:day_type];
+        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[eventlist.events mutableCopy]];
+        NSMutableArray *events = [SameCityUtils get_eventArray:array];
+        [self.eventsArray insertObjects:events atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, events.count)]];
+        self.totalEvent = eventlist.total;
+        self.page ++;
+        
+    }
 }
 
 - (void)getMoreEvent:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type{
@@ -167,6 +165,7 @@
     }
     cell.tag = indexPath.row + 100;
     Event *event = self.eventsArray[indexPath.row];
+    cell.singleEvent = event;
     cell.titleLabel.text = [NSString stringWithFormat:@" %@", event.title];
     cell.bengin_event_time_Label.text = event.begin_time;
     cell.end_event_time_Label.text = event.end_time;
@@ -186,10 +185,16 @@
 
 - (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath
 {
-    UIColor *CellColor = [UIColor colorWithWhite:1.0 alpha:0.4];
-    cell.backgroundColor = CellColor;
     //去除有内容的Cell分割线
     cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    EventCell *cell = (EventCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    EventDetailController *detailCon = [[EventDetailController alloc] init];
+    [detailCon initUI:cell.singleEvent];
+    [self.navigationController pushViewController:detailCon animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

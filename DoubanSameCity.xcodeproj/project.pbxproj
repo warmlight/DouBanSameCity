@@ -23,6 +23,10 @@
 		CD9F7BE31ADFA78A0025F34F /* ConfigUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BE21ADFA78A0025F34F /* ConfigUtils.m */; };
 		CD9F7BE61ADFA7DE0025F34F /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BE51ADFA7DE0025F34F /* Config.m */; };
 		CD9F7BE91ADFBF6B0025F34F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BE81ADFBF6B0025F34F /* User.m */; };
+		CDB401F81AE78A3E0067E61F /* EventDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB401F71AE78A3E0067E61F /* EventDetailController.m */; };
+		CDB401FB1AE78A730067E61F /* EventDetailScrollerVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB401FA1AE78A730067E61F /* EventDetailScrollerVIew.m */; };
+		CDB401FD1AE7924D0067E61F /* owner.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB401FC1AE7924D0067E61F /* owner.png */; };
+		CDBEDAF41AE7382100D0C0D9 /* table_bkg.png in Resources */ = {isa = PBXBuildFile; fileRef = CDBEDAF31AE7382100D0C0D9 /* table_bkg.png */; };
 		CDD360E51AE5DC8A001B08FF /* LocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD360E41AE5DC8A001B08FF /* LocationUtils.m */; };
 		CDD360E71AE62D35001B08FF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD360E61AE62D35001B08FF /* MapKit.framework */; };
 		CDD360E91AE62D3D001B08FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD360E81AE62D3D001B08FF /* CoreLocation.framework */; };
@@ -88,6 +92,12 @@
 		CD9F7BE51ADFA7DE0025F34F /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
 		CD9F7BE71ADFBF6B0025F34F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		CD9F7BE81ADFBF6B0025F34F /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		CDB401F61AE78A3E0067E61F /* EventDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailController.h; sourceTree = "<group>"; };
+		CDB401F71AE78A3E0067E61F /* EventDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailController.m; sourceTree = "<group>"; };
+		CDB401F91AE78A730067E61F /* EventDetailScrollerVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailScrollerVIew.h; sourceTree = "<group>"; };
+		CDB401FA1AE78A730067E61F /* EventDetailScrollerVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailScrollerVIew.m; sourceTree = "<group>"; };
+		CDB401FC1AE7924D0067E61F /* owner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owner.png; sourceTree = "<group>"; };
+		CDBEDAF31AE7382100D0C0D9 /* table_bkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_bkg.png; sourceTree = "<group>"; };
 		CDD360E31AE5DC8A001B08FF /* LocationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationUtils.h; sourceTree = "<group>"; };
 		CDD360E41AE5DC8A001B08FF /* LocationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationUtils.m; sourceTree = "<group>"; };
 		CDD360E61AE62D35001B08FF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -188,6 +198,8 @@
 		CD9F7BBA1ADF50AA0025F34F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CDB401FC1AE7924D0067E61F /* owner.png */,
+				CDBEDAF31AE7382100D0C0D9 /* table_bkg.png */,
 				CD1996541AE4DCBD0064B3DE /* address.png */,
 				CD1996551AE4DCBD0064B3DE /* end.png */,
 				CD1996561AE4DCBD0064B3DE /* star.png */,
@@ -219,6 +231,8 @@
 				CDE14F5B1AE0D23600B1C60F /* LeftController.m */,
 				CDED4BC71AE0E5CC006AAB9F /* RootViewController.h */,
 				CDED4BC81AE0E5CC006AAB9F /* RootViewController.m */,
+				CDB401F61AE78A3E0067E61F /* EventDetailController.h */,
+				CDB401F71AE78A3E0067E61F /* EventDetailController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -360,6 +374,8 @@
 			children = (
 				CDD9750E1AE486CD00C8C79C /* EventCell.h */,
 				CDD9750F1AE486CD00C8C79C /* EventCell.m */,
+				CDB401F91AE78A730067E61F /* EventDetailScrollerVIew.h */,
+				CDB401FA1AE78A730067E61F /* EventDetailScrollerVIew.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -415,7 +431,6 @@
 				TargetAttributes = {
 					CDE2D4641ADDF35E0099FE0C = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = KKB2HU8MUC;
 					};
 					CDE2D47D1ADDF35F0099FE0C = {
 						CreatedOnToolsVersion = 6.2;
@@ -455,8 +470,10 @@
 				CD9F7BC51ADF652E0025F34F /* bkg.png in Resources */,
 				CD1996581AE4DCBD0064B3DE /* address.png in Resources */,
 				CDED4BCB1AE0EA80006AAB9F /* menu.png in Resources */,
+				CDB401FD1AE7924D0067E61F /* owner.png in Resources */,
 				CDE2D4791ADDF35F0099FE0C /* LaunchScreen.xib in Resources */,
 				CDE2D4761ADDF35F0099FE0C /* Images.xcassets in Resources */,
+				CDBEDAF41AE7382100D0C0D9 /* table_bkg.png in Resources */,
 				CDE14F431AE0B87100B1C60F /* LaunchController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,6 +529,7 @@
 				CDED4BD11AE0F484006AAB9F /* SameCityUtils.m in Sources */,
 				CDE14F591AE0D20B00B1C60F /* UIViewController+SideMenu.m in Sources */,
 				CD9F7BCC1ADF848A0025F34F /* OAutoController.m in Sources */,
+				CDB401F81AE78A3E0067E61F /* EventDetailController.m in Sources */,
 				CD9F7BE01ADF97320025F34F /* Account.m in Sources */,
 				CDE14F521AE0D17C00B1C60F /* EventListController.m in Sources */,
 				CDED4BD41AE10D4A006AAB9F /* Owner.m in Sources */,
@@ -531,6 +549,7 @@
 				CD9F7BC21ADF5AE20025F34F /* LaunchController.m in Sources */,
 				CDED4BC91AE0E5CC006AAB9F /* RootViewController.m in Sources */,
 				CDE14F4F1AE0D14C00B1C60F /* MyEventController.m in Sources */,
+				CDB401FB1AE78A730067E61F /* EventDetailScrollerVIew.m in Sources */,
 				CD9F7BD01ADF87CB0025F34F /* API.m in Sources */,
 				CD9F7BE31ADFA78A0025F34F /* ConfigUtils.m in Sources */,
 				CDE14F5C1AE0D23600B1C60F /* LeftController.m in Sources */,
@@ -660,7 +679,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DoubanSameCity/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -676,7 +695,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DoubanSameCity/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

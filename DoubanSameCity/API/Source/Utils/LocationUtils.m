@@ -9,7 +9,30 @@
 #import "LocationUtils.h"
 #import <UIKit/UIKit.h>
 
+static LocationUtils *locationUtils = nil;
 @implementation LocationUtils
+
++ (LocationUtils *)shareInstance{
+    if (locationUtils == nil) {
+        locationUtils = [locationUtils init];
+    }else{
+        return locationUtils;
+    }
+    return locationUtils;
+}
+
+- (void)starLocation:(double)distance desiredAccuracy:(double)desiredAccuracy type:(LocationType)type delegate:(id)delegate{
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = 300;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+        [self.locationManager requestWhenInUseAuthorization];//ios8要添加 还要在plist里添加
+    }
+    [self.locationManager startUpdatingLocation];
+    self.type = 0;
+}
+
 - (instancetype)init:(LocationType)type{
     self = [super init];
     if (self) {

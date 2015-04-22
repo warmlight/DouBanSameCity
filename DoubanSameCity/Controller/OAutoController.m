@@ -35,6 +35,7 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     // 获取全路径，将URL转换成字符串
@@ -69,6 +70,7 @@
     }
     return YES;
 }
+
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {

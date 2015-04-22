@@ -14,8 +14,8 @@
 #import "EventList.h"
 #import "Event.h"
 
-#define APIKey @"0431c1b73ffe94340c954525bffbbc9c"
-#define Secret @"25b0498a00ab1abd"
+#define APIKey @"0c64cd6d91fb7474252e6848b5f25d5c"
+#define Secret @"0e0ee1a0742a7637"
 #define RedirectURL @"https://www.douban.com/"
 #define BASE_URL @"https://api.douban.com"
 

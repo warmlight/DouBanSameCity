@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DoubanSameCity/API/Source/Utils/LocationUtils.m"
-            timestampString = "451276130.413403"
+            timestampString = "451359616.54639"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "-init:"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "-locationManager:didUpdateLocations:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DoubanSameCity/API/API.m"
-            timestampString = "451296773.441593"
+            filePath = "DoubanSameCity/API/Source/Utils/LocationUtils.m"
+            timestampString = "451359956.425972"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "+get_eventlist:star:loc:type:day_type:"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "-getPlaceInfomation"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +73,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DoubanSameCity/API/API.m"
-            timestampString = "451296793.708617"
+            filePath = "DoubanSameCity/Controller/DetialController.h"
+            timestampString = "451381677.001557"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "+get_eventlist:star:loc:type:day_type:"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "event"
+            landmarkType = "19">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DoubanSameCity/View/EventDetailScrollerVIew.m"
+            timestampString = "451389229.668593"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "-setViewFrame_Content:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DoubanSameCity/View/EventDetailScrollerVIew.m"
+            timestampString = "451389444.699159"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "-setViewFrame_Content:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

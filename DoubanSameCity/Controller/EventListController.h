@@ -18,6 +18,7 @@
 #import "LocationUtils.h"
 #import <MJRefresh.h>
 #import "Toast.h"
+#import "EventDetailController.h"
 
 
 #define Count 10
@@ -28,5 +29,6 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (assign, nonatomic) int page;
 @property (strong, nonatomic) NSNumber *totalEvent;
+@property (strong, nonatomic) LocationUtils *lu;
 
 @end

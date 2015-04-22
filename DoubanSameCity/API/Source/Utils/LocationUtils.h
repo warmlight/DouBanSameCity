@@ -52,7 +52,9 @@ typedef enum
 - (instancetype)init:(double)distance desiredAccuracy:(double)desiredAccuracy type:(LocationType)type;
 
 
-- (void)initLocationManager;//就是这个 和后面的那个代理！！！！！！！！！！！！！！！在外面走的很好 里面就不行
++ (LocationUtils *)shareInstance;
+- (void)starLocation:(double)distance desiredAccuracy:(double)desiredAccuracy type:(LocationType)type delegate:(id)delegate;
 
+- (void)initLocationManager;
 
 @end

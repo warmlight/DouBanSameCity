@@ -14,11 +14,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.contentView.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor clearColor];
         [self createSubview];
-//        self.contentView.layer.cornerRadius = 10.0;
-//        self.contentView.layer.borderWidth = 1;
-//        self.contentView.layer.borderColor = [[UIColor redColor] CGColor];
-//        self.contentView.layer.masksToBounds = YES;
     }
     return self;
 }
@@ -26,16 +23,14 @@
 - (void)createSubview{
     //bkgView
     self.bkgView = [[UIView alloc] init];
-    self.bkgView.backgroundColor = UIColorFromRGB(0xD1EEEE);
+    self.bkgView.backgroundColor = UIColorFromRGB(0xB0DCD5);
     self.bkgView.layer.cornerRadius = 5.0;
-//    self.bkgView.layer.borderWidth = 1;
-//    self.bkgView.layer.borderColor = [[UIColor redColor] CGColor];
     self.bkgView.layer.masksToBounds = YES;
     [self.contentView addSubview:self.bkgView];
     
     //titile
     self.titleLabel = [[UILabel alloc] init];
-    self.titleLabel.backgroundColor = UIColorFromRGB(0xFFC1C1);
+    self.titleLabel.backgroundColor = UIColorFromRGB(0xF8C5B4);
     self.titleLabel.font = TitleFont;
     self.titleLabel.numberOfLines = 0;
     [self.bkgView addSubview:self.titleLabel];
@@ -184,7 +179,7 @@
     
     //wish label
     CGSize wishSize = [@"人感兴趣" sizeWithFont:TextFont constrainedToSize:CGSizeMake(200, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
-    CGFloat wishX = screenSize.width - 4 *Margin - wishSize.width;
+    CGFloat wishX = screenSize.width - 6 *Margin - wishSize.width;
     CGFloat wishY = begintimeSize.height + typeLabelY + 20;//2232323
     self.wishLabel.frame = CGRectMake(wishX, wishY, wishSize.width, wishSize.height);
     
