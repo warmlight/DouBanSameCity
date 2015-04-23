@@ -13,6 +13,7 @@
 #import "User.h"
 #import "EventList.h"
 #import "Event.h"
+#import "CityList.h"
 
 #define APIKey @"0c64cd6d91fb7474252e6848b5f25d5c"
 #define Secret @"0e0ee1a0742a7637"
@@ -40,5 +41,5 @@
 + (Account*)get_access_token:(NSString *)code;
 + (User *)get_user:(NSString *)code;
 + (EventList *)get_eventlist:(NSNumber *)count star:(NSNumber *)star loc:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type;
-
++ (CityList *)get_cityList:(NSNumber *)count start:(NSNumber *)start;
 @end

@@ -7,10 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JsonUtils.h"
 
+@class CityList;
 @interface CityList : NSObject
 @property (strong, nonatomic) NSNumber *count;
 @property (strong, nonatomic) NSNumber *start;
 @property (strong, nonatomic) NSNumber *total;
-@property (strong, nonatomic) NSMutableArray *users;
+@property (strong, nonatomic) NSMutableArray *locs;
+
++(CityList *)fromJsonString: (NSString *)jsonString;
++(CityList *)fromJsonData: (NSData *)jsonData;
++(CityList *)fromJsonObject: (NSJSONSerialization *)json;
+-(NSString *)toString;
 @end

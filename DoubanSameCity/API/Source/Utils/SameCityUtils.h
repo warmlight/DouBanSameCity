@@ -11,9 +11,12 @@
 #import "Event.h"
 #import "JsonUtils.h"
 #import "Owner.h"
+#import "CityList.h"
+#import "City.h"
 
 @interface SameCityUtils : NSObject
 + (NSMutableArray *)get_eventArray:(NSArray *)eventlist_events;
 + (Owner *)get_owner:(NSMutableDictionary *)owner;
++ (NSMutableArray *)get_cityArray:(NSMutableArray *)cityList_locs;
 
 @end

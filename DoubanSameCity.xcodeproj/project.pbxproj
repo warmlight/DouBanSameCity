@@ -17,6 +17,7 @@
 		CD57B9531AE8B43300B86701 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = CD57B9521AE8B43300B86701 /* add.png */; };
 		CD57B9561AE8D06800B86701 /* CityList.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57B9551AE8D06800B86701 /* CityList.m */; };
 		CD57B9591AE8D4AE00B86701 /* PHJTransformPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57B9581AE8D4AE00B86701 /* PHJTransformPinyin.m */; };
+		CD57B95C1AE8E5AA00B86701 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57B95B1AE8E5AA00B86701 /* City.m */; };
 		CD9F7BB81ADF50680025F34F /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = CD9F7BB71ADF50680025F34F /* launch.png */; };
 		CD9F7BC21ADF5AE20025F34F /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BC01ADF5AE20025F34F /* LaunchController.m */; };
 		CD9F7BC51ADF652E0025F34F /* bkg.png in Resources */ = {isa = PBXBuildFile; fileRef = CD9F7BC41ADF652E0025F34F /* bkg.png */; };
@@ -87,6 +88,8 @@
 		CD57B9551AE8D06800B86701 /* CityList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityList.m; sourceTree = "<group>"; };
 		CD57B9571AE8D4AE00B86701 /* PHJTransformPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHJTransformPinyin.h; sourceTree = "<group>"; };
 		CD57B9581AE8D4AE00B86701 /* PHJTransformPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHJTransformPinyin.m; sourceTree = "<group>"; };
+		CD57B95A1AE8E5AA00B86701 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
+		CD57B95B1AE8E5AA00B86701 /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
 		CD9F7BB71ADF50680025F34F /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launch.png; path = ../../../../DoubanSameCityTests/launch.png; sourceTree = "<group>"; };
 		CD9F7BBF1ADF5AE20025F34F /* LaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
 		CD9F7BC01ADF5AE20025F34F /* LaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
@@ -391,6 +394,8 @@
 				CDED4BD31AE10D4A006AAB9F /* Owner.m */,
 				CD57B9541AE8D06800B86701 /* CityList.h */,
 				CD57B9551AE8D06800B86701 /* CityList.m */,
+				CD57B95A1AE8E5AA00B86701 /* City.h */,
+				CD57B95B1AE8E5AA00B86701 /* City.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -555,6 +560,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD57B95C1AE8E5AA00B86701 /* City.m in Sources */,
 				CDED4BD11AE0F484006AAB9F /* SameCityUtils.m in Sources */,
 				CDE14F591AE0D20B00B1C60F /* UIViewController+SideMenu.m in Sources */,
 				CD9F7BCC1ADF848A0025F34F /* OAutoController.m in Sources */,

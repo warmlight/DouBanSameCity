@@ -63,9 +63,10 @@
         self.addressButton.layer.masksToBounds = YES;
         [self addSubview:self.addressButton];
         
-        self.ownerLabel = [[UILabel alloc] init];
+        self.ownerLabel = [[FreeLabel alloc] init];
         self.ownerLabel.numberOfLines = 0;
         self.ownerLabel.font = TextF;
+        self.ownerLabel.verticalAlignment = VerticalAlignmentTop;
         [self addSubview:self.ownerLabel];
         
         self.typeLabel = [[UILabel alloc] init];
@@ -181,7 +182,7 @@
     self.addressImg.frame = CGRectMake(addressImgX, addressImgY, addressImgW, addressImgH);
     
     //address button
-    [self.addressButton setTitle:event.address forState:UIControlStateNormal];
+    [self.addressButton setTitle:[event.address stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] forState:UIControlStateNormal];//去回车
     
     CGFloat addressBtnX = endLabelX;
     CGFloat addressBtnY = addressImgY;
@@ -203,8 +204,7 @@
     
     //owner label
     Owner *owner = [SameCityUtils get_owner:event.owner];
-    self.ownerLabel.text = [NSString stringWithFormat:@"主办:%@", owner.name];
-    
+    self.ownerLabel.text = owner.name;
     CGFloat ownerLabelX = addressBtnX;
     CGFloat ownerLabelY = ownerImgY;
     CGFloat ownerLabelW = addressBtnW;

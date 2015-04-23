@@ -23,4 +23,12 @@
     return host;
 }
 
++ (NSMutableArray *)get_cityArray:(NSMutableArray *)cityList_locs{
+    NSMutableArray *cityArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < cityList_locs.count; i ++) {
+        City *city = [City fromJsonObject:cityList_locs[i]];
+        [cityArray addObject:city];
+    }
+    return cityArray;
+}
 @end

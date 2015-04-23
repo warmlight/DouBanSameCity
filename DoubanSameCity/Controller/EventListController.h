@@ -20,6 +20,8 @@
 #import "Toast.h"
 #import "EventDetailController.h"
 #import "PHJTransformPinyin.h"
+#import "CityList.h"
+#import "City.h"
 
 
 #define Count 10

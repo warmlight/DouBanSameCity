@@ -48,13 +48,7 @@
                 [weakSelf afterRefresh];
             });
         });
-
     }];
-    
-    NSString *str = @"上海";
-    NSLog(@"拼音%@", [str transformToPinyin]);
-    
-    // Do any additional setup after loading the view.
 }
 
 - (void)fristTimeReload{
@@ -74,7 +68,7 @@
 
 }
 
-
+#pragma mark location
 - (void)initLocationManager{
         if([CLLocationManager locationServicesEnabled]){
         self.locationManager = [[CLLocationManager alloc] init];
@@ -99,11 +93,11 @@
             NSRange range = [place.locality rangeOfString:@"市"];
             NSString *loc = [[place.locality substringToIndex:range.location] transformToPinyin];
             NSArray *array = [loc componentsSeparatedByString:@" "];
-            for (int i = 0; i < array.count; i ++) {
-                [self.locName appendString:array[i]];
-            }
             //只执行一次
             static dispatch_once_t predicate; dispatch_once(&predicate, ^{
+                for (int i = 0; i < array.count; i ++) {
+                    [self.locName appendString:array[i]];
+                }
                 [manager stopUpdatingLocation];
                 [self fristTimeReload];
             });
@@ -135,6 +129,7 @@
     [self.tabelView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];//隐藏没有内容的cell的分割线
 }
 
+#pragma mark getEvent
 - (void)latestEvent:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type{
     if (![self.tabelView.header isRefreshing]){
         self.page = 0;

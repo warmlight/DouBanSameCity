@@ -32,5 +32,11 @@
     return (result == nil? nil : [EventList fromJsonData:result[0]]);
 }
 
++ (CityList *)get_cityList:(NSNumber *)count start:(NSNumber *)start{
+    NSString *url = [BASE_URL stringByAppendingFormat:@"/v2/loc/list?count=%@0&start=%@", count, start];
+    NSArray *result = [HttpUtils getSync:url];
+    return (result == nil? nil : [CityList fromJsonData:result[0]]);
+}
+
 
 @end

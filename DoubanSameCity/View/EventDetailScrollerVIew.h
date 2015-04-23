@@ -36,7 +36,7 @@
 @property (strong, nonatomic) UILabel *beginTimeLabel;
 @property (strong, nonatomic) UILabel *endTimeLabel;
 @property (strong, nonatomic) UIButton *addressButton;
-@property (strong, nonatomic) UILabel *ownerLabel;
+@property (strong, nonatomic) FreeLabel *ownerLabel;
 @property (strong, nonatomic) UILabel *typeLabel;
 
 @property (strong, nonatomic) UILabel *bandLabel;
@@ -45,5 +45,6 @@
 @property (strong, nonatomic) UIView *contentLabelBkg;
 
 - (CGFloat)setViewFrame_Content:(Event *)event;
+
 
 @end
