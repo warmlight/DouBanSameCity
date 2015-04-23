@@ -173,7 +173,7 @@
     cell.eventAdressLabel.text = event.address;
     cell.wish_count_Label.text = [NSString stringWithFormat:@"%@", event.wisher_count];
     cell.participant_count_label.text = [NSString stringWithFormat:@"%@", event.participant_count];
-    [cell.eventImage setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"bkg.png"]];
+    [cell.eventImage sd_setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"bkg.png"]];
     [cell createFrame];
     return cell;
 }
@@ -196,6 +196,7 @@
     [detailCon initUI:cell.singleEvent];
     [self.navigationController pushViewController:detailCon animated:YES];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

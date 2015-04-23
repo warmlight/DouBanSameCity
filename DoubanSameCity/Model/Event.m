@@ -26,6 +26,8 @@
         self.category_name = @"";
         self.loc_id = @"";
         self.end_time = @"";
+        self.image_hlarge = @"";
+        self.image_lmobile = @"";
     }
     return self;
 }

@@ -25,6 +25,8 @@
 @property (strong, nonatomic) NSString *loc_id;
 @property (strong, nonatomic) NSString *end_time;
 @property (strong, nonatomic) NSString *address;
+@property (strong, nonatomic) NSString *image_hlarge;
+@property (strong, nonatomic) NSString *image_lmobile;
 
 +(Event *)fromJsonString: (NSString *)jsonString;
 +(Event *)fromJsonData: (NSData *)jsonData;

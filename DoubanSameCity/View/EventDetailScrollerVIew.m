@@ -21,7 +21,13 @@
         
         self.eventImg = [[UIImageView alloc] init];
         self.eventImg.backgroundColor = [UIColor redColor];
+        self.eventImg.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapZoomInImage:)];
+        [self.eventImg addGestureRecognizer:tap];
         [self addSubview:self.eventImg];
+        
+        self.eventZoomInImg = [[UIImageView alloc] init];
+        [self.eventImg addSubview:self.eventZoomInImg];
         
         self.beginTimeImg = [[UIImageView alloc] init];
         [self addSubview:self.beginTimeImg];
@@ -71,14 +77,26 @@
         self.bandLabel.backgroundColor = UIColorFromRGB(0xEEE685);
         [self addSubview:self.bandLabel];
         
+        
+        self.contentLabelBkg = [[UIView alloc] init];
+        self.contentLabelBkg.backgroundColor = UIColorFromRGB(0xEE9572);
+        [self addSubview:self.contentLabelBkg];
+        
         self.contentLabel = [[FreeLabel alloc] init];
         self.contentLabel.numberOfLines = 0;
         self.contentLabel.font = TextF;
         self.contentLabel.backgroundColor = UIColorFromRGB(0xEE9572);
         [self.contentLabel setVerticalAlignment:VerticalAlignmentTop];
         [self addSubview:self.contentLabel];
+
     }
     return self;
+}
+
+- (void)tapZoomInImage:(UITapGestureRecognizer *)gesture{
+    NSLog(@"tap");
+    UIImageView *eventImg = (UIImageView *)gesture.view;
+    [FullScreenLargeImageShowUtils showImage:eventImg large_image_url:self.event.image_hlarge];//放大
 }
 
 - (CGFloat)setViewFrame_Content:(Event *)event{
@@ -98,13 +116,23 @@
     self.titleLabel.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
     //event image
-    [self.eventImg setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"bkg.png"]];
+    [self.eventImg sd_setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"bkg.png"]];
     
     CGFloat eventImgX = BigMargin;
     CGFloat eventImgY = titleY + titleH + SmallMargin;
     CGFloat eventImgW = EventImageW;
     CGFloat eventImgH = EventImageH;
     self.eventImg.frame = CGRectMake(eventImgX, eventImgY, eventImgW, eventImgH);
+    
+    
+    //event zoom in image
+    self.eventZoomInImg.image = [UIImage imageNamed:@"add.png"];
+    
+    CGFloat zoomX = eventImgW - 25;
+    CGFloat zoomY = eventImgH - 25;
+    CGFloat zoomW = BigMargin;
+    CGFloat zoomH = BigMargin;
+    self.eventZoomInImg.frame = CGRectMake(zoomX, zoomY, zoomW, zoomH);
     
     //begin label
     self.beginTimeLabel.text = event.begin_time;
@@ -215,21 +243,30 @@
     self.bandLabel.frame = CGRectMake(bandX, bandY, bandW, bandH);
     
     //contentlabel
-    self.contentLabel.text = [NSString stringWithFormat:@"\n%@", event.content];
+    self.contentLabel.text = event.content;
     
-    CGFloat contentX = 0;
-    CGFloat contentY = bandY + bandH;
-    CGFloat contentW = screenWidth;
+    CGFloat contentX = SmallMargin;
+    CGFloat contentY = bandY + bandH + SmallMargin;
+    CGFloat contentW = screenWidth - 2 *SmallMargin;
     CGSize contentConstraint = CGSizeMake(contentW, 20000.0);
     CGSize contentSize = [self.contentLabel.text sizeWithFont:TextF constrainedToSize:contentConstraint];
     CGFloat contentH = contentSize.height;
-    if (contentH  <  ([UIScreen mainScreen].bounds.size.height - contentY)) {
-        contentH = [UIScreen mainScreen].bounds.size.height - contentY;
-    }
+//    if (contentH  <  ([UIScreen mainScreen].bounds.size.height - contentY)) {
+//        contentH = [UIScreen mainScreen].bounds.size.height - contentY;
+//    }
     self.contentLabel.frame = CGRectMake(contentX, contentY, contentW, contentH);
 
-    
-    return contentY + contentH;
+    //contenlabelbkg
+    CGFloat contentBkgX = 0;
+    CGFloat contentBkgY = bandH + bandY;
+    CGFloat contentBkgW = screenWidth;
+    CGFloat contentBkgH = contentH + SmallMargin;
+    if (contentH < ([UIScreen mainScreen].bounds.size.height - contentY)) {
+        contentBkgH = [UIScreen mainScreen].bounds.size.height - contentY;
+    }
+    self.contentLabelBkg.frame = CGRectMake(contentBkgX, contentBkgY, contentBkgW, contentBkgH);
+ 
+    return contentBkgY + contentH;
     
 }
 

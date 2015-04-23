@@ -191,10 +191,11 @@
     self.wish_count_Label.frame = CGRectMake(wishNumberX, wishNumberY, wishNumberW, wishNumberH);
     
     //participant label
-    CGSize parSize  = [@"人想参加" sizeWithFont:TextFont constrainedToSize:CGSizeMake(200, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize parSize  = [@"人参加" sizeWithFont:TextFont constrainedToSize:CGSizeMake(200, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
     CGFloat parX = wishNumberX - parSize.width - 20;
     CGFloat parY = wishNumberY;
-    self.participant_label.frame = CGRectMake(parX, parY, parSize.width, parSize.height);
+    CGFloat parW = wishSize.width;
+    self.participant_label.frame = CGRectMake(parX, parY, parW, parSize.height);
     
     //participant Number
     CGFloat parNumX = parX - 50;
