@@ -15,6 +15,8 @@
 		CD57B94A1AE87FE700B86701 /* ZoomInUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57B9491AE87FE700B86701 /* ZoomInUtils.m */; };
 		CD57B94D1AE8938E00B86701 /* FullScreenLargeImageShowUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57B94C1AE8938E00B86701 /* FullScreenLargeImageShowUtils.m */; };
 		CD57B9531AE8B43300B86701 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = CD57B9521AE8B43300B86701 /* add.png */; };
+		CD57B9561AE8D06800B86701 /* CityList.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57B9551AE8D06800B86701 /* CityList.m */; };
+		CD57B9591AE8D4AE00B86701 /* PHJTransformPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57B9581AE8D4AE00B86701 /* PHJTransformPinyin.m */; };
 		CD9F7BB81ADF50680025F34F /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = CD9F7BB71ADF50680025F34F /* launch.png */; };
 		CD9F7BC21ADF5AE20025F34F /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BC01ADF5AE20025F34F /* LaunchController.m */; };
 		CD9F7BC51ADF652E0025F34F /* bkg.png in Resources */ = {isa = PBXBuildFile; fileRef = CD9F7BC41ADF652E0025F34F /* bkg.png */; };
@@ -81,6 +83,10 @@
 		CD57B94B1AE8938E00B86701 /* FullScreenLargeImageShowUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FullScreenLargeImageShowUtils.h; path = ../SideMenu/FullScreenLargeImageShowUtils.h; sourceTree = "<group>"; };
 		CD57B94C1AE8938E00B86701 /* FullScreenLargeImageShowUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FullScreenLargeImageShowUtils.m; path = ../SideMenu/FullScreenLargeImageShowUtils.m; sourceTree = "<group>"; };
 		CD57B9521AE8B43300B86701 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
+		CD57B9541AE8D06800B86701 /* CityList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityList.h; sourceTree = "<group>"; };
+		CD57B9551AE8D06800B86701 /* CityList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityList.m; sourceTree = "<group>"; };
+		CD57B9571AE8D4AE00B86701 /* PHJTransformPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHJTransformPinyin.h; sourceTree = "<group>"; };
+		CD57B9581AE8D4AE00B86701 /* PHJTransformPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHJTransformPinyin.m; sourceTree = "<group>"; };
 		CD9F7BB71ADF50680025F34F /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launch.png; path = ../../../../DoubanSameCityTests/launch.png; sourceTree = "<group>"; };
 		CD9F7BBF1ADF5AE20025F34F /* LaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
 		CD9F7BC01ADF5AE20025F34F /* LaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
@@ -270,6 +276,8 @@
 				CD57B9491AE87FE700B86701 /* ZoomInUtils.m */,
 				CD57B94B1AE8938E00B86701 /* FullScreenLargeImageShowUtils.h */,
 				CD57B94C1AE8938E00B86701 /* FullScreenLargeImageShowUtils.m */,
+				CD57B9571AE8D4AE00B86701 /* PHJTransformPinyin.h */,
+				CD57B9581AE8D4AE00B86701 /* PHJTransformPinyin.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -381,6 +389,8 @@
 				CDED4BCD1AE0EDE8006AAB9F /* Event.m */,
 				CDED4BD21AE10D4A006AAB9F /* Owner.h */,
 				CDED4BD31AE10D4A006AAB9F /* Owner.m */,
+				CD57B9541AE8D06800B86701 /* CityList.h */,
+				CD57B9551AE8D06800B86701 /* CityList.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -571,10 +581,12 @@
 				E486C67E1AE7EFE300F2CF9A /* FreeLabel.m in Sources */,
 				CDE14F4F1AE0D14C00B1C60F /* MyEventController.m in Sources */,
 				CDB401FB1AE78A730067E61F /* EventDetailScrollerVIew.m in Sources */,
+				CD57B9561AE8D06800B86701 /* CityList.m in Sources */,
 				CD9F7BD01ADF87CB0025F34F /* API.m in Sources */,
 				CD9F7BE31ADFA78A0025F34F /* ConfigUtils.m in Sources */,
 				CD57B94A1AE87FE700B86701 /* ZoomInUtils.m in Sources */,
 				CDE14F5C1AE0D23600B1C60F /* LeftController.m in Sources */,
+				CD57B9591AE8D4AE00B86701 /* PHJTransformPinyin.m in Sources */,
 				CDE14F4C1AE0D11C00B1C60F /* NavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

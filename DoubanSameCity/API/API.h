@@ -19,6 +19,23 @@
 #define RedirectURL @"https://www.douban.com/"
 #define BASE_URL @"https://api.douban.com"
 
+#define All @"all"
+#define Music @"music"
+#define XiJu @"drama"
+#define ZhanLan @"exhibition"
+#define JiangZuo @"salon"
+#define JuHui @"party"
+#define YunDong @"sports"
+#define LuXing @"travel"
+#define GongYi @"commonweal"
+#define DianYing @"film"
+
+#define Future @"future"
+#define Week @"week"
+#define Weekend @"weekend"
+#define Today @"today"
+#define Tomorrow @"tomorrow"
+
 @interface API : NSObject
 + (Account*)get_access_token:(NSString *)code;
 + (User *)get_user:(NSString *)code;

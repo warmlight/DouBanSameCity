@@ -21,26 +21,19 @@
     self.eventsArray = [[NSMutableArray alloc] init];
     [self initUI];
     
-    //显示页面的时候异步加载 并给予等待页面
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"努力加载中";                    // 设置文字
-    hud.labelFont = [UIFont systemFontOfSize:14];
-    dispatch_queue_t queue =  dispatch_queue_create("myqueue", NULL);
-    dispatch_async(queue, ^{
-         [self latestEvent:@"shanghai" type:@"all" day_type:@"future"];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [self afterRefresh];
-        });
-    });
+    self.type = All;
+    self.day_type = Future;
+    self.locName = [[NSMutableString alloc] init];
+    
+    [self initLocationManager];
+    
     
     //table下拉刷新
     __weak typeof(self) weakSelf = self;
     [self.tabelView addLegendHeaderWithRefreshingBlock:^{
         dispatch_queue_t queueToDown =  dispatch_queue_create("myqueue", NULL);
         dispatch_async(queueToDown, ^{
-            [weakSelf latestEvent:@"shanghai" type:@"all" day_type:@"future"];
+            [weakSelf latestEvent:weakSelf.locName type:weakSelf.type day_type:weakSelf.day_type];
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [weakSelf afterRefresh];
             });
@@ -50,7 +43,7 @@
     [self.tabelView addLegendFooterWithRefreshingBlock:^{
         dispatch_queue_t queueToUp =  dispatch_queue_create("myqueue", NULL);
         dispatch_async(queueToUp, ^{
-            [weakSelf getMoreEvent:@"shanghai" type:@"all" day_type:@"future"];
+            [weakSelf getMoreEvent:weakSelf.locName type:weakSelf.type day_type:weakSelf.day_type];
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [weakSelf afterRefresh];
             });
@@ -58,9 +51,27 @@
 
     }];
     
-    [self initLocationManager];
+    NSString *str = @"上海";
+    NSLog(@"拼音%@", [str transformToPinyin]);
     
     // Do any additional setup after loading the view.
+}
+
+- (void)fristTimeReload{
+    //显示页面的时候异步加载 并给予等待页面
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"努力加载中";                    // 设置文字
+    hud.labelFont = [UIFont systemFontOfSize:14];
+    dispatch_queue_t queue =  dispatch_queue_create("myqueue", NULL);
+    dispatch_async(queue, ^{
+        [self latestEvent:self.locName type:self.type day_type:self.day_type];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [self afterRefresh];
+        });
+    });
+
 }
 
 
@@ -85,14 +96,18 @@
                                                                           *placemarks, NSError *error) {
         for (CLPlacemark *place in placemarks)
         {
-           NSLog(@"name,%@",place.name);
-            NSLog(@"thoroughfare,%@",place.thoroughfare);
-            NSLog(@"subThoroughfare,%@",place.subThoroughfare);
-            NSLog(@"locality,%@",place.locality);
-            NSLog(@"subLocality,%@",place.subLocality);
-            NSLog(@"country,%@",place.country);
+            NSRange range = [place.locality rangeOfString:@"市"];
+            NSString *loc = [[place.locality substringToIndex:range.location] transformToPinyin];
+            NSArray *array = [loc componentsSeparatedByString:@" "];
+            for (int i = 0; i < array.count; i ++) {
+                [self.locName appendString:array[i]];
+            }
+            //只执行一次
+            static dispatch_once_t predicate; dispatch_once(&predicate, ^{
+                [manager stopUpdatingLocation];
+                [self fristTimeReload];
+            });
         }
-        [manager stopUpdatingLocation];
     }];
   
 }
@@ -114,6 +129,7 @@
     self.tabelView.delegate = self;
     self.tabelView.dataSource = self;
     self.tabelView.backgroundView = image;
+   
 //    self.tabelView.backgroundColor = UIColorFromRGB(0xEEEF98);
     [self.view addSubview:self.tabelView];
     [self.tabelView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];//隐藏没有内容的cell的分割线
@@ -187,6 +203,10 @@
 {
     //去除有内容的Cell分割线
     cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
+    //点击时背景色
+    UIColor *color = UIColorFromRGB(0xEAEAEA);//通过RGB来定义自己的颜色
+    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
+    cell.selectedBackgroundView.backgroundColor = color;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

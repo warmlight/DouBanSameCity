@@ -19,6 +19,7 @@
 #import <MJRefresh.h>
 #import "Toast.h"
 #import "EventDetailController.h"
+#import "PHJTransformPinyin.h"
 
 
 #define Count 10
@@ -30,5 +31,8 @@
 @property (assign, nonatomic) int page;
 @property (strong, nonatomic) NSNumber *totalEvent;
 @property (strong, nonatomic) LocationUtils *lu;
+@property (strong, nonatomic) NSMutableString *locName;
+@property (strong, nonatomic) NSString *type;
+@property (strong, nonatomic) NSString *day_type;
 
 @end

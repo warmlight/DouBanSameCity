@@ -276,7 +276,7 @@
     NSArray *location = [self.event.geo componentsSeparatedByString:@" "];
     CLLocationCoordinate2D  endCoor = {[location[0] intValue], [location[1] intValue]};
     MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:endCoor addressDictionary:nil]];
-    toLocation.name = @"to name";
+    toLocation.name = self.event.address;
     
     [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
                    launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
