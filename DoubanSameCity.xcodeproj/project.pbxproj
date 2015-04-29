@@ -38,6 +38,7 @@
 		CDC0698A1AEDC55600D46185 /* HeadPortraitView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC069891AEDC55600D46185 /* HeadPortraitView.m */; };
 		CDC0698C1AEDDC6200D46185 /* place_hold_image.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC0698B1AEDDC6200D46185 /* place_hold_image.png */; };
 		CDC069D11AEE350400D46185 /* LeftHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC069D01AEE350400D46185 /* LeftHeadView.m */; };
+		CDC095CA1AF0A9FF0013526F /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC095C91AF0A9FF0013526F /* avatar.png */; };
 		CDD360E51AE5DC8A001B08FF /* LocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD360E41AE5DC8A001B08FF /* LocationUtils.m */; };
 		CDD360E71AE62D35001B08FF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD360E61AE62D35001B08FF /* MapKit.framework */; };
 		CDD360E91AE62D3D001B08FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD360E81AE62D3D001B08FF /* CoreLocation.framework */; };
@@ -130,6 +131,7 @@
 		CDC0698B1AEDDC6200D46185 /* place_hold_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = place_hold_image.png; sourceTree = "<group>"; };
 		CDC069CF1AEE350400D46185 /* LeftHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftHeadView.h; sourceTree = "<group>"; };
 		CDC069D01AEE350400D46185 /* LeftHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftHeadView.m; sourceTree = "<group>"; };
+		CDC095C91AF0A9FF0013526F /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
 		CDD360E31AE5DC8A001B08FF /* LocationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationUtils.h; sourceTree = "<group>"; };
 		CDD360E41AE5DC8A001B08FF /* LocationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationUtils.m; sourceTree = "<group>"; };
 		CDD360E61AE62D35001B08FF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -233,6 +235,7 @@
 		CD9F7BBA1ADF50AA0025F34F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CDC095C91AF0A9FF0013526F /* avatar.png */,
 				CDC0698B1AEDDC6200D46185 /* place_hold_image.png */,
 				CDB401FC1AE7924D0067E61F /* owner.png */,
 				CDBEDAF31AE7382100D0C0D9 /* table_bkg.png */,
@@ -530,6 +533,7 @@
 				CD9F7BC51ADF652E0025F34F /* bkg.png in Resources */,
 				CD1996581AE4DCBD0064B3DE /* address.png in Resources */,
 				CDED4BCB1AE0EA80006AAB9F /* menu.png in Resources */,
+				CDC095CA1AF0A9FF0013526F /* avatar.png in Resources */,
 				CDB401FD1AE7924D0067E61F /* owner.png in Resources */,
 				CDE2D4761ADDF35F0099FE0C /* Images.xcassets in Resources */,
 				CDBEDAF41AE7382100D0C0D9 /* table_bkg.png in Resources */,

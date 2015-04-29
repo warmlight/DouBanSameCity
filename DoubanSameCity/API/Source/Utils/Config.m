@@ -64,4 +64,5 @@
 + (NSString *)getLoginUserId{
     return [ConfigUtils loadConfigString:@"douban_user_id"];
 }
+
 @end

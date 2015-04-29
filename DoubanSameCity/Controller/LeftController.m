@@ -94,7 +94,7 @@
             if ([Config getLoginUserId]) {
                 User *user = [Config loadUser];
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHead:)];
-                [self.headView sd_setImageWithURL:[NSURL URLWithString:user.avatar] placeholderImage:[UIImage imageNamed:@"place_hold_image.png"]];
+                [self.headView sd_setImageWithURL:[NSURL URLWithString:user.avatar] placeholderImage:[UIImage imageNamed:@"avatar.png"]];
                 [self.headView addGestureRecognizer:tap];
                 self.headView.userInteractionEnabled = YES;
                 self.nameLabel.text = user.name;

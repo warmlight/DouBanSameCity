@@ -16,10 +16,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0xFFAEB9);
-    self.navigationController.navigationBar.alpha = 0.3;
     NSLog(@"access token :%@", [Config loadAccount].access_token);
     NSLog(@"user id:%@", [Config getLoginUserId]);
+    NSLog(@"user largeAvatar :%@", [Config loadUser].large_avatar);
+    
+    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0xFFAEB9);
+    self.navigationController.navigationBar.alpha = 0.3;
     
     self.view.backgroundColor = [UIColor blackColor];
     self.eventsArray = [[NSMutableArray alloc] init];

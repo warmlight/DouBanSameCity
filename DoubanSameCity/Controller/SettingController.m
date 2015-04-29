@@ -16,7 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self checkTmpSize];
+    self.view.backgroundColor = [UIColor whiteColor];
+
+    [self initUI];
     // Do any additional setup after loading the view.
 }
 
@@ -29,6 +31,8 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(tableX, tableY, tableW, tableH)];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    [self. tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    [self.view addSubview:self.tableView];
     
     
     CGFloat outY = screenSize.height - Span - ButtonH;
@@ -39,6 +43,7 @@
     [self.loginOutButton setTitle:@"退出当前账号" forState:UIControlStateNormal];
     self.loginOutButton.backgroundColor = UIColorFromRGB(0xB4EEB4);
     [self.loginOutButton addTarget:self action:@selector(logOutAccount:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.loginOutButton];
     
     
     CGFloat switchX = outX;
@@ -49,14 +54,26 @@
     [self.switchButton setTitle:@"切换账号" forState:UIControlStateNormal];
     self.switchButton.backgroundColor = UIColorFromRGB(0xB4EEB4);
     [self.switchButton addTarget:self action:@selector(switchAccount:) forControlEvents:UIControlEventTouchUpInside];
-
+    [self.view addSubview:self.switchButton];
+    
+    if (![Config getLoginUserId]) {
+        self.loginOutButton.hidden = YES;
+        self.switchButton.hidden = YES;
+    }
 }
 
 - (void)logOutAccount:(UIButton *)sender{
-    
+    [Config logOut];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:@"push_reloadData" object:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)switchAccount:(UIButton *)sender{
+    OAutoController *oauto = [[OAutoController alloc] init];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:@"push_reloadData" object:nil];
+    [self presentViewController:oauto animated:YES completion:nil];
     
 }
 
@@ -66,9 +83,9 @@
    return  1;
 }
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-//    return 1;
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellIdentifer = @"cell";
@@ -76,30 +93,28 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifer];
     }
-    cell.textLabel.text = @"清除图片缓存";
-    cell.detailTextLabel.text = @"23333";
+    if (indexPath.section == 0){
+          __block float totals = 0;
+        cell.textLabel.text = @"清除图片缓存";
+        [SDWebImageManager.sharedManager.imageCache
+         calculateSizeWithCompletionBlock:^(NSUInteger fileCount, NSUInteger totalSize) {
+             totals = (float)totalSize / 1024 / 1024;
+              cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2fM", totals];
+         }];
+    }
     return cell;
 }
 
-
--(float)checkTmpSize {
-    __weak typeof(self) weakSelf = self;
-    [SDWebImageManager.sharedManager.imageCache
-     calculateSizeWithCompletionBlock:^(NSUInteger fileCount, NSUInteger totalSize) {
-         weakSelf.totalSize = totalSize;
-     }];
-    
-//    NSDirectoryEnumerator *fileEnumerator = [[NSFileManager defaultManager] enumeratorAtPath:diskCachePath];
-//    for (NSString *fileName in fileEnumerator) {
-//        NSString *filePath = [diskCachePath stringByAppendingPathComponent:fileName];
-//        NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
-//        unsigned long long length = [attrs fileSize];
-//        totalSize += length / 1024.0 / 1024.0;
-//    } // NSLog(@"tmp size is %.2f",totalSize); return totalSize;
-    NSLog(@"%u", self.totalSize);
-    return self.totalSize;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        [[[SDWebImageManager sharedManager] imageCache] clearDisk];
+        [[[SDWebImageManager sharedManager] imageCache] clearMemory];
+        [[NSURLCache sharedURLCache] removeAllCachedResponses];
+        [[[[Toast makeText:@"清理完成"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+        [self.tableView reloadData];
+    }
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
