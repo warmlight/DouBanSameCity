@@ -31,6 +31,8 @@
 		CD9F7BE31ADFA78A0025F34F /* ConfigUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BE21ADFA78A0025F34F /* ConfigUtils.m */; };
 		CD9F7BE61ADFA7DE0025F34F /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BE51ADFA7DE0025F34F /* Config.m */; };
 		CD9F7BE91ADFBF6B0025F34F /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BE81ADFBF6B0025F34F /* User.m */; };
+		CDA7C3281AF0E1BE001EF067 /* gray_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA7C3271AF0E1BE001EF067 /* gray_heart.png */; };
+		CDA7C32A1AF0E1C7001EF067 /* red_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA7C3291AF0E1C7001EF067 /* red_heart.png */; };
 		CDB401F81AE78A3E0067E61F /* EventDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB401F71AE78A3E0067E61F /* EventDetailController.m */; };
 		CDB401FB1AE78A730067E61F /* EventDetailScrollerVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB401FA1AE78A730067E61F /* EventDetailScrollerVIew.m */; };
 		CDB401FD1AE7924D0067E61F /* owner.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB401FC1AE7924D0067E61F /* owner.png */; };
@@ -120,6 +122,8 @@
 		CD9F7BE51ADFA7DE0025F34F /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
 		CD9F7BE71ADFBF6B0025F34F /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		CD9F7BE81ADFBF6B0025F34F /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		CDA7C3271AF0E1BE001EF067 /* gray_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray_heart.png; sourceTree = "<group>"; };
+		CDA7C3291AF0E1C7001EF067 /* red_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_heart.png; sourceTree = "<group>"; };
 		CDB401F61AE78A3E0067E61F /* EventDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailController.h; sourceTree = "<group>"; };
 		CDB401F71AE78A3E0067E61F /* EventDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailController.m; sourceTree = "<group>"; };
 		CDB401F91AE78A730067E61F /* EventDetailScrollerVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailScrollerVIew.h; sourceTree = "<group>"; };
@@ -238,6 +242,8 @@
 				CDC095C91AF0A9FF0013526F /* avatar.png */,
 				CDC0698B1AEDDC6200D46185 /* place_hold_image.png */,
 				CDB401FC1AE7924D0067E61F /* owner.png */,
+				CDA7C3271AF0E1BE001EF067 /* gray_heart.png */,
+				CDA7C3291AF0E1C7001EF067 /* red_heart.png */,
 				CDBEDAF31AE7382100D0C0D9 /* table_bkg.png */,
 				CD1996541AE4DCBD0064B3DE /* address.png */,
 				CD1996551AE4DCBD0064B3DE /* end.png */,
@@ -535,8 +541,10 @@
 				CDED4BCB1AE0EA80006AAB9F /* menu.png in Resources */,
 				CDC095CA1AF0A9FF0013526F /* avatar.png in Resources */,
 				CDB401FD1AE7924D0067E61F /* owner.png in Resources */,
+				CDA7C32A1AF0E1C7001EF067 /* red_heart.png in Resources */,
 				CDE2D4761ADDF35F0099FE0C /* Images.xcassets in Resources */,
 				CDBEDAF41AE7382100D0C0D9 /* table_bkg.png in Resources */,
+				CDA7C3281AF0E1BE001EF067 /* gray_heart.png in Resources */,
 				CDE14F431AE0B87100B1C60F /* LaunchController.xib in Resources */,
 				CD57B9531AE8B43300B86701 /* add.png in Resources */,
 			);

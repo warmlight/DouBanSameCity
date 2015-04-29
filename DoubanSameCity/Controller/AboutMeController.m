@@ -28,6 +28,8 @@
     User *user = [API get_user:[Config getLoginUserId]];
     [Config saveUser:user];
     [self.scrollView createFrame_Conten];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:@"push_reloadData" object:nil];
 }
 
 - (void)initUI{

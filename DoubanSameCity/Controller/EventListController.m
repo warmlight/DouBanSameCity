@@ -31,10 +31,10 @@
     self.day_type = Future;
     self.locName = [[NSMutableString alloc] init];
     
-//    [self.locName appendString:@"shanghai"];
+    [self.locName appendString:@"shanghai"];
 
     
-    [self initLocationManager];
+//    [self initLocationManager];
     
     
     //table下拉刷新
