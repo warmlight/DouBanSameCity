@@ -8,6 +8,29 @@
 
 #import "EventDetailScrollerVIew.h"
 
+static inline NSRegularExpression * NameRegularExpression() {
+    static NSRegularExpression *_nameRegularExpression = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _nameRegularExpression = [[NSRegularExpression alloc] initWithPattern:@"((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)" options:NSRegularExpressionCaseInsensitive error:nil];
+    });
+    
+    return _nameRegularExpression;
+}
+
+static inline NSRegularExpression * ParenthesisRegularExpression() {
+    static NSRegularExpression *_parenthesisRegularExpression = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _parenthesisRegularExpression = [[NSRegularExpression alloc] initWithPattern:@"0\\d{2,3}-\\d{5,9}|0\\d{2,3}-\\d{5,9}" options:NSRegularExpressionCaseInsensitive error:nil];
+    });
+    
+    return _parenthesisRegularExpression;
+}
+
+
 @implementation EventDetailScrollerVIew
 - (instancetype)init{
     self = [super init];
@@ -54,8 +77,6 @@
 
         self.addressButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.addressButton.titleLabel.numberOfLines = 0;
-//        self.addressButton.backgroundColor = [UIColor blueColor];
-//        self.addressButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [self.addressButton addTarget:self action:@selector(callMap:) forControlEvents:UIControlEventTouchDown];
         self.addressButton.layer.borderColor = [UIColor whiteColor].CGColor;
         self.addressButton.layer.borderWidth = 1;
@@ -83,11 +104,13 @@
         self.contentLabelBkg.backgroundColor = UIColorFromRGB(0xEE9572);
         [self addSubview:self.contentLabelBkg];
         
-        self.contentLabel = [[FreeLabel alloc] init];
-        self.contentLabel.numberOfLines = 0;
+        self.contentLabel = [[UITextView alloc] init];
+        self.contentLabel.delegate = self;
+        self.contentLabel.scrollEnabled = NO;
+        self.contentLabel.editable = NO;
         self.contentLabel.font = TextF;
         self.contentLabel.backgroundColor = UIColorFromRGB(0xEE9572);
-        [self.contentLabel setVerticalAlignment:VerticalAlignmentTop];
+        self.contentLabel.dataDetectorTypes = UIDataDetectorTypePhoneNumber | UIDataDetectorTypeLink | UIDataDetectorTypeAddress;
         [self addSubview:self.contentLabel];
 
     }
@@ -103,7 +126,6 @@
 - (CGFloat)setViewFrame_Content:(Event *)event{
     self.event = event;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-
     
     //title label
     self.titleLabel.text = event.title;
@@ -117,7 +139,7 @@
     self.titleLabel.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
     //event image
-    [self.eventImg sd_setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"bkg.png"]];
+    [self.eventImg sd_setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"place_hold_image.png"]];
     
     CGFloat eventImgX = BigMargin;
     CGFloat eventImgY = titleY + titleH + SmallMargin;
@@ -266,12 +288,14 @@
     }
     self.contentLabelBkg.frame = CGRectMake(contentBkgX, contentBkgY, contentBkgW, contentBkgH);
  
-    return contentBkgY + contentH;
+    
+//    [self createAtributeContentLabel:event];
+    return contentBkgY + contentH + SmallMargin;
     
 }
 
 - (void)callMap:(UIButton *)sender{
-    NSLog(@"tap button %@", self.event.geo);
+    
     MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
     NSArray *location = [self.event.geo componentsSeparatedByString:@" "];
     CLLocationCoordinate2D  endCoor = {[location[0] intValue], [location[1] intValue]};
@@ -283,5 +307,29 @@
 
 }
 
+//- (void)createAtributeContentLabel:(Event *)event{
+//    self.contentLabel.dataDetectorTypes = UIDataDetectorTypePhoneNumber | UIDataDetectorTypeLink | UIDataDetectorTypeAddress;
+    //富文本的样式
+//    NSDictionary*linkAttributes=@{NSForegroundColorAttributeName:[UIColor blueColor],
+//                                  NSUnderlineColorAttributeName:[UIColor blueColor],
+//                                  NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)};
+//    
+//    NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithString:event.content];
+//    NSRange stringRange = NSMakeRange(0, [mutableAttributedString length]);
+//    NSRegularExpression *regexp = NameRegularExpression();
+//    //给所有符合正则条件的string修改样式
+//    [regexp enumerateMatchesInString:[mutableAttributedString string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+//        self.contentLabel.linkTextAttributes = linkAttributes;
+//    }];
+//    NSRegularExpression *regexp_second = ParenthesisRegularExpression();
+//    [regexp_second enumerateMatchesInString:[mutableAttributedString string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+//        self.contentLabel.linkTextAttributes = linkAttributes;
+//    }];
+//}
 
+#pragma mark- textview delegate
+//点击链接
+-(BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange{
+    return YES;
+}
 @end

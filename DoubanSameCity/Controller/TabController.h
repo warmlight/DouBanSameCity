@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "MyEventController.h"
 #import "EventListController.h"
+#import "UIViewController+SideMenu.h"
 
-@interface TabController : UITabBarController
+@interface TabController : UITabBarController<UITabBarControllerDelegate>
 
 @end

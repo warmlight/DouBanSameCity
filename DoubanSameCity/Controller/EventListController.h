@@ -22,6 +22,9 @@
 #import "PHJTransformPinyin.h"
 #import "CityList.h"
 #import "City.h"
+#import "OAutoController.h"
+#import "AboutMeController.h"
+#import "SettingController.h"
 
 
 #define Count 10

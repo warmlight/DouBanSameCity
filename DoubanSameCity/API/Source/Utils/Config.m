@@ -57,6 +57,10 @@
     return user;
 }
 
++ (void)logOut{
+    [ConfigUtils saveConfigString:@"douban_user_id" value:0];
+}
+
 + (NSString *)getLoginUserId{
     return [ConfigUtils loadConfigString:@"douban_user_id"];
 }

@@ -18,6 +18,8 @@
 		CD57B9561AE8D06800B86701 /* CityList.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57B9551AE8D06800B86701 /* CityList.m */; };
 		CD57B9591AE8D4AE00B86701 /* PHJTransformPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57B9581AE8D4AE00B86701 /* PHJTransformPinyin.m */; };
 		CD57B95C1AE8E5AA00B86701 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57B95B1AE8E5AA00B86701 /* City.m */; };
+		CD8C2BE11AEF39F300707528 /* AboutMeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C2BE01AEF39F300707528 /* AboutMeScrollView.m */; };
+		CD8C2BE41AF0743500707528 /* SettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C2BE31AF0743500707528 /* SettingController.m */; };
 		CD9F7BB81ADF50680025F34F /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = CD9F7BB71ADF50680025F34F /* launch.png */; };
 		CD9F7BC21ADF5AE20025F34F /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F7BC01ADF5AE20025F34F /* LaunchController.m */; };
 		CD9F7BC51ADF652E0025F34F /* bkg.png in Resources */ = {isa = PBXBuildFile; fileRef = CD9F7BC41ADF652E0025F34F /* bkg.png */; };
@@ -33,6 +35,9 @@
 		CDB401FB1AE78A730067E61F /* EventDetailScrollerVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB401FA1AE78A730067E61F /* EventDetailScrollerVIew.m */; };
 		CDB401FD1AE7924D0067E61F /* owner.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB401FC1AE7924D0067E61F /* owner.png */; };
 		CDBEDAF41AE7382100D0C0D9 /* table_bkg.png in Resources */ = {isa = PBXBuildFile; fileRef = CDBEDAF31AE7382100D0C0D9 /* table_bkg.png */; };
+		CDC0698A1AEDC55600D46185 /* HeadPortraitView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC069891AEDC55600D46185 /* HeadPortraitView.m */; };
+		CDC0698C1AEDDC6200D46185 /* place_hold_image.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC0698B1AEDDC6200D46185 /* place_hold_image.png */; };
+		CDC069D11AEE350400D46185 /* LeftHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC069D01AEE350400D46185 /* LeftHeadView.m */; };
 		CDD360E51AE5DC8A001B08FF /* LocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD360E41AE5DC8A001B08FF /* LocationUtils.m */; };
 		CDD360E71AE62D35001B08FF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD360E61AE62D35001B08FF /* MapKit.framework */; };
 		CDD360E91AE62D3D001B08FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD360E81AE62D3D001B08FF /* CoreLocation.framework */; };
@@ -51,13 +56,13 @@
 		CDE2D46E1ADDF35F0099FE0C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE2D46D1ADDF35F0099FE0C /* AppDelegate.m */; };
 		CDE2D4741ADDF35F0099FE0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE2D4721ADDF35F0099FE0C /* Main.storyboard */; };
 		CDE2D4761ADDF35F0099FE0C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDE2D4751ADDF35F0099FE0C /* Images.xcassets */; };
-		CDE2D4791ADDF35F0099FE0C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDE2D4771ADDF35F0099FE0C /* LaunchScreen.xib */; };
 		CDE2D4851ADDF35F0099FE0C /* DoubanSameCityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE2D4841ADDF35F0099FE0C /* DoubanSameCityTests.m */; };
 		CDED4BC91AE0E5CC006AAB9F /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED4BC81AE0E5CC006AAB9F /* RootViewController.m */; };
 		CDED4BCB1AE0EA80006AAB9F /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = CDED4BCA1AE0EA80006AAB9F /* menu.png */; };
 		CDED4BCE1AE0EDE8006AAB9F /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED4BCD1AE0EDE8006AAB9F /* Event.m */; };
 		CDED4BD11AE0F484006AAB9F /* SameCityUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED4BD01AE0F484006AAB9F /* SameCityUtils.m */; };
 		CDED4BD41AE10D4A006AAB9F /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED4BD31AE10D4A006AAB9F /* Owner.m */; };
+		CDF614CC1AEF22F000ECEECD /* AboutMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF614CB1AEF22F000ECEECD /* AboutMeController.m */; };
 		E486C67E1AE7EFE300F2CF9A /* FreeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E486C67D1AE7EFE300F2CF9A /* FreeLabel.m */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +95,10 @@
 		CD57B9581AE8D4AE00B86701 /* PHJTransformPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHJTransformPinyin.m; sourceTree = "<group>"; };
 		CD57B95A1AE8E5AA00B86701 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
 		CD57B95B1AE8E5AA00B86701 /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
+		CD8C2BDF1AEF39F300707528 /* AboutMeScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutMeScrollView.h; sourceTree = "<group>"; };
+		CD8C2BE01AEF39F300707528 /* AboutMeScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutMeScrollView.m; sourceTree = "<group>"; };
+		CD8C2BE21AF0743500707528 /* SettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingController.h; sourceTree = "<group>"; };
+		CD8C2BE31AF0743500707528 /* SettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingController.m; sourceTree = "<group>"; };
 		CD9F7BB71ADF50680025F34F /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launch.png; path = ../../../../DoubanSameCityTests/launch.png; sourceTree = "<group>"; };
 		CD9F7BBF1ADF5AE20025F34F /* LaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
 		CD9F7BC01ADF5AE20025F34F /* LaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
@@ -116,6 +125,11 @@
 		CDB401FA1AE78A730067E61F /* EventDetailScrollerVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailScrollerVIew.m; sourceTree = "<group>"; };
 		CDB401FC1AE7924D0067E61F /* owner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owner.png; sourceTree = "<group>"; };
 		CDBEDAF31AE7382100D0C0D9 /* table_bkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_bkg.png; sourceTree = "<group>"; };
+		CDC069881AEDC55600D46185 /* HeadPortraitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadPortraitView.h; sourceTree = "<group>"; };
+		CDC069891AEDC55600D46185 /* HeadPortraitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadPortraitView.m; sourceTree = "<group>"; };
+		CDC0698B1AEDDC6200D46185 /* place_hold_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = place_hold_image.png; sourceTree = "<group>"; };
+		CDC069CF1AEE350400D46185 /* LeftHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftHeadView.h; sourceTree = "<group>"; };
+		CDC069D01AEE350400D46185 /* LeftHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftHeadView.m; sourceTree = "<group>"; };
 		CDD360E31AE5DC8A001B08FF /* LocationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationUtils.h; sourceTree = "<group>"; };
 		CDD360E41AE5DC8A001B08FF /* LocationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationUtils.m; sourceTree = "<group>"; };
 		CDD360E61AE62D35001B08FF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -148,7 +162,6 @@
 		CDE2D46D1ADDF35F0099FE0C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CDE2D4731ADDF35F0099FE0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDE2D4751ADDF35F0099FE0C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CDE2D4781ADDF35F0099FE0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		CDE2D47E1ADDF35F0099FE0C /* DoubanSameCityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoubanSameCityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE2D4831ADDF35F0099FE0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDE2D4841ADDF35F0099FE0C /* DoubanSameCityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoubanSameCityTests.m; sourceTree = "<group>"; };
@@ -161,6 +174,8 @@
 		CDED4BD01AE0F484006AAB9F /* SameCityUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SameCityUtils.m; sourceTree = "<group>"; };
 		CDED4BD21AE10D4A006AAB9F /* Owner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Owner.h; sourceTree = "<group>"; };
 		CDED4BD31AE10D4A006AAB9F /* Owner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Owner.m; sourceTree = "<group>"; };
+		CDF614CA1AEF22F000ECEECD /* AboutMeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutMeController.h; sourceTree = "<group>"; };
+		CDF614CB1AEF22F000ECEECD /* AboutMeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutMeController.m; sourceTree = "<group>"; };
 		E486C67C1AE7EFE300F2CF9A /* FreeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeLabel.h; sourceTree = "<group>"; };
 		E486C67D1AE7EFE300F2CF9A /* FreeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -218,6 +233,7 @@
 		CD9F7BBA1ADF50AA0025F34F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CDC0698B1AEDDC6200D46185 /* place_hold_image.png */,
 				CDB401FC1AE7924D0067E61F /* owner.png */,
 				CDBEDAF31AE7382100D0C0D9 /* table_bkg.png */,
 				CD1996541AE4DCBD0064B3DE /* address.png */,
@@ -254,6 +270,10 @@
 				CDED4BC81AE0E5CC006AAB9F /* RootViewController.m */,
 				CDB401F61AE78A3E0067E61F /* EventDetailController.h */,
 				CDB401F71AE78A3E0067E61F /* EventDetailController.m */,
+				CDF614CA1AEF22F000ECEECD /* AboutMeController.h */,
+				CDF614CB1AEF22F000ECEECD /* AboutMeController.m */,
+				CD8C2BE21AF0743500707528 /* SettingController.h */,
+				CD8C2BE31AF0743500707528 /* SettingController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -281,6 +301,8 @@
 				CD57B94C1AE8938E00B86701 /* FullScreenLargeImageShowUtils.m */,
 				CD57B9571AE8D4AE00B86701 /* PHJTransformPinyin.h */,
 				CD57B9581AE8D4AE00B86701 /* PHJTransformPinyin.m */,
+				CDC069881AEDC55600D46185 /* HeadPortraitView.h */,
+				CDC069891AEDC55600D46185 /* HeadPortraitView.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -338,7 +360,6 @@
 				CDE2D46D1ADDF35F0099FE0C /* AppDelegate.m */,
 				CDE2D4721ADDF35F0099FE0C /* Main.storyboard */,
 				CDE2D4751ADDF35F0099FE0C /* Images.xcassets */,
-				CDE2D4771ADDF35F0099FE0C /* LaunchScreen.xib */,
 				CDE2D4681ADDF35E0099FE0C /* Supporting Files */,
 			);
 			path = DoubanSameCity;
@@ -403,12 +424,16 @@
 		CDE2D4971ADDFC370099FE0C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CDD9750E1AE486CD00C8C79C /* EventCell.h */,
-				CDD9750F1AE486CD00C8C79C /* EventCell.m */,
 				CDB401F91AE78A730067E61F /* EventDetailScrollerVIew.h */,
 				CDB401FA1AE78A730067E61F /* EventDetailScrollerVIew.m */,
+				CDD9750E1AE486CD00C8C79C /* EventCell.h */,
+				CDD9750F1AE486CD00C8C79C /* EventCell.m */,
 				E486C67C1AE7EFE300F2CF9A /* FreeLabel.h */,
 				E486C67D1AE7EFE300F2CF9A /* FreeLabel.m */,
+				CDC069CF1AEE350400D46185 /* LeftHeadView.h */,
+				CDC069D01AEE350400D46185 /* LeftHeadView.m */,
+				CD8C2BDF1AEF39F300707528 /* AboutMeScrollView.h */,
+				CD8C2BE01AEF39F300707528 /* AboutMeScrollView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -464,6 +489,7 @@
 				TargetAttributes = {
 					CDE2D4641ADDF35E0099FE0C = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = TF7AXM8WDK;
 					};
 					CDE2D47D1ADDF35F0099FE0C = {
 						CreatedOnToolsVersion = 6.2;
@@ -499,12 +525,12 @@
 				CDE2D4741ADDF35F0099FE0C /* Main.storyboard in Resources */,
 				CD19965B1AE4DCBD0064B3DE /* type.png in Resources */,
 				CD1996591AE4DCBD0064B3DE /* end.png in Resources */,
+				CDC0698C1AEDDC6200D46185 /* place_hold_image.png in Resources */,
 				CD19965A1AE4DCBD0064B3DE /* star.png in Resources */,
 				CD9F7BC51ADF652E0025F34F /* bkg.png in Resources */,
 				CD1996581AE4DCBD0064B3DE /* address.png in Resources */,
 				CDED4BCB1AE0EA80006AAB9F /* menu.png in Resources */,
 				CDB401FD1AE7924D0067E61F /* owner.png in Resources */,
-				CDE2D4791ADDF35F0099FE0C /* LaunchScreen.xib in Resources */,
 				CDE2D4761ADDF35F0099FE0C /* Images.xcassets in Resources */,
 				CDBEDAF41AE7382100D0C0D9 /* table_bkg.png in Resources */,
 				CDE14F431AE0B87100B1C60F /* LaunchController.xib in Resources */,
@@ -561,11 +587,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD57B95C1AE8E5AA00B86701 /* City.m in Sources */,
+				CDC069D11AEE350400D46185 /* LeftHeadView.m in Sources */,
 				CDED4BD11AE0F484006AAB9F /* SameCityUtils.m in Sources */,
 				CDE14F591AE0D20B00B1C60F /* UIViewController+SideMenu.m in Sources */,
 				CD9F7BCC1ADF848A0025F34F /* OAutoController.m in Sources */,
 				CDB401F81AE78A3E0067E61F /* EventDetailController.m in Sources */,
 				CD9F7BE01ADF97320025F34F /* Account.m in Sources */,
+				CD8C2BE41AF0743500707528 /* SettingController.m in Sources */,
 				CDE14F521AE0D17C00B1C60F /* EventListController.m in Sources */,
 				CDED4BD41AE10D4A006AAB9F /* Owner.m in Sources */,
 				CDE14F491AE0D0EA00B1C60F /* TabController.m in Sources */,
@@ -578,6 +606,7 @@
 				CDD360E51AE5DC8A001B08FF /* LocationUtils.m in Sources */,
 				CD9F7BDC1ADF89F50025F34F /* HttpUtils.m in Sources */,
 				CD9F7BE61ADFA7DE0025F34F /* Config.m in Sources */,
+				CD8C2BE11AEF39F300707528 /* AboutMeScrollView.m in Sources */,
 				CD9F7BE91ADFBF6B0025F34F /* User.m in Sources */,
 				CD9F7BDD1ADF89F50025F34F /* JsonUtils.m in Sources */,
 				CDE14F581AE0D20B00B1C60F /* SideMenu.m in Sources */,
@@ -586,11 +615,13 @@
 				CDED4BC91AE0E5CC006AAB9F /* RootViewController.m in Sources */,
 				E486C67E1AE7EFE300F2CF9A /* FreeLabel.m in Sources */,
 				CDE14F4F1AE0D14C00B1C60F /* MyEventController.m in Sources */,
+				CDC0698A1AEDC55600D46185 /* HeadPortraitView.m in Sources */,
 				CDB401FB1AE78A730067E61F /* EventDetailScrollerVIew.m in Sources */,
 				CD57B9561AE8D06800B86701 /* CityList.m in Sources */,
 				CD9F7BD01ADF87CB0025F34F /* API.m in Sources */,
 				CD9F7BE31ADFA78A0025F34F /* ConfigUtils.m in Sources */,
 				CD57B94A1AE87FE700B86701 /* ZoomInUtils.m in Sources */,
+				CDF614CC1AEF22F000ECEECD /* AboutMeController.m in Sources */,
 				CDE14F5C1AE0D23600B1C60F /* LeftController.m in Sources */,
 				CD57B9591AE8D4AE00B86701 /* PHJTransformPinyin.m in Sources */,
 				CDE14F4C1AE0D11C00B1C60F /* NavigationController.m in Sources */,
@@ -624,14 +655,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		CDE2D4771ADDF35F0099FE0C /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CDE2D4781ADDF35F0099FE0C /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -652,7 +675,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yiban app (9QB93R83T9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yiban app (9QB93R83T9)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -672,6 +696,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "5ff6bf58-e2a6-48e6-9c85-823262255e87";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -693,7 +718,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yiban app (9QB93R83T9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yiban app (9QB93R83T9)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -706,6 +732,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "5ff6bf58-e2a6-48e6-9c85-823262255e87";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -716,13 +743,13 @@
 			baseConfigurationReference = A21E842B24FE76340EEC61D6 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yiban app (9QB93R83T9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yiban app (9QB93R83T9)";
 				INFOPLIST_FILE = DoubanSameCity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5ff6bf58-e2a6-48e6-9c85-823262255e87";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -732,13 +759,13 @@
 			baseConfigurationReference = 4B9EA1BDC03BF56BBC7AEBDA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yiban app (9QB93R83T9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yiban app (9QB93R83T9)";
 				INFOPLIST_FILE = DoubanSameCity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5ff6bf58-e2a6-48e6-9c85-823262255e87";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

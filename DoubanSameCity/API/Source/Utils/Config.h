@@ -16,6 +16,6 @@
 + (Account *)loadAccount;
 + (void)saveUser :(User *)user;
 + (User *)loadUser;
-
++ (void)logOut;
 + (NSString *)getLoginUserId;
 @end

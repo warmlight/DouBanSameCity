@@ -46,7 +46,7 @@
     _logoLabel.backgroundColor = [UIColor clearColor];
     _shimmeringView.contentView = _logoLabel;
     
-      [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(pushController) userInfo:nil repeats:NO];//计时跳转界面
+      [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(pushController) userInfo:nil repeats:NO];//计时跳转界面
     
 //    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_tapped:)];
 //    [self.view addGestureRecognizer:tapRecognizer];

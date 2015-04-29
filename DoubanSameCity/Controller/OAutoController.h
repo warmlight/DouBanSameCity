@@ -11,7 +11,8 @@
 #import "API.h"
 #import "Account.h"
 #import "Config.h"
-#import "LaunchController.h"
+//#import "LaunchController.h"
+#import "EventListController.h"
 #import <PureLayout.h>
 @interface OAutoController : UIViewController<UIWebViewDelegate>
 @property (strong, nonatomic) MBProgressHUD *hud;

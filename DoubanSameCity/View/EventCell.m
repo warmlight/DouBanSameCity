@@ -37,7 +37,7 @@
     
     //image
     self.eventImage = [[UIImageView alloc] init];
-    self.eventImage.backgroundColor = [UIColor orangeColor];
+    self.eventImage.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:self.eventImage];
     
     //begin time
@@ -99,7 +99,7 @@
     self.participant_label = [[UILabel alloc] init];
     self.participant_label.font = TextFont;
     self.participant_label.textColor = [UIColor lightGrayColor];
-    self.participant_label.text = @"人想参加";
+    self.participant_label.text = @"人参加";
     [self.contentView addSubview:self.participant_label];
     
     //participant label
@@ -119,6 +119,7 @@
     CGSize titleConstraint = CGSizeMake(screenSize.width- 8 * Margin, 20000.0);
     CGSize titleSize = [self.titleLabel.text sizeWithFont:TitleFont constrainedToSize:titleConstraint];
     self.titleLabel.frame = (CGRect){{titleX, titleY}, {screenSize.width- 6 * Margin, titleSize.height}};
+
     
     //image
     CGFloat imageY = titleSize.height + 4 * Margin;
@@ -180,7 +181,7 @@
     //wish label
     CGSize wishSize = [@"人感兴趣" sizeWithFont:TextFont constrainedToSize:CGSizeMake(200, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
     CGFloat wishX = screenSize.width - 6 *Margin - wishSize.width;
-    CGFloat wishY = begintimeSize.height + typeLabelY + 20;//2232323
+    CGFloat wishY = begintimeSize.height + typeLabelY + 20;
     self.wishLabel.frame = CGRectMake(wishX, wishY, wishSize.width, wishSize.height);
     
     //wish number label

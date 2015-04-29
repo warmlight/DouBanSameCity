@@ -19,13 +19,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     UINavigationController *nav;
-    if ([Config getLoginUserId]) {//登陆过直接显示launch界面
-    nav = [[UINavigationController alloc] initWithRootViewController:[[LaunchController alloc] init]];
-      NSLog(@"%@", [Config loadAccount].access_token);
-    }else{
-    nav = [[UINavigationController alloc] initWithRootViewController:[[OAutoController alloc] init]];
-    }
-    self.window.rootViewController = nav;
+//    if ([Config getLoginUserId]) {//登陆过直接显示launch界面
+//    nav = [[UINavigationController alloc] initWithRootViewController:[[LaunchController alloc] init]];
+//      NSLog(@"%@", [Config loadAccount].access_token);
+//    }else{
+//    nav = [[UINavigationController alloc] initWithRootViewController:[[OAutoController alloc] init]];
+//    }
+//    nav = [[UINavigationController alloc] initWithRootViewController:[[LaunchController alloc] init]];
+    self.window.rootViewController = [[LaunchController alloc] init];
     [self.window makeKeyAndVisible];
     // Override point for customization after application launch.
     return YES;

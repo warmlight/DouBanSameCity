@@ -89,13 +89,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DoubanSameCity/Controller/EventListController.m"
-            timestampString = "451471108.386471"
+            filePath = "DoubanSameCity/API/Source/Utils/SameCityUtils.m"
+            timestampString = "451473202.265075"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "+get_cityArray:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DoubanSameCity/Controller/RootViewController.m"
+            timestampString = "451813789.934659"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "-init"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -105,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DoubanSameCity/API/Source/Utils/SameCityUtils.m"
-            timestampString = "451473202.265075"
+            filePath = "DoubanSameCity/Controller/AboutMeController.m"
+            timestampString = "451961786.198264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "+get_cityArray:"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "-refreshUser"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

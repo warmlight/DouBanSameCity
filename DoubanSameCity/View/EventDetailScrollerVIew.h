@@ -24,7 +24,7 @@
 #define EventImageH 110
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-@interface EventDetailScrollerVIew : UIScrollView
+@interface EventDetailScrollerVIew : UIScrollView<UITextViewDelegate>
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UIImageView *beginTimeImg;
 @property (strong, nonatomic) UIImageView *endTimeImg;
@@ -40,7 +40,7 @@
 @property (strong, nonatomic) UILabel *typeLabel;
 
 @property (strong, nonatomic) UILabel *bandLabel;
-@property (strong, nonatomic) FreeLabel *contentLabel;
+@property (strong, nonatomic) UITextView *contentLabel;
 @property (strong, nonatomic) Event *event;
 @property (strong, nonatomic) UIView *contentLabelBkg;
 

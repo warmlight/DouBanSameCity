@@ -16,7 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"活动";
+    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0xFFAEB9);
+    self.navigationController.navigationBar.alpha = 0.3;
+    NSLog(@"access token :%@", [Config loadAccount].access_token);
+    NSLog(@"user id:%@", [Config getLoginUserId]);
+    
     self.view.backgroundColor = [UIColor blackColor];
     self.eventsArray = [[NSMutableArray alloc] init];
     [self initUI];
@@ -24,6 +28,9 @@
     self.type = All;
     self.day_type = Future;
     self.locName = [[NSMutableString alloc] init];
+    
+//    [self.locName appendString:@"shanghai"];
+
     
     [self initLocationManager];
     
@@ -49,18 +56,41 @@
             });
         });
     }];
+    
+    //接收消息
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(receivedNotificaion:) name:@"push_left" object:nil];
+    [nc addObserver:self selector:@selector(receivedNotificaion_pushAboutMe:) name:@"push_AboutMe" object:nil];
+    [nc addObserver:self selector:@selector(receivedNotificaion_pushSetting:) name:@"push_Setting" object:nil];
+
+    
+}
+
+- (void)receivedNotificaion:(NSNotification *)nofiticaiton{
+    OAutoController *oauto = [[OAutoController alloc] init];
+    [self presentViewController:oauto animated:NO completion:nil];
+    [self.sideMenuViewController hideMenuViewController];
+}
+
+- (void)receivedNotificaion_pushAboutMe:(NSNotification *)nofiticaiton{
+    AboutMeController *aboutMe = [[AboutMeController alloc] init];
+    [self.navigationController pushViewController:aboutMe animated:YES];
+    [self.sideMenuViewController hideMenuViewController];
+}
+
+- (void)receivedNotificaion_pushSetting:(NSNotification *)nofiticaiton{
+    SettingController *setting = [[SettingController alloc] init];
+    [self.navigationController pushViewController:setting animated:YES];
+    [self.sideMenuViewController hideMenuViewController];
 }
 
 - (void)fristTimeReload{
-    //显示页面的时候异步加载 并给予等待页面
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"努力加载中";                    // 设置文字
-    hud.labelFont = [UIFont systemFontOfSize:14];
+    //显示页面的时候异步加载
     dispatch_queue_t queue =  dispatch_queue_create("myqueue", NULL);
     dispatch_async(queue, ^{
         [self latestEvent:self.locName type:self.type day_type:self.day_type];
         dispatch_sync(dispatch_get_main_queue(), ^{
+            //首次得到数据隐藏等待界面
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [self afterRefresh];
         });
@@ -70,15 +100,24 @@
 
 #pragma mark location
 - (void)initLocationManager{
-        if([CLLocationManager locationServicesEnabled]){
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.delegate = self;
-        self.locationManager.distanceFilter = 300;
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
-            [self.locationManager requestWhenInUseAuthorization];//ios8要添加 还要在plist里添加
-        }
-            [self.locationManager startUpdatingLocation];
+     //开始定位时给予等待页面
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"努力加载中";                    // 设置文字
+    hud.labelFont = [UIFont systemFontOfSize:14];
+
+    if([CLLocationManager locationServicesEnabled]){
+        [[[[Toast makeText:@"正在定位"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = 300;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+        [self.locationManager requestWhenInUseAuthorization];//ios8要添加 还要在plist里添加
+    }
+        [self.locationManager startUpdatingLocation];
+    }else{
+        [[[[Toast makeText:@"定位失败，请手动选择地址"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
     }
 }
 
@@ -95,6 +134,7 @@
             NSArray *array = [loc componentsSeparatedByString:@" "];
             //只执行一次
             static dispatch_once_t predicate; dispatch_once(&predicate, ^{
+            
                 for (int i = 0; i < array.count; i ++) {
                     [self.locName appendString:array[i]];
                 }
@@ -107,18 +147,13 @@
 }
 
 - (void)initUI{
-    //没有效果
-    UIImage * img = [UIImage imageNamed:@"menu"];
-    UIBarButtonItem * menuButton = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(presentLeftMenuViewController:)];
-    self.navigationItem.leftBarButtonItem = menuButton;
-    
     UIImageView *image = [[UIImageView alloc] initWithFrame:self.view.frame];
-    image.image = [UIImage imageNamed:@"table_bkg.png"];
+    image.image = [UIImage imageNamed:@"bkg.png"];
     
     CGFloat tableX = 0;
     CGFloat tableY = 0;
     CGFloat tableW = self.view.frame.size.width;
-    CGFloat tableH = self.view.frame.size.height - 64;
+    CGFloat tableH = self.view.frame.size.height;
     self.tabelView = [[UITableView alloc] initWithFrame:CGRectMake(tableX, tableY, tableW, tableH)];
     self.tabelView.delegate = self;
     self.tabelView.dataSource = self;
@@ -131,17 +166,17 @@
 
 #pragma mark getEvent
 - (void)latestEvent:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type{
-    if (![self.tabelView.header isRefreshing]){
         self.page = 0;
-        [self.eventsArray removeAllObjects];
+//        [self.eventsArray removeAllObjects];
         EventList *eventlist = [API get_eventlist:[NSNumber numberWithInt:10] star:[NSNumber numberWithInt:self.page] loc:loc type:type day_type:day_type];
         NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[eventlist.events mutableCopy]];
         NSMutableArray *events = [SameCityUtils get_eventArray:array];
         [self.eventsArray insertObjects:events atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, events.count)]];
+        if (self.eventsArray.count > Count) {
+            [self.eventsArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(events.count + 1, events.count - 1)]];
+        }
         self.totalEvent = eventlist.total;
         self.page ++;
-        
-    }
 }
 
 - (void)getMoreEvent:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type{
@@ -184,7 +219,7 @@
     cell.eventAdressLabel.text = event.address;
     cell.wish_count_Label.text = [NSString stringWithFormat:@"%@", event.wisher_count];
     cell.participant_count_label.text = [NSString stringWithFormat:@"%@", event.participant_count];
-    [cell.eventImage sd_setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"bkg.png"]];
+    [cell.eventImage sd_setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"place_hold_image.png"]];
     [cell createFrame];
     return cell;
 }

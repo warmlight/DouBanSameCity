@@ -15,13 +15,9 @@
 @implementation NavigationController
 
 - (void)viewDidLoad {
-    TabController *tabCon = [[TabController alloc] init];
-    [self addChildViewController:tabCon];
     [super viewDidLoad];
-    
-    UIImage * img = [UIImage imageNamed:@"menu.png"];
-    UIBarButtonItem * menuButton = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(presentLeftMenuViewController:)];
-    self.navigationItem.leftBarButtonItem = menuButton;
+    TabController *tabCon = [[TabController alloc] init];
+     [self addChildViewController:tabCon];
     // Do any additional setup after loading the view.
 }
 

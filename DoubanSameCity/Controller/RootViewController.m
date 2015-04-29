@@ -15,10 +15,11 @@
 @implementation RootViewController
 -(id)init {
     if (self = [super init]) {
+        self.title = @"aaa";
         self.contentViewShadowColor = [UIColor greenColor];
-        self.scaleMenuView = YES;
-        self.scaleContentView = YES;
-        self.contentViewScaleValue = 0.8;
+        self.scaleMenuView = NO;
+        self.scaleContentView = NO;
+        self.contentViewScaleValue = 1;
         self.contentViewShadowRadius = 15;
         self.contentViewShadowEnabled = NO; //阴影
         self.contentViewShadowOffset = CGSizeMake(0, 0);

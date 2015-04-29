@@ -38,5 +38,4 @@
     return (result == nil? nil : [CityList fromJsonData:result[0]]);
 }
 
-
 @end

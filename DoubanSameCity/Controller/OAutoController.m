@@ -17,8 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.alpha = 0;
+    [self.navigationController setNavigationBarHidden:NO];
     
     self.title = @"授权";
     CGRect bounds = [[UIScreen mainScreen] bounds];
@@ -61,8 +62,12 @@
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideAllHUDsForView:_webView animated:YES];
                 if ([Config getLoginUserId]) {
-                    LaunchController *lauch = [[LaunchController alloc] init];
-                    [self.navigationController pushViewController:lauch animated:NO];
+//                    EventListController *eventList = [[EventListController alloc] init];
+//                    [self.navigationController pushViewController:eventList animated:NO];
+//                    [self.navigationController popToRootViewControllerAnimated:NO];
+                    [self dismissViewControllerAnimated:NO completion:nil];
+                    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+                    [nc postNotificationName:@"push_reloadData" object:nil];
                 }
             });
         });

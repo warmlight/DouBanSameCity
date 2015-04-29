@@ -1,40 +1,49 @@
 //
-//  EventDetailController.m
+//  AboutMeController.m
 //  DoubanSameCity
 //
-//  Created by yiban on 15/4/22.
+//  Created by yiban on 15/4/28.
 //  Copyright (c) 2015年 yiban. All rights reserved.
 //
 
-#import "EventDetailController.h"
+#import "AboutMeController.h"
 
-
-@interface EventDetailController ()
+@interface AboutMeController ()
 
 @end
 
-@implementation EventDetailController
+@implementation AboutMeController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationController.navigationBar.translucent = YES;
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"table_bkg.png"] forBarMetrics:UIBarMetricsCompact];
+    self.view.backgroundColor = [UIColor whiteColor];
+
+    [self initUI];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshUser)];
     // Do any additional setup after loading the view.
 }
 
-- (void)initUI:(Event *)event{
-    self.scrollerView = [[EventDetailScrollerVIew alloc] init];
-    CGFloat contentSizeHeigth = [self.scrollerView setViewFrame_Content:event];
+- (void)refreshUser{
+    User *user = [API get_user:[Config getLoginUserId]];
+    [Config saveUser:user];
+    [self.scrollView createFrame_Conten];
+}
+
+- (void)initUI{
+    self.scrollView = [[AboutMeScrollView alloc] init];
+    CGFloat contentSizeHeigth = [self.scrollView createFrame_Conten];
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat scrollerX = 0;
     CGFloat scrollerY = 0;
     CGFloat scrollerW = screenWidth;
     CGFloat scrollerH = self.view.frame.size.height;
-    self.scrollerView.frame = CGRectMake(scrollerX, scrollerY, scrollerW, scrollerH);
-    self.scrollerView.contentSize = CGSizeMake(screenWidth, contentSizeHeigth);
+    self.scrollView.frame = CGRectMake(scrollerX, scrollerY, scrollerW, scrollerH);
+    self.scrollView.contentSize = CGSizeMake(screenWidth, contentSizeHeigth);
     //    self.scrollerView.backgroundColor = [UIColor orangeColor];
-    [self.view addSubview:self.scrollerView];
+    [self.view addSubview:self.scrollView];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
