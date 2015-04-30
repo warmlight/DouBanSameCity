@@ -24,6 +24,7 @@
 
 - (void)initUI:(Event *)event{
     self.scrollerView = [[EventDetailScrollerVIew alloc] init];
+    self.automaticallyAdjustsScrollViewInsets = NO; //让视图从{0， 0}开始显示 而不是从{0， 64}
     CGFloat contentSizeHeigth = [self.scrollerView setViewFrame_Content:event];
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat scrollerX = 0;

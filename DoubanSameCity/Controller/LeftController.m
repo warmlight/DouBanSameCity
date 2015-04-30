@@ -37,7 +37,6 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(tableX, tableY, tableW, tableH)];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.tableHeaderView = [[LeftHeadView alloc] init];
 
     [self.view addSubview:self.tableView];
 

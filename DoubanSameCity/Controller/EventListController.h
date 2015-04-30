@@ -25,8 +25,9 @@
 #import "OAutoController.h"
 #import "AboutMeController.h"
 #import "SettingController.h"
+#import "TimeTable.h"
 
-
+#define Daytable [tableView isKindOfClass:[TimeTable class]]
 #define Count 10
 
 @interface EventListController : UIViewController<UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
@@ -39,5 +40,7 @@
 @property (strong, nonatomic) NSMutableString *locName;
 @property (strong, nonatomic) NSString *type;
 @property (strong, nonatomic) NSString *day_type;
+@property (strong, nonatomic) UIButton *day_typeButton;
+@property (strong, nonatomic) TimeTable *timeTable;
 
 @end

@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
 //    self.tabBar.translucent = NO;
 //    self.navigationController.navigationBar.translucent = YES;
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"table_bkg.png"] forBarMetrics:UIBarMetricsCompact];

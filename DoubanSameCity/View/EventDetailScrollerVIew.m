@@ -37,11 +37,7 @@
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         
-//        self.titleLabel = [[UILabel alloc] init];
-//        self.titleLabel.font = TitleBoldFont;
-//        self.titleLabel.numberOfLines = 0;
-//        [self addSubview:self.titleLabel];
-//        
+        
         self.eventImg = [[UIImageView alloc] init];
         self.eventImg.backgroundColor = [UIColor redColor];
         self.eventImg.userInteractionEnabled = YES;
@@ -74,6 +70,32 @@
         [self addSubview:self.bkgImageView];
       
         [self addSubview:self.eventImg];
+        
+        self.joinButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.joinButton.contentHorizontalAlignment=UIControlContentHorizontalAlignmentLeft;
+        self.joinButton.backgroundColor = [UIColor clearColor];
+        [self.joinButton setTitle:@" 参加" forState:UIControlStateNormal];
+        [self.joinButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.joinButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
+        [self.joinButton setImage:[UIImage imageNamed:@"gray_heart.png"] forState:UIControlStateNormal];
+        [self.joinButton setImage:[UIImage imageNamed:@"red_heart.png"] forState:UIControlStateSelected];
+        [self addSubview:self.joinButton];
+        
+        self.wishButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.wishButton.contentHorizontalAlignment=UIControlContentHorizontalAlignmentRight;
+        self.wishButton.backgroundColor = [UIColor clearColor];
+        [self.wishButton setTitle:@" 感兴趣" forState:UIControlStateNormal];
+        [self.wishButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.wishButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
+        [self.wishButton setImage:[UIImage imageNamed:@"gray_heart.png"] forState:UIControlStateNormal];
+        [self.wishButton setImage:[UIImage imageNamed:@"red_heart.png"] forState:UIControlStateSelected];
+        [self addSubview:self.wishButton];
+        
+        
+        self.addressButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.addressButton setImage:[UIImage imageNamed:@"information_province.png"] forState:UIControlStateNormal];
+        [self.addressButton addTarget:self  action:@selector(callMap:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.addressButton];
 
     }
     return self;
@@ -93,6 +115,12 @@
 
     NSDictionary *textAttibute = @{NSFontAttributeName:TextF, NSParagraphStyleAttributeName:paragraphStyle};
     NSDictionary *titleAttibute = @{NSFontAttributeName:TitleF};
+    //addressbtn
+    CGFloat addrX = screenWidth - BigMargin - ButtonH;
+    CGFloat addrY = 64;
+    CGFloat addrW = ButtonH;
+    CGFloat addrH = addrW;
+    self.addressButton.frame = CGRectMake(addrX, addrY, addrW, addrH);
     
     //bkgImage
     [self.bkgImageView sd_setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"place_hold_image.png"]];
@@ -100,11 +128,11 @@
     CGFloat bkgImageX = 0;
     CGFloat bkgImageY = 0;
     CGFloat bkgImageW = screenWidth;
-    CGFloat bkgImageH = 300;
+    CGFloat bkgImageH = 300 + 64;
     self.bkgImageView.frame = CGRectMake(bkgImageX, bkgImageY, bkgImageW, bkgImageH);
     
     //effentView
-    self.effectView.frame = CGRectMake(bkgImageX, bkgImageY, bkgImageW, bkgImageH);
+    self.effectView.frame = CGRectMake(bkgImageX, 0, bkgImageW, bkgImageH);
     
     //eventImage
     [self.eventImg sd_setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"place_hold_image.png"]];
@@ -112,7 +140,7 @@
     CGFloat eventImageW = EventImageW;
     CGFloat eventImageH = EventImageH;
     CGFloat eventImageX = (screenWidth - eventImageW) / 2;
-    CGFloat eventImageY = BigMargin;
+    CGFloat eventImageY = 64;
     self.eventImg.frame = CGRectMake(eventImageX, eventImageY, eventImageW, eventImageH);
 
     
@@ -136,9 +164,9 @@
     CGFloat contentX = SmallMargin;
     CGFloat contentY = bandY + bandH + SmallMargin;
     CGFloat contentW = screenWidth - 2*SmallMargin;
-    CGSize contentConstraint = CGSizeMake(contentW, 200000.0);
+    CGSize contentConstraint = CGSizeMake(contentW - SmallMargin, 200000.0);
     CGRect contentRect = [attributedString boundingRectWithSize:contentConstraint options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) context:nil];
-    CGFloat contentH = contentRect.size.height + 60;
+    CGFloat contentH = contentRect.size.height + SmallMargin;
 
     self.contentLabel.frame = CGRectMake(contentX, contentY, contentW, contentH);
 
@@ -151,7 +179,24 @@
         contentBkgH = [UIScreen mainScreen].bounds.size.height - contentY -SmallMargin;
     }
     self.contentLabelBkg.frame = CGRectMake(contentBkgX, contentBkgY, contentBkgW, contentBkgH);
- 
+    
+    //joinBtn
+    CGFloat joinX = 2 *BigMargin;
+    CGFloat joinY = eventImageY + eventImageH + BigMargin;
+    CGFloat joinW = Buttonw;
+    CGFloat joinH = ButtonH;
+    self.joinButton.frame = CGRectMake(joinX, joinY, joinW, joinH);
+    self.joinButton.selected = YES;
+
+    
+    //wishBtn
+    CGFloat wishX = screenWidth - 2 *BigMargin - Buttonw;
+    CGFloat wishY = joinY;
+    CGFloat wishW = Buttonw;
+    CGFloat wishH = ButtonH;
+    self.wishButton.frame = CGRectMake(wishX, wishY, wishW, wishH);
+    self.wishButton.selected = YES;
+
     
 //    [self createAtributeContentLabel:event];
     return contentBkgY + contentH + SmallMargin;

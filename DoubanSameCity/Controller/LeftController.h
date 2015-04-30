@@ -12,7 +12,7 @@
 #import "User.h"
 #import <UIImageView+WebCache.h>
 #import "FullScreenLargeImageShowUtils.h"
-#import "LeftHeadView.h"
+//#import "LeftHeadView.h"
 
 
 //#import "OAutoController.h"
