@@ -42,5 +42,6 @@
 @property (strong, nonatomic) NSString *day_type;
 @property (strong, nonatomic) UIButton *day_typeButton;
 @property (strong, nonatomic) TimeTable *timeTable;
-
+@property (assign, nonatomic) BOOL dayTableIsAdd;
+@property (strong, nonatomic) UIView *blurView;
 @end

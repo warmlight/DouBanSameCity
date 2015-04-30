@@ -9,17 +9,14 @@
 #import "TimeTable.h"
 
 @implementation TimeTable
-- (instancetype)init{
-    self = [super init];
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
     if (self) {
         self.delegate = self;
         self.dataSource = self;
         self.timeTypes = [[NSMutableArray alloc] init];
-//        NSDictionary *future = [[NSDictionary alloc] initWithObjectsAndKeys:@"所有时间段",Future, nil];
-//        NSDictionary *week = [[NSDictionary alloc] initWithObjectsAndKeys:@"最近一周",Week, nil];
-//        NSDictionary *weekend = [[NSDictionary alloc] initWithObjectsAndKeys:@"周末",Weekend, nil];
-//        NSDictionary *tomorrow = [[NSDictionary alloc] initWithObjectsAndKeys:@"明天",Tomorrow, nil];
-//        NSDictionary *today = [[NSDictionary alloc] initWithObjectsAndKeys:@"今天",Today, nil];
+        self.separatorStyle = UITableViewCellSelectionStyleNone;
+        self.scrollEnabled = NO;
         [self.timeTypes addObject:@"所有时间段"];
         [self.timeTypes addObject:@"最近一周"];
         [self.timeTypes addObject:@"周末"];
@@ -40,6 +37,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifer];
     }
     cell.textLabel.text = self.timeTypes[indexPath.row];
+    cell.textLabel.textColor = [UIColor whiteColor];
     return cell;
 }
 
@@ -66,6 +64,20 @@
     [self removeFromSuperview];
 }
 
+
+- (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath
+{
+//    //去除有内容的Cell分割线
+//    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
+    
+    UIColor *CellColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+    cell.backgroundColor = CellColor;
+    //点击时背景色
+//    UIColor *color = UIColorFromRGB(0xEAEAEA);//通过RGB来定义自己的颜色
+//    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
+//    cell.selectedBackgroundView.backgroundColor = color;
+    
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

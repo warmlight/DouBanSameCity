@@ -41,7 +41,6 @@
     UIImage * img = [UIImage imageNamed:@"menu.png"];
     UIBarButtonItem * menuButton = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStyleDone target:self action:@selector(presentLeftMenuViewController:)];
     self.navigationItem.leftBarButtonItem = menuButton;
-
 }
 
 - (void)didReceiveMemoryWarning {

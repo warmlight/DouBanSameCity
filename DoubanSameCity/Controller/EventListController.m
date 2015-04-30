@@ -19,22 +19,22 @@
     NSLog(@"access token :%@", [Config loadAccount].access_token);
     NSLog(@"user id:%@", [Config getLoginUserId]);
     NSLog(@"user largeAvatar :%@", [Config loadUser].large_avatar);
-
+    
     self.navigationController.navigationBar.tintColor = UIColorFromRGB(0xFFAEB9);
     self.navigationController.navigationBar.alpha = 0.3;
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"add.png"] forBarMetrics:UIBarMetricsCompact];//图片可随便设置？？
     
-    //消除黑线
-    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
-        NSArray *list = self.navigationController.navigationBar.subviews;
-        for (id obj in list) {
-            if ([obj isKindOfClass:[UIImageView class]]) {
-                UIImageView *imageView = (UIImageView *)obj;
-                imageView.hidden = YES;
-            }
-        }
-    }
+//    //消除黑线
+//    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
+//        NSArray *list = self.navigationController.navigationBar.subviews;
+//        for (id obj in list) {
+//            if ([obj isKindOfClass:[UIImageView class]]) {
+//                UIImageView *imageView = (UIImageView *)obj;
+//                imageView.hidden = YES;
+//            }
+//        }
+//    }
     
     self.view.backgroundColor = [UIColor blackColor];
     self.eventsArray = [[NSMutableArray alloc] init];
@@ -44,10 +44,10 @@
     self.day_type = Future;
     self.locName = [[NSMutableString alloc] init];
     
-    [self.locName appendString:@"shanghai"];
-
+    //    [self.locName appendString:@"shanghai"];
     
-//    [self initLocationManager];
+    
+    [self initLocationManager];
     
     
     //table下拉刷新
@@ -78,7 +78,7 @@
     [nc addObserver:self selector:@selector(receivedNotificaion_pushAboutMe:) name:@"push_AboutMe" object:nil];
     [nc addObserver:self selector:@selector(receivedNotificaion_pushSetting:) name:@"push_Setting" object:nil];
     [nc addObserver:self selector:@selector(receivedNotification_timeType:) name:@"time_type" object:nil];
-
+    
     
 }
 
@@ -103,7 +103,12 @@
 
 - (void)receivedNotification_timeType:(NSNotification *)notification{
     self.day_type = notification.object;
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"努力加载中";                    // 设置文字
+    hud.labelFont = [UIFont systemFontOfSize:14];
     [self fristTimeReload];
+    [self removeBlurView:nil];
 }
 
 
@@ -118,26 +123,25 @@
             [self afterRefresh];
         });
     });
-
 }
 
 #pragma mark location
 - (void)initLocationManager{
-     //开始定位时给予等待页面
+    //开始定位时给予等待页面
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"努力加载中";                    // 设置文字
     hud.labelFont = [UIFont systemFontOfSize:14];
-
+    
     if([CLLocationManager locationServicesEnabled]){
         [[[[Toast makeText:@"正在定位"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.distanceFilter = 300;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
-        [self.locationManager requestWhenInUseAuthorization];//ios8要添加 还要在plist里添加
-    }
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        self.locationManager.distanceFilter = 300;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+            [self.locationManager requestWhenInUseAuthorization];//ios8要添加 还要在plist里添加
+        }
         [self.locationManager startUpdatingLocation];
     }else{
         [[[[Toast makeText:@"定位失败，请手动选择地址"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
@@ -157,7 +161,7 @@
             NSArray *array = [loc componentsSeparatedByString:@" "];
             //只执行一次
             static dispatch_once_t predicate; dispatch_once(&predicate, ^{
-            
+                
                 for (int i = 0; i < array.count; i ++) {
                     [self.locName appendString:array[i]];
                 }
@@ -166,7 +170,7 @@
             });
         }
     }];
-  
+    
 }
 
 
@@ -179,22 +183,31 @@
     effectView.frame = headView.frame;
     [headView addSubview:effectView];
     
+    
     //daybutton
-    CGFloat dayBtnX = 0;
-    CGFloat dayBtnY = 64;
     CGFloat dayBtnW = self.view.frame.size.width / 2;
     CGFloat dayBtnH = ButtonH;
     self.day_typeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.day_typeButton setTitle:@"选择时间" forState:UIControlStateNormal];
-    self.day_typeButton.frame = CGRectMake(dayBtnX, dayBtnY, dayBtnW, dayBtnH);
+    self.day_typeButton.backgroundColor = [UIColor clearColor];
+    [self.day_typeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    self.day_typeButton.frame = CGRectMake(0, 0, dayBtnW, dayBtnH);
     [self.day_typeButton addTarget:self action:@selector(showDayTypeTable:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //daybuttonBkg
+    CGFloat dayBtnX = 0;
+    CGFloat dayBtnY = 64;
+    UIVisualEffectView  *dayButtonBkg = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
+    dayButtonBkg.frame = CGRectMake(dayBtnX, dayBtnY, dayBtnW, dayBtnH);
+    [dayButtonBkg addSubview:self.day_typeButton];
+
     
     //tableView
     UIImageView *image = [[UIImageView alloc] initWithFrame:self.view.frame];
     image.image = [UIImage imageNamed:@"bkg.png"];
     
     CGFloat tableX = 0;
-    CGFloat tableY = 0;
+    CGFloat tableY = ButtonH;
     CGFloat tableW = self.view.frame.size.width;
     CGFloat tableH = self.view.frame.size.height + 64;
     self.tabelView = [[UITableView alloc] initWithFrame:CGRectMake(tableX, tableY, tableW, tableH)];
@@ -204,42 +217,53 @@
     [self.tabelView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];//隐藏没有内容的cell的分割线
     //    self.tabelView.backgroundColor = UIColorFromRGB(0xEEEF98);
     
-    UIView *head = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, ButtonH)];
-    self.tabelView.tableHeaderView = head;
-    
-    [self.view addSubview:self.tabelView];
-    [self.view addSubview:headView];
-    [self.view addSubview:self.day_typeButton];
     
     //timeTable
-    CGFloat timeTableX = 0;
+    CGFloat timeTableX = SmallMargin;
     CGFloat timeTableY = dayBtnY + dayBtnH;
     CGFloat timeTableW = self.view.frame.size.width / 2;
     CGFloat timeTableH = cellH *5;
     self.timeTable = [[TimeTable alloc] initWithFrame:CGRectMake(timeTableX, timeTableY, timeTableW, timeTableH)];
-    self.timeTable.dataSource = self;
-    self.timeTable.delegate = self;
-//    [self.view addSubview:self.timeTable];
+    self.timeTable.backgroundColor = [UIColor clearColor];
+    
+    //blurview
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeBlurView:)];
+    self.blurView = [[UIView alloc] initWithFrame:self.view.frame];
+    [self.blurView addGestureRecognizer:tap];
+    self.blurView.backgroundColor = [UIColor clearColor];
+    [self.blurView addSubview:self.timeTable];
+    
+    
+    [self.view addSubview:self.tabelView];
+    [self.view addSubview:headView];
+    [self.view addSubview:dayButtonBkg];
+    
 }
 
-#pragma mark -buttonClick
+#pragma mark -show/remove timetable
 - (void)showDayTypeTable:(UIButton *)sender{
-    [self.view addSubview:self.timeTable];
+    [self.view addSubview:self.blurView];
+    self.navigationItem.leftBarButtonItem.enabled = NO;
+}
+
+- (void)removeBlurView:(UITapGestureRecognizer *)sender{
+    [self.blurView removeFromSuperview];
+    self.navigationItem.leftBarButtonItem.enabled = YES;
 }
 
 #pragma mark getEvent
 - (void)latestEvent:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type{
-        self.page = 0;
-//        [self.eventsArray removeAllObjects];
-        EventList *eventlist = [API get_eventlist:[NSNumber numberWithInt:10] star:[NSNumber numberWithInt:self.page] loc:loc type:type day_type:day_type];
-        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[eventlist.events mutableCopy]];
-        NSMutableArray *events = [SameCityUtils get_eventArray:array];
-        [self.eventsArray insertObjects:events atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, events.count)]];
-        if (self.eventsArray.count > Count) {
-            [self.eventsArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(events.count + 1, events.count - 1)]];
-        }
-        self.totalEvent = eventlist.total;
-        self.page ++;
+    self.page = 0;
+    //        [self.eventsArray removeAllObjects];
+    EventList *eventlist = [API get_eventlist:[NSNumber numberWithInt:10] star:[NSNumber numberWithInt:self.page] loc:loc type:type day_type:day_type];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[eventlist.events mutableCopy]];
+    NSMutableArray *events = [SameCityUtils get_eventArray:array];
+    [self.eventsArray insertObjects:events atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, events.count)]];
+    if (self.eventsArray.count > Count) {
+        [self.eventsArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(events.count + 1, events.count - 1)]];
+    }
+    self.totalEvent = eventlist.total;
+    self.page ++;
 }
 
 - (void)getMoreEvent:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type{
@@ -263,95 +287,56 @@
 
 #pragma mark -tableview delegate datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    if (Daytable) {
-//        return self.timeTable.timeTypes.count;
-//    }else{
-        return self.eventsArray.count;
-//    }
+    return self.eventsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (Daytable) {
-//        static NSString *cellIdentifer = @"cell";
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifer];
-//        if (cell == nil) {
-//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifer];
-//        }
-//        cell.textLabel.text = self.timeTable.timeTypes[indexPath.row];
-//        return cell;
-//
-//    }else{
-        static NSString *cellIdentifier = @"cell";
-        EventCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (cell == nil) {
-            cell = [[EventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        }
-        cell.tag = indexPath.row + 100;
-        Event *event = self.eventsArray[indexPath.row];
-        cell.singleEvent = event;
-        cell.titleLabel.text = [NSString stringWithFormat:@" %@", event.title];
-        cell.bengin_event_time_Label.text = event.begin_time;
-        cell.end_event_time_Label.text = event.end_time;
-        cell.eventTypeLabel.text = event.category_name;
-        cell.eventAdressLabel.text = event.address;
-        cell.wish_count_Label.text = [NSString stringWithFormat:@"%@", event.wisher_count];
-        cell.participant_count_label.text = [NSString stringWithFormat:@"%@", event.participant_count];
-        [cell.eventImage sd_setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"place_hold_image.png"]];
-        [cell createFrame];
-        return cell;
-//    }
+    static NSString *cellIdentifier = @"cell";
+    EventCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[EventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.tag = indexPath.row + 100;
+    Event *event = self.eventsArray[indexPath.row];
+    cell.singleEvent = event;
+    cell.titleLabel.text = [NSString stringWithFormat:@" %@", event.title];
+    cell.bengin_event_time_Label.text = event.begin_time;
+    cell.end_event_time_Label.text = event.end_time;
+    cell.eventTypeLabel.text = event.category_name;
+    cell.eventAdressLabel.text = event.address;
+    cell.wish_count_Label.text = [NSString stringWithFormat:@"%@", event.wisher_count];
+    cell.participant_count_label.text = [NSString stringWithFormat:@"%@", event.participant_count];
+    [cell.eventImage sd_setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"place_hold_image.png"]];
+    [cell createFrame];
+    return cell;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (Daytable) {
-//        return cellH;
-//    }else{
-        Event *event = self.eventsArray[indexPath.row];
-        return [EventCell cellHeight:event];
-//    }
+    Event *event = self.eventsArray[indexPath.row];
+    return [EventCell cellHeight:event];
 }
 
 - (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath
 {
-//    if (Daytable) {
-//        return;
-//    }else{
-        //去除有内容的Cell分割线
-        cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
-        //点击时背景色
-        UIColor *color = UIColorFromRGB(0xEAEAEA);//通过RGB来定义自己的颜色
-        cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
-        cell.selectedBackgroundView.backgroundColor = color;
-//    }
+    //去除有内容的Cell分割线
+    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
+    //点击时背景色
+    UIColor *color = UIColorFromRGB(0xEAEAEA);//通过RGB来定义自己的颜色
+    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
+    cell.selectedBackgroundView.backgroundColor = color;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (Daytable) {
-//        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//        NSString *selectedType = @"";
-//        if ([cell.textLabel.text isEqualToString:@"所有时间段"]) {
-//            selectedType = Future;
-//        }else if ([cell.textLabel.text isEqualToString:@"最近一周"]){
-//            selectedType = Week;
-//        }else if ([cell.textLabel.text isEqualToString:@"周末"]){
-//            selectedType = Weekend;
-//        }else if ([cell.textLabel.text isEqualToString:@"明天"]){
-//            selectedType = Tomorrow;
-//        }else if ([cell.textLabel.text isEqualToString:@"今天"]){
-//            selectedType = Today;
-//        }
-//        self.day_type = selectedType;
-//        [self fristTimeReload];
-//        [self.timeTable removeFromSuperview];
-//    }else{
-        EventCell *cell = (EventCell *)[tableView cellForRowAtIndexPath:indexPath];
-        [tableView deselectRowAtIndexPath:indexPath animated:NO];
-        EventDetailController *detailCon = [[EventDetailController alloc] init];
-        [detailCon initUI:cell.singleEvent];
-        NSLog(@"%@",cell.singleEvent.id);
-        [self.navigationController pushViewController:detailCon animated:YES];
-
-//    }
+    
+    EventCell *cell = (EventCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    EventDetailController *detailCon = [[EventDetailController alloc] init];
+    [detailCon initUI:cell.singleEvent];
+    NSLog(@"%@",cell.singleEvent.id);
+    [self.navigationController pushViewController:detailCon animated:YES];
+    
 }
 
 
@@ -361,13 +346,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

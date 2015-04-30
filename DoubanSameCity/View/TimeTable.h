@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "API.h"
 
-#define cellH 40
+#define cellH 30
 @interface TimeTable : UITableView<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSMutableArray *timeTypes;
 
