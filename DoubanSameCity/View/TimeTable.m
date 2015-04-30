@@ -46,6 +46,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *selectedType = @"";
     if ([cell.textLabel.text isEqualToString:@"所有时间段"]) {

@@ -44,10 +44,10 @@
     self.day_type = Future;
     self.locName = [[NSMutableString alloc] init];
     
-    //    [self.locName appendString:@"shanghai"];
+    [self.locName appendString:@"shanghai"];
     
     
-    [self initLocationManager];
+//    [self initLocationManager];
     
     
     //table下拉刷新
@@ -78,8 +78,6 @@
     [nc addObserver:self selector:@selector(receivedNotificaion_pushAboutMe:) name:@"push_AboutMe" object:nil];
     [nc addObserver:self selector:@selector(receivedNotificaion_pushSetting:) name:@"push_Setting" object:nil];
     [nc addObserver:self selector:@selector(receivedNotification_timeType:) name:@"time_type" object:nil];
-    
-    
 }
 
 #pragma mark -notification
@@ -170,7 +168,6 @@
             });
         }
     }];
-    
 }
 
 
@@ -219,7 +216,7 @@
     
     
     //timeTable
-    CGFloat timeTableX = SmallMargin;
+    CGFloat timeTableX = 0;
     CGFloat timeTableY = dayBtnY + dayBtnH;
     CGFloat timeTableW = self.view.frame.size.width / 2;
     CGFloat timeTableH = cellH *5;
@@ -231,7 +228,7 @@
     self.blurView = [[UIView alloc] initWithFrame:self.view.frame];
     [self.blurView addGestureRecognizer:tap];
     self.blurView.backgroundColor = [UIColor clearColor];
-    [self.blurView addSubview:self.timeTable];
+//    [self.blurView addSubview:self.timeTable];
     
     
     [self.view addSubview:self.tabelView];
@@ -243,12 +240,12 @@
 #pragma mark -show/remove timetable
 - (void)showDayTypeTable:(UIButton *)sender{
     [self.view addSubview:self.blurView];
-    self.navigationItem.leftBarButtonItem.enabled = NO;
+    [self.view addSubview:self.timeTable];
 }
 
 - (void)removeBlurView:(UITapGestureRecognizer *)sender{
     [self.blurView removeFromSuperview];
-    self.navigationItem.leftBarButtonItem.enabled = YES;
+    [self.timeTable removeFromSuperview];
 }
 
 #pragma mark getEvent
