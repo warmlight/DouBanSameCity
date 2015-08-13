@@ -20,10 +20,12 @@
     NSLog(@"user id:%@", [Config getLoginUserId]);
     NSLog(@"user largeAvatar :%@", [Config loadUser].large_avatar);
     
-    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0xFFAEB9);
-    self.navigationController.navigationBar.alpha = 0.3;
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"add.png"] forBarMetrics:UIBarMetricsCompact];//图片可随便设置？？
+//    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0xFFAEB9);
+//    self.navigationController.navigationBar.alpha = 0.3;
+    
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"add.png"] forBarMetrics:UIBarMetricsCompact];//图片可随便设置？？
+    self.automaticallyAdjustsScrollViewInsets = NO; //让view的y从0开始而不是从64开始
     
 //    //消除黑线
 //    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
@@ -35,7 +37,6 @@
 //            }
 //        }
 //    }
-    
     self.view.backgroundColor = [UIColor blackColor];
     self.eventsArray = [[NSMutableArray alloc] init];
     [self initUI];
@@ -44,10 +45,10 @@
     self.day_type = Future;
     self.locName = [[NSMutableString alloc] init];
     
-    [self.locName appendString:@"shanghai"];
+//    [self.locName appendString:@"shanghai"];
     
     
-//    [self initLocationManager];
+    [self initLocationManager];
     
     
     //table下拉刷新
@@ -178,7 +179,7 @@
     UIVisualEffectView  *effectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
     effectView.frame = headView.frame;
-    [headView addSubview:effectView];
+//    [headView addSubview:effectView];
     
     
     //daybutton
@@ -204,7 +205,7 @@
     image.image = [UIImage imageNamed:@"bkg.png"];
     
     CGFloat tableX = 0;
-    CGFloat tableY = ButtonH;
+    CGFloat tableY = 0;
     CGFloat tableW = self.view.frame.size.width;
     CGFloat tableH = self.view.frame.size.height + 64;
     self.tabelView = [[UITableView alloc] initWithFrame:CGRectMake(tableX, tableY, tableW, tableH)];

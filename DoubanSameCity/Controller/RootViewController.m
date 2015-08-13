@@ -26,7 +26,8 @@
         self.contentViewShadowOpacity = 0.6;
         self.scaleBackgroundImageView = YES;
         
-        self.contentViewController = [[NavigationController alloc] init];
+        TabController *tabVC = [[TabController alloc] init];
+        self.contentViewController = [[NavigationController alloc] initWithRootViewController:tabVC];
         self.leftMenuViewController = [[LeftController alloc] init];
     }
     return self;

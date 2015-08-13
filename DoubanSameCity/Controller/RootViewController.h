@@ -10,6 +10,7 @@
 #import "SideMenu.h"
 #import "NavigationController.h"
 #import "LeftController.h"
+#import "TabController.h"
 @interface RootViewController : SideMenu<SideMenuDelegate>
 
 @end
