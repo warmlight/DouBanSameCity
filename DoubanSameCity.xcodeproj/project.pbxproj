@@ -49,6 +49,9 @@
 		CDB401F81AE78A3E0067E61F /* EventDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB401F71AE78A3E0067E61F /* EventDetailController.m */; };
 		CDB401FB1AE78A730067E61F /* EventDetailScrollerVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB401FA1AE78A730067E61F /* EventDetailScrollerVIew.m */; };
 		CDB401FD1AE7924D0067E61F /* owner.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB401FC1AE7924D0067E61F /* owner.png */; };
+		CDB443341B870F3A00DCB934 /* SelectPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB443331B870F3A00DCB934 /* SelectPopoverController.m */; };
+		CDB443371B87237C00DCB934 /* TypeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB443361B87237C00DCB934 /* TypeTable.m */; };
+		CDB4433C1B8C46A400DCB934 /* ResponseCode.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB4433B1B8C46A400DCB934 /* ResponseCode.m */; };
 		CDBEDAF41AE7382100D0C0D9 /* table_bkg.png in Resources */ = {isa = PBXBuildFile; fileRef = CDBEDAF31AE7382100D0C0D9 /* table_bkg.png */; };
 		CDC0698A1AEDC55600D46185 /* HeadPortraitView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC069891AEDC55600D46185 /* HeadPortraitView.m */; };
 		CDC095CA1AF0A9FF0013526F /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC095C91AF0A9FF0013526F /* avatar.png */; };
@@ -154,6 +157,12 @@
 		CDB401F91AE78A730067E61F /* EventDetailScrollerVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailScrollerVIew.h; sourceTree = "<group>"; };
 		CDB401FA1AE78A730067E61F /* EventDetailScrollerVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailScrollerVIew.m; sourceTree = "<group>"; };
 		CDB401FC1AE7924D0067E61F /* owner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owner.png; sourceTree = "<group>"; };
+		CDB443321B870F3A00DCB934 /* SelectPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectPopoverController.h; sourceTree = "<group>"; };
+		CDB443331B870F3A00DCB934 /* SelectPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectPopoverController.m; sourceTree = "<group>"; };
+		CDB443351B87237C00DCB934 /* TypeTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeTable.h; sourceTree = "<group>"; };
+		CDB443361B87237C00DCB934 /* TypeTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeTable.m; sourceTree = "<group>"; };
+		CDB4433A1B8C46A400DCB934 /* ResponseCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseCode.h; sourceTree = "<group>"; };
+		CDB4433B1B8C46A400DCB934 /* ResponseCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseCode.m; sourceTree = "<group>"; };
 		CDBEDAF31AE7382100D0C0D9 /* table_bkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_bkg.png; sourceTree = "<group>"; };
 		CDC069881AEDC55600D46185 /* HeadPortraitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadPortraitView.h; sourceTree = "<group>"; };
 		CDC069891AEDC55600D46185 /* HeadPortraitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadPortraitView.m; sourceTree = "<group>"; };
@@ -316,6 +325,8 @@
 				CDF614CB1AEF22F000ECEECD /* AboutMeController.m */,
 				CD8C2BE21AF0743500707528 /* SettingController.h */,
 				CD8C2BE31AF0743500707528 /* SettingController.m */,
+				CDB443321B870F3A00DCB934 /* SelectPopoverController.h */,
+				CDB443331B870F3A00DCB934 /* SelectPopoverController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -459,6 +470,8 @@
 				CD57B9551AE8D06800B86701 /* CityList.m */,
 				CD57B95A1AE8E5AA00B86701 /* City.h */,
 				CD57B95B1AE8E5AA00B86701 /* City.m */,
+				CDB4433A1B8C46A400DCB934 /* ResponseCode.h */,
+				CDB4433B1B8C46A400DCB934 /* ResponseCode.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -476,6 +489,8 @@
 				CD8C2BE01AEF39F300707528 /* AboutMeScrollView.m */,
 				CD8D18C81AF1FEB700F50261 /* TimeTable.h */,
 				CD8D18C91AF1FEB700F50261 /* TimeTable.m */,
+				CDB443351B87237C00DCB934 /* TypeTable.h */,
+				CDB443361B87237C00DCB934 /* TypeTable.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -662,6 +677,7 @@
 				CD9F7BDC1ADF89F50025F34F /* HttpUtils.m in Sources */,
 				CD9F7BE61ADFA7DE0025F34F /* Config.m in Sources */,
 				CD8C2BE11AEF39F300707528 /* AboutMeScrollView.m in Sources */,
+				CDB443371B87237C00DCB934 /* TypeTable.m in Sources */,
 				CD9F7BE91ADFBF6B0025F34F /* User.m in Sources */,
 				CD9F7BDD1ADF89F50025F34F /* JsonUtils.m in Sources */,
 				CDE14F581AE0D20B00B1C60F /* SideMenu.m in Sources */,
@@ -677,6 +693,8 @@
 				CD9F7BD01ADF87CB0025F34F /* API.m in Sources */,
 				CD9F7BE31ADFA78A0025F34F /* ConfigUtils.m in Sources */,
 				CD57B94A1AE87FE700B86701 /* ZoomInUtils.m in Sources */,
+				CDB443341B870F3A00DCB934 /* SelectPopoverController.m in Sources */,
+				CDB4433C1B8C46A400DCB934 /* ResponseCode.m in Sources */,
 				CDF614CC1AEF22F000ECEECD /* AboutMeController.m in Sources */,
 				CDE14F5C1AE0D23600B1C60F /* LeftController.m in Sources */,
 				CD57B9591AE8D4AE00B86701 /* PHJTransformPinyin.m in Sources */,

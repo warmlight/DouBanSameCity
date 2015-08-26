@@ -7,9 +7,12 @@
 //
 
 #import "EventListController.h"
+#import "SelectPopoverController.h"
+#import "UIScrollView+MJRefresh.h"
+#import "MJRefresh.h"
 
 @interface EventListController ()
-
+@property (strong, nonatomic) SelectPopoverController *popoverVC;
 @end
 
 @implementation EventListController
@@ -41,6 +44,7 @@
     self.eventsArray = [[NSMutableArray alloc] init];
     [self initUI];
     
+    //默认的请求类型、请求时间
     self.type = All;
     self.day_type = Future;
     self.locName = [[NSMutableString alloc] init];
@@ -52,8 +56,8 @@
     
     
     //table下拉刷新
-    __weak typeof(self) weakSelf = self;
-    [self.tabelView addLegendHeaderWithRefreshingBlock:^{
+    __block __weak typeof(self) weakSelf = self;
+    [self.tableView addLegendHeaderWithRefreshingBlock:^{
         dispatch_queue_t queueToDown =  dispatch_queue_create("myqueue", NULL);
         dispatch_async(queueToDown, ^{
             [weakSelf latestEvent:weakSelf.locName type:weakSelf.type day_type:weakSelf.day_type];
@@ -62,8 +66,9 @@
             });
         });
     }];
+    
     //table上拉刷新
-    [self.tabelView addLegendFooterWithRefreshingBlock:^{
+    [self.tableView addLegendFooterWithRefreshingBlock:^{
         dispatch_queue_t queueToUp =  dispatch_queue_create("myqueue", NULL);
         dispatch_async(queueToUp, ^{
             [weakSelf getMoreEvent:weakSelf.locName type:weakSelf.type day_type:weakSelf.day_type];
@@ -79,6 +84,8 @@
     [nc addObserver:self selector:@selector(receivedNotificaion_pushAboutMe:) name:@"push_AboutMe" object:nil];
     [nc addObserver:self selector:@selector(receivedNotificaion_pushSetting:) name:@"push_Setting" object:nil];
     [nc addObserver:self selector:@selector(receivedNotification_timeType:) name:@"time_type" object:nil];
+    [nc addObserver:self selector:@selector(receivedNotification_type:) name:@"type" object:nil];
+
 }
 
 #pragma mark -notification
@@ -107,9 +114,18 @@
     hud.labelText = @"努力加载中";                    // 设置文字
     hud.labelFont = [UIFont systemFontOfSize:14];
     [self fristTimeReload];
-    [self removeBlurView:nil];
+    [self.popoverVC dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)receivedNotification_type:(NSNotification *)notification {
+    self.type = notification.object;
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"努力加载中";                    // 设置文字
+    hud.labelFont = [UIFont systemFontOfSize:14];
+    [self fristTimeReload];
+    [self.popoverVC dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)fristTimeReload{
     //显示页面的时候异步加载
@@ -190,7 +206,18 @@
     self.day_typeButton.backgroundColor = [UIColor clearColor];
     [self.day_typeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     self.day_typeButton.frame = CGRectMake(0, 0, dayBtnW, dayBtnH);
+    self.day_typeButton.tag = 100;
     [self.day_typeButton addTarget:self action:@selector(showDayTypeTable:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //typeButton
+    self.type_Button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.type_Button setTitle:@"活动类型" forState:UIControlStateNormal];
+    self.type_Button.backgroundColor = [UIColor clearColor];
+    [self.type_Button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    self.type_Button.frame = CGRectMake(0, 0, dayBtnW, dayBtnH);
+    self.type_Button.tag = 101;
+    [self.type_Button addTarget:self action:@selector(showDayTypeTable:) forControlEvents:UIControlEventTouchUpInside];
+
     
     //daybuttonBkg
     CGFloat dayBtnX = 0;
@@ -198,6 +225,10 @@
     UIVisualEffectView  *dayButtonBkg = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
     dayButtonBkg.frame = CGRectMake(dayBtnX, dayBtnY, dayBtnW, dayBtnH);
     [dayButtonBkg addSubview:self.day_typeButton];
+    
+    UIVisualEffectView  *typeButtonBkg = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
+    typeButtonBkg.frame = CGRectMake(dayBtnW, dayBtnY, dayBtnW, dayBtnH);
+    [typeButtonBkg addSubview:self.type_Button];
 
     
     //tableView
@@ -205,68 +236,60 @@
     image.image = [UIImage imageNamed:@"bkg.png"];
     
     CGFloat tableX = 0;
-    CGFloat tableY = 0;
+    CGFloat tableY = 40;
     CGFloat tableW = self.view.frame.size.width;
-    CGFloat tableH = self.view.frame.size.height + 64;
-    self.tabelView = [[UITableView alloc] initWithFrame:CGRectMake(tableX, tableY, tableW, tableH)];
-    self.tabelView.delegate = self;
-    self.tabelView.dataSource = self;
-    self.tabelView.backgroundView = image;
-    [self.tabelView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];//隐藏没有内容的cell的分割线
-    //    self.tabelView.backgroundColor = UIColorFromRGB(0xEEEF98);
+    CGFloat tableH = self.view.frame.size.height - 40;
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(tableX, tableY, tableW, tableH)];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.backgroundView = image;
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];//隐藏没有内容的cell的分割线
+    //    self.tableView.backgroundColor = UIColorFromRGB(0xEEEF98);
     
-    
-    //timeTable
-    CGFloat timeTableX = 0;
-    CGFloat timeTableY = dayBtnY + dayBtnH;
-    CGFloat timeTableW = self.view.frame.size.width / 2;
-    CGFloat timeTableH = cellH *5;
-    self.timeTable = [[TimeTable alloc] initWithFrame:CGRectMake(timeTableX, timeTableY, timeTableW, timeTableH)];
-    self.timeTable.backgroundColor = [UIColor clearColor];
-    
-    //blurview
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeBlurView:)];
-    self.blurView = [[UIView alloc] initWithFrame:self.view.frame];
-    [self.blurView addGestureRecognizer:tap];
-    self.blurView.backgroundColor = [UIColor clearColor];
-//    [self.blurView addSubview:self.timeTable];
-    
-    
-    [self.view addSubview:self.tabelView];
+    [self.view addSubview:self.tableView];
     [self.view addSubview:headView];
     [self.view addSubview:dayButtonBkg];
+    [self.view addSubview:typeButtonBkg];
     
 }
 
 #pragma mark -show/remove timetable
 - (void)showDayTypeTable:(UIButton *)sender{
-    [self.view addSubview:self.blurView];
-    [self.view addSubview:self.timeTable];
-}
+    self.popoverVC = [[SelectPopoverController alloc] init];
+    self.popoverVC.modalPresentationStyle = UIModalPresentationPopover;
+    if (sender.tag == 100) {
+        self.popoverVC.whitchTable = 1;
+        self.popoverVC.popoverPresentationController.sourceView = self.day_typeButton;
+        self.popoverVC.popoverPresentationController.sourceRect = self.day_typeButton.bounds;
+    }else if (sender.tag == 101) {
+        self.popoverVC.whitchTable = 2;
+        self.popoverVC.popoverPresentationController.sourceView = self.type_Button;
+        self.popoverVC.popoverPresentationController.sourceRect = self.type_Button.bounds;
+    }
 
-- (void)removeBlurView:(UITapGestureRecognizer *)sender{
-    [self.blurView removeFromSuperview];
-    [self.timeTable removeFromSuperview];
+    self.popoverVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
+    self.popoverVC.popoverPresentationController.delegate = self;
+    self.popoverVC.popoverPresentationController.backgroundColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:0.7];
+    [self presentViewController:self.popoverVC animated:YES completion:nil];
 }
 
 #pragma mark getEvent
 - (void)latestEvent:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type{
     self.page = 0;
-    //        [self.eventsArray removeAllObjects];
-    EventList *eventlist = [API get_eventlist:[NSNumber numberWithInt:10] star:[NSNumber numberWithInt:self.page] loc:loc type:type day_type:day_type];
+    EventList *eventlist = [API get_eventlist:[NSNumber numberWithInt:Count] star:[NSNumber numberWithInt:self.page] loc:loc type:type day_type:day_type];
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[eventlist.events mutableCopy]];
     NSMutableArray *events = [SameCityUtils get_eventArray:array];
-    [self.eventsArray insertObjects:events atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, events.count)]];
-    if (self.eventsArray.count > Count) {
-        [self.eventsArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(events.count + 1, events.count - 1)]];
+    if (self.eventsArray.count >= 10) {
+        [self.eventsArray removeAllObjects];
     }
+    [self.eventsArray addObjectsFromArray:events];
     self.totalEvent = eventlist.total;
     self.page ++;
 }
 
 - (void)getMoreEvent:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type{
     int starPage = self.page *Count;
-    EventList *eventlist = [API get_eventlist:[NSNumber numberWithInt:10] star:[NSNumber numberWithInt:starPage] loc:loc type:type day_type:day_type];
+    EventList *eventlist = [API get_eventlist:[NSNumber numberWithInt:Count] star:[NSNumber numberWithInt:starPage] loc:loc type:type day_type:day_type];
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[eventlist.events mutableCopy]];
     NSMutableArray *events = [SameCityUtils get_eventArray:array];
     [self.eventsArray insertObjects:events atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(starPage, events.count)]];
@@ -274,12 +297,12 @@
 }
 
 - (void)afterRefresh{
-    [self.tabelView reloadData];
-    if ([self.tabelView.header isRefreshing]) {
-        [self.tabelView.header endRefreshing];
+    [self.tableView reloadData];
+    if ([self.tableView.header isRefreshing]) {
+        [self.tableView.header endRefreshing];
         [[[Toast makeText:[NSString stringWithFormat:@"一共找到%@个活动", self.totalEvent]] setGravity:ToastGravityBottom] show];
-    }else if ([self.tabelView.footer isRefreshing]){
-        [self.tabelView.footer endRefreshing];
+    }else if ([self.tableView.footer isRefreshing]){
+        [self.tableView.footer endRefreshing];
     }
 }
 
@@ -294,7 +317,6 @@
     if (cell == nil) {
         cell = [[EventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    cell.tag = indexPath.row + 100;
     Event *event = self.eventsArray[indexPath.row];
     cell.singleEvent = event;
     cell.titleLabel.text = [NSString stringWithFormat:@" %@", event.title];
@@ -337,6 +359,10 @@
     
 }
 
+#pragma mark -UIPopoverPresentationControllerDelegate
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller{
+    return UIModalPresentationNone;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

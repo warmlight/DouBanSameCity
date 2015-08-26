@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UIViewController+SideMenu.h"
 
-@interface MyEventController : UIViewController
+@interface MyEventController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @end

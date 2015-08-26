@@ -16,7 +16,6 @@
 #import <MBProgressHUD.h>
 #import <CoreLocation/CoreLocation.h>
 #import "LocationUtils.h"
-#import <MJRefresh.h>
 #import "Toast.h"
 #import "EventDetailController.h"
 #import "PHJTransformPinyin.h"
@@ -30,8 +29,8 @@
 #define Daytable [tableView isKindOfClass:[TimeTable class]]
 #define Count 10
 
-@interface EventListController : UIViewController<UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
-@property (strong, nonatomic) UITableView *tabelView;
+@interface EventListController : UIViewController<UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIPopoverPresentationControllerDelegate>
+@property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *eventsArray;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (assign, nonatomic) int page;
@@ -41,7 +40,8 @@
 @property (strong, nonatomic) NSString *type;
 @property (strong, nonatomic) NSString *day_type;
 @property (strong, nonatomic) UIButton *day_typeButton;
+@property (strong, nonatomic) UIButton *type_Button;    //选择活动类型按钮
 @property (strong, nonatomic) TimeTable *timeTable;
 @property (assign, nonatomic) BOOL dayTableIsAdd;
-@property (strong, nonatomic) UIView *blurView;
+
 @end

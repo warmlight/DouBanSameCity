@@ -224,5 +224,4 @@
 
     return 10 + titleSize.height + 10 + labelSize.height * 3 + 15 + addressSize.height + 20 + labelSize.height + 50;
 }
-
 @end

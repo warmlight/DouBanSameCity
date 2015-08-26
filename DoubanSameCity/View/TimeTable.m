@@ -17,6 +17,7 @@
         self.timeTypes = [[NSMutableArray alloc] init];
         self.separatorStyle = UITableViewCellSelectionStyleNone;
         self.scrollEnabled = NO;
+        
         [self.timeTypes addObject:@"所有时间段"];
         [self.timeTypes addObject:@"最近一周"];
         [self.timeTypes addObject:@"周末"];
@@ -37,7 +38,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifer];
     }
     cell.textLabel.text = self.timeTypes[indexPath.row];
-    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.textColor = [UIColor lightGrayColor];
     return cell;
 }
 
@@ -71,7 +72,7 @@
 //    //去除有内容的Cell分割线
 //    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
     
-    UIColor *CellColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+    UIColor *CellColor = [UIColor clearColor];
     cell.backgroundColor = CellColor;
     //点击时背景色
 //    UIColor *color = UIColorFromRGB(0xEAEAEA);//通过RGB来定义自己的颜色

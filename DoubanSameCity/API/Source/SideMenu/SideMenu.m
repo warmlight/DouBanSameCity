@@ -430,11 +430,13 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     if (self.interactivePopGestureRecognizerEnabled && [self.contentViewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController *navigationController = (UINavigationController *)self.contentViewController;
+        if ([navigationController.topViewController.superclass isSubclassOfClass:[UITabBarController class]]){
+            return YES;
+        }
         if (navigationController.viewControllers.count > 1 && navigationController.interactivePopGestureRecognizer.enabled) {
             return NO;
         }
     }
-  
     if (self.panFromEdge && [gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] && !self.visible) {
         CGPoint point = [touch locationInView:gestureRecognizer.view];
         if (point.x < self.panMinimumEdgeSize || point.x > self.view.frame.size.width - self.panMinimumEdgeSize) {

@@ -42,4 +42,6 @@
 + (User *)get_user:(NSString *)code;
 + (EventList *)get_eventlist:(NSNumber *)count star:(NSNumber *)star loc:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type;
 + (CityList *)get_cityList:(NSNumber *)count start:(NSNumber *)start;
+//用户感兴趣
++ (EventList *)get_wishedEvent:(NSNumber *)count start:(NSNumber *)start;
 @end

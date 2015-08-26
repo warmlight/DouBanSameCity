@@ -8,7 +8,6 @@
 //  下拉刷新控件:负责监控用户下拉的状态
 
 #import "MJRefreshComponent.h"
-
 // 下拉刷新控件的状态
 typedef enum {
     /** 普通闲置状态 */
