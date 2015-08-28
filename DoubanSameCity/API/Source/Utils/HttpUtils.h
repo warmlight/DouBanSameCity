@@ -22,5 +22,6 @@
 +(NSArray *) getSync: (NSString *)url;
 +(NSArray *) postSync: (NSString *)url dict: (NSDictionary *)dict;
 +(NSArray *) postFileSync: (NSString *)url param: (NSDictionary *)param files: (NSDictionary *)files;
++(NSArray *) postSync:(NSString *)url dict:(NSDictionary *)dict headerField:(NSString *)Field headerValue:(NSString *)value;
 
 @end

@@ -14,4 +14,8 @@
 @property (strong, nonatomic) NSNumber *code;
 @property (strong, nonatomic) NSString *request;
 
++(ResponseCode *)fromJsonString: (NSString *)jsonString;
++(ResponseCode *)fromJsonData: (NSData *)jsonData;
++(ResponseCode *)fromJsonObject: (NSJSONSerialization *)json;
+-(NSString *)toString;
 @end

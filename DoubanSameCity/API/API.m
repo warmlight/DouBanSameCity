@@ -39,10 +39,35 @@
     return (result == nil? nil : [CityList fromJsonData:result[0]]);
 }
 
-+ (EventList *)get_wishedEvent:(NSNumber *)count start:(NSNumber *)start{
-    NSString *url = [BASE_URL stringByAppendingFormat:@"/v2/event/user_wished/%@?count=%@&start=%@",Config.getLoginUserId,count, start];
++ (EventList *)get_wishedEvent:(NSNumber *)count start:(NSNumber *)start status:(NSString *)status{
+    NSString *url = [BASE_URL stringByAppendingFormat:@"/v2/event/user_wished/%@?count=%@&start=%@&status=%@",Config.getLoginUserId,count, start, status];
     NSArray *result = [HttpUtils getSync:url];
     return (result == nil? nil : [EventList fromJsonData:result[0]]);
+}
+
++ (EventList *)get_participateEvent:(NSNumber *)count start:(NSNumber *)start status:(NSString *)status{
+    NSString *url = [BASE_URL stringByAppendingFormat:@"/v2/event/user_participated/%@?count=%@&start=%@&status=%@",Config.getLoginUserId,count, start, status];
+    NSArray *result = [HttpUtils getSync:url];
+    return (result == nil? nil : [EventList fromJsonData:result[0]]);
+}
+
++ (ResponseCode *)wishEvent:(NSString *)eventId {
+    NSString *url = [BASE_URL stringByAppendingFormat:@"/v2/event/%@/wishers",eventId];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:url]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:[@"Bearer " stringByAppendingString:[Config loadAccount].access_token] forHTTPHeaderField:@"Authorization"];
+    NSHTTPURLResponse * resp;
+    NSError * error;
+    NSData * retData =[NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:&error];
+    if (resp.statusCode == 202) {
+        ResponseCode *responseCode = [[ResponseCode alloc] init];
+        responseCode.code = [NSNumber numberWithInt:202];
+        return nil;
+    }else {
+        return (retData == nil? nil : [ResponseCode fromJsonData:retData]);
+
+    }
 }
 
 @end

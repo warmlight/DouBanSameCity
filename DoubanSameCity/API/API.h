@@ -14,6 +14,8 @@
 #import "EventList.h"
 #import "Event.h"
 #import "CityList.h"
+#import "ResponseCode.h"
+
 
 #define APIKey @"0c64cd6d91fb7474252e6848b5f25d5c"
 #define Secret @"0e0ee1a0742a7637"
@@ -42,6 +44,10 @@
 + (User *)get_user:(NSString *)code;
 + (EventList *)get_eventlist:(NSNumber *)count star:(NSNumber *)star loc:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type;
 + (CityList *)get_cityList:(NSNumber *)count start:(NSNumber *)start;
-//用户感兴趣
-+ (EventList *)get_wishedEvent:(NSNumber *)count start:(NSNumber *)start;
+//用户感兴趣 status 活动是否过期的状态	ongoing, expired
++ (EventList *)get_wishedEvent:(NSNumber *)count start:(NSNumber *)start status:(NSString *)status;
+//用户参加
++ (EventList *)get_participateEvent:(NSNumber *)count start:(NSNumber *)start status:(NSString *)status;
+//想参加
++ (ResponseCode *)wishEvent:(NSString *)eventId;
 @end

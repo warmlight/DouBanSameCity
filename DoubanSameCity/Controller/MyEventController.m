@@ -12,6 +12,7 @@
 #import "API.h"
 #import <UIImageView+WebCache.h>
 #import "SameCityUtils.h"
+#import "EventDetailController.h"
 
 #define Count 10
 @interface MyEventController ()
@@ -53,13 +54,12 @@
     self.wishTableView.hidden = NO;
     
     self.participateTableView = [[UITableView alloc] initWithFrame:tableFrame];
-//    self.participateTableView.delegate = self;
-//    self.participateTableView.dataSource = self;
+    self.participateTableView.delegate = self;
+    self.participateTableView.dataSource = self;
     [self.view addSubview:self.participateTableView];
     self.participateTableView.hidden = YES;
     
-    
-    //table下拉刷新
+    //wish table下拉刷新
     __block __weak typeof(self) weakSelf = self;
     [self.wishTableView addLegendHeaderWithRefreshingBlock:^{
         dispatch_queue_t queueToDown =  dispatch_queue_create("myqueue", NULL);
@@ -87,42 +87,67 @@
             });
         });
     }];
-//
-//    [self.participateTableView addLegendHeaderWithRefreshingBlock:^{
-//        dispatch_queue_t queueToDown =  dispatch_queue_create("myqueue", NULL);
-//        dispatch_async(queueToDown, ^{
-//            [weakSelf latestEvent:weakSelf.locName type:weakSelf.type day_type:weakSelf.day_type];
-//            dispatch_sync(dispatch_get_main_queue(), ^{
-//                [weakSelf afterRefresh];
-//            });
-//        });
-//    }];
-//    
-//    //table上拉刷新
-//    [self.participateTableView addLegendFooterWithRefreshingBlock:^{
-//        dispatch_queue_t queueToUp =  dispatch_queue_create("myqueue", NULL);
-//        dispatch_async(queueToUp, ^{
-//            [weakSelf getMoreEvent:weakSelf.locName type:weakSelf.type day_type:weakSelf.day_type];
-//            dispatch_sync(dispatch_get_main_queue(), ^{
-//                [weakSelf afterRefresh];
-//            });
-//        });
-//    }];
+    
+    //participate table下拉刷新
+    [self.participateTableView addLegendHeaderWithRefreshingBlock:^{
+        dispatch_queue_t queueToDown =  dispatch_queue_create("myqueue", NULL);
+        dispatch_async(queueToDown, ^{
+            [weakSelf getParticipateEvents:[NSNumber numberWithInt:Count]];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [weakSelf.participateTableView reloadData];
+                if ([weakSelf.participateTableView.header isRefreshing]) {
+                    [weakSelf.participateTableView.header endRefreshing];
+                }
+            });
+        });
+    }];
+    
+    //table上拉刷新
+    [self.participateTableView addLegendFooterWithRefreshingBlock:^{
+        dispatch_queue_t queueToUp =  dispatch_queue_create("myqueue", NULL);
+        dispatch_async(queueToUp, ^{
+            [weakSelf getParticipateEvents:[NSNumber numberWithInt:Count]];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [weakSelf.participateTableView reloadData];
+                if ([weakSelf.participateTableView.footer isRefreshing]) {
+                    [weakSelf.participateTableView.footer endRefreshing];
+                }
+            });
+        });
+    }];
+    
+    //第一次进来时拉一遍数据
+    dispatch_queue_t queueToDown =  dispatch_queue_create("myqueue", NULL);
+    dispatch_async(queueToDown, ^{
+        [weakSelf getWishEvents:[NSNumber numberWithInt:Count]];
+        [weakSelf getParticipateEvents:[NSNumber numberWithInt:Count]];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [weakSelf.wishTableView reloadData];
+            [weakSelf.participateTableView reloadData];
+            if ([weakSelf.wishTableView.header isRefreshing]) {
+                [weakSelf.wishTableView.header endRefreshing];
+            }
+            if ([weakSelf.participateTableView.footer isRefreshing]) {
+                [weakSelf.participateTableView.footer endRefreshing];
+            }
+        });
+    });
+
     // Do any additional setup after loading the view.
 }
 
+#pragma mark -get wish event
 - (void)getWishEvents:(NSNumber *)count {
     self.wishPage = 0;
-    EventList *list = [API get_wishedEvent:count start:[NSNumber numberWithInt:0]];
+    EventList *list = [API get_wishedEvent:count start:[NSNumber numberWithInt:0] status:@""];
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[list.events mutableCopy]];
     NSMutableArray *events = [SameCityUtils get_eventArray:array];
     self.wishEvents = events;
     self.wishPage ++;
-    
 }
 
 - (void)getMoreWishEvents:(NSNumber *)count {
-    EventList *list = [API get_wishedEvent:count start:[NSNumber numberWithInt:Count * self.wishPage]];
+    EventList *list = [API get_wishedEvent:count start:[NSNumber numberWithInt:(int)(Count * self.wishPage)] status:@""];
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[list.events mutableCopy]];
     NSMutableArray *events = [SameCityUtils get_eventArray:array];
     if (events.count > 0) {
@@ -131,6 +156,28 @@
     }
 }
 
+#pragma mark -get participate event
+- (void)getParticipateEvents:(NSNumber *)count {
+    self.participatePage = 0;
+    EventList *list = [API get_participateEvent:count start:[NSNumber numberWithInt:0] status:@""];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[list.events mutableCopy]];
+    NSMutableArray *events = [SameCityUtils get_eventArray:array];
+    self.participateEvents = events;
+    self.participatePage ++;
+
+}
+
+- (void)getMoreParticipateEvents:(NSNumber *)count {
+    EventList *list = [API get_participateEvent:count start:[NSNumber numberWithInt:(int)(Count * self.wishPage)] status:@""];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[list.events mutableCopy]];
+    NSMutableArray *events = [SameCityUtils get_eventArray:array];
+    if (events.count > 0) {
+        [self.participateEvents insertObject:events atIndex:(NSUInteger)[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(Count *self.wishPage, events.count)]];
+        self.participatePage++;
+    }
+}
+
+#pragma mark -tableview delegate & datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView.tag == 100) {
         return self.wishEvents.count;
@@ -187,6 +234,17 @@
         Event *event = self.participateEvents[indexPath.row];
         return [EventCell cellHeight:event];
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    EventCell *cell = (EventCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    EventDetailController *detailCon = [[EventDetailController alloc] init];
+    [detailCon initUI:cell.singleEvent];
+    NSLog(@"%@",cell.singleEvent.id);
+    [self.navigationController pushViewController:detailCon animated:YES];
+    
 }
 
 //处理segmentController的点击

@@ -35,6 +35,7 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
+        self.userInteractionEnabled = YES;
         self.backgroundColor = [UIColor whiteColor];
         
         
@@ -73,7 +74,7 @@
         
         self.joinButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.joinButton.contentHorizontalAlignment=UIControlContentHorizontalAlignmentLeft;
-        self.joinButton.backgroundColor = [UIColor clearColor];
+        //self.joinButton.backgroundColor = [UIColor clearColor];
         [self.joinButton setTitle:@" 参加" forState:UIControlStateNormal];
         [self.joinButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.joinButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
@@ -87,8 +88,8 @@
         [self.wishButton setTitle:@" 感兴趣" forState:UIControlStateNormal];
         [self.wishButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.wishButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
-        [self.wishButton setImage:[UIImage imageNamed:@"gray_heart.png"] forState:UIControlStateNormal];
-        [self.wishButton setImage:[UIImage imageNamed:@"red_heart.png"] forState:UIControlStateSelected];
+        [self.wishButton setImage:[UIImage imageNamed:@"gray_heart"] forState:UIControlStateNormal];
+        [self.wishButton setImage:[UIImage imageNamed:@"red_heart"] forState:UIControlStateSelected];
         [self addSubview:self.wishButton];
         
         
@@ -100,6 +101,7 @@
     }
     return self;
 }
+
 
 - (void)tapZoomInImage:(UITapGestureRecognizer *)gesture{
     NSLog(@"tap");
@@ -186,16 +188,14 @@
     CGFloat joinW = Buttonw;
     CGFloat joinH = ButtonH;
     self.joinButton.frame = CGRectMake(joinX, joinY, joinW, joinH);
-    self.joinButton.selected = YES;
 
-    
     //wishBtn
     CGFloat wishX = screenWidth - 2 *BigMargin - Buttonw;
     CGFloat wishY = joinY;
     CGFloat wishW = Buttonw;
     CGFloat wishH = ButtonH;
     self.wishButton.frame = CGRectMake(wishX, wishY, wishW, wishH);
-    self.wishButton.selected = YES;
+    // self.wishButton.selected = YES;
 
     
 //    [self createAtributeContentLabel:event];

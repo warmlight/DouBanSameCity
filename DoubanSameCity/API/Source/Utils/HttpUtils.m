@@ -104,6 +104,14 @@
     [conn start];
 }
 
++(NSArray *) postSync:(NSString *)url dict:(NSDictionary *)dict headerField:(NSString *)Field headerValue:(NSString *)value {
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:url]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:value forHTTPHeaderField:Field];
+    return [HttpUtils sendRequestSync:request];
+}
+
 +(NSArray *) postSync: (NSString *)url dict: (NSDictionary *)dict {
     NSURLRequest * req = [HttpUtils buildPostRequest:url dict:dict];
     return [HttpUtils sendRequestSync:req];

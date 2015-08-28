@@ -13,6 +13,13 @@
 
 @interface EventListController ()
 @property (strong, nonatomic) SelectPopoverController *popoverVC;
+@property (strong, nonatomic) NSMutableArray *wishEvents;
+@property (strong, nonatomic) NSMutableArray *participateEvents;
+@property (assign, nonatomic) NSUInteger wishPage;
+@property (assign, nonatomic) NSUInteger participatePage;
+@property (assign, nonatomic) BOOL wishHasNext;         //是否还可以继续请求更多
+@property (assign, nonatomic) BOOL participateHasNext;  //是否还可以继续请求更多
+
 @end
 
 @implementation EventListController
@@ -22,6 +29,9 @@
     NSLog(@"access token :%@", [Config loadAccount].access_token);
     NSLog(@"user id:%@", [Config getLoginUserId]);
     NSLog(@"user largeAvatar :%@", [Config loadUser].large_avatar);
+    
+    [API wishEvent:@"24634909"];
+
     
     
 //    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0xFFAEB9);
@@ -42,6 +52,9 @@
 //    }
     self.view.backgroundColor = [UIColor blackColor];
     self.eventsArray = [[NSMutableArray alloc] init];
+    self.wishPage = 0;
+    self.wishHasNext = YES;
+    self.participateHasNext = YES;
     [self initUI];
     
     //默认的请求类型、请求时间
@@ -60,6 +73,16 @@
     [self.tableView addLegendHeaderWithRefreshingBlock:^{
         dispatch_queue_t queueToDown =  dispatch_queue_create("myqueue", NULL);
         dispatch_async(queueToDown, ^{
+            weakSelf.wishHasNext = YES;
+            weakSelf.participateHasNext = YES;
+            [weakSelf.wishEvents removeAllObjects];
+            [weakSelf.participateEvents removeAllObjects];
+            while (weakSelf.wishHasNext) {
+                [weakSelf getWishEvent:[NSNumber numberWithInt:Count]];
+            }
+            while (weakSelf.participateHasNext) {
+                [weakSelf getParticipateEvents:[NSNumber numberWithInt:Count]];
+            }
             [weakSelf latestEvent:weakSelf.locName type:weakSelf.type day_type:weakSelf.day_type];
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [weakSelf afterRefresh];
@@ -85,7 +108,7 @@
     [nc addObserver:self selector:@selector(receivedNotificaion_pushSetting:) name:@"push_Setting" object:nil];
     [nc addObserver:self selector:@selector(receivedNotification_timeType:) name:@"time_type" object:nil];
     [nc addObserver:self selector:@selector(receivedNotification_type:) name:@"type" object:nil];
-
+    [nc addObserver:self selector:@selector(receivedNotification_login:) name:@"push_reloadData" object:nil];
 }
 
 #pragma mark -notification
@@ -127,17 +150,65 @@
     [self.popoverVC dismissViewControllerAnimated:YES completion:nil];
 }
 
+//登陆后要重新拉一遍感兴趣的数据
+- (void)receivedNotification_login:(NSNotification *)notification {
+    self.wishHasNext = YES;
+    self.participateHasNext = YES;
+    [self.wishEvents removeAllObjects];
+    [self.participateEvents removeAllObjects];
+    while (self.wishHasNext) {
+        [self getWishEvent:[NSNumber numberWithInt:Count]];
+    }
+    while (self.participateHasNext) {
+        [self getParticipateEvents:[NSNumber numberWithInt:Count]];
+    }
+}
+
 - (void)fristTimeReload{
     //显示页面的时候异步加载
+    __block __weak typeof(self) weakSelf = self;
     dispatch_queue_t queue =  dispatch_queue_create("myqueue", NULL);
     dispatch_async(queue, ^{
-        [self latestEvent:self.locName type:self.type day_type:self.day_type];
+        [weakSelf latestEvent:self.locName type:self.type day_type:self.day_type];
+        while (weakSelf.wishHasNext) {
+            [weakSelf getWishEvent:[NSNumber numberWithInt:Count]];
+        }
+        while (weakSelf.participateHasNext) {
+            [weakSelf getParticipateEvents:[NSNumber numberWithInt:Count]];
+        }
         dispatch_sync(dispatch_get_main_queue(), ^{
             //首次得到数据隐藏等待界面
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [self afterRefresh];
+            [weakSelf afterRefresh];
         });
     });
+}
+
+#pragma mark -get wish event
+- (void) getWishEvent:(NSNumber *)count {
+    EventList *list = [API get_wishedEvent:count start:[NSNumber numberWithInt:self.wishPage *Count] status:@"ongoing"];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[list.events mutableCopy]];
+    NSMutableArray *events = [SameCityUtils get_eventArray:array];
+    self.wishEvents = events;
+    if (events.count >= 10) {
+        self.wishPage ++;
+    }else {
+        self.wishHasNext = NO;
+    }
+}
+
+#pragma mark -get participate event
+- (void)getParticipateEvents:(NSNumber *)count {
+    EventList *list = [API get_participateEvent:count start:[NSNumber numberWithInt:self.wishPage *Count] status:@"ongoing"];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[list.events mutableCopy]];
+    NSMutableArray *events = [SameCityUtils get_eventArray:array];
+    self.participateEvents = events;
+    if (events.count >= 10) {
+        self.participatePage ++;
+    }else {
+        self.participateHasNext = NO;
+    }
+
 }
 
 #pragma mark location
@@ -196,7 +267,6 @@
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
     effectView.frame = headView.frame;
 //    [headView addSubview:effectView];
-    
     
     //daybutton
     CGFloat dayBtnW = self.view.frame.size.width / 2;
@@ -337,8 +407,7 @@
     return [EventCell cellHeight:event];
 }
 
-- (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath
-{
+- (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath {
     //去除有内容的Cell分割线
     cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
     //点击时背景色
@@ -349,18 +418,29 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    EventCell *cell = (EventCell *)[tableView cellForRowAtIndexPath:indexPath];
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     EventDetailController *detailCon = [[EventDetailController alloc] init];
+    EventCell *cell = (EventCell *)[tableView cellForRowAtIndexPath:indexPath];
+       [tableView deselectRowAtIndexPath:indexPath animated:NO];
     [detailCon initUI:cell.singleEvent];
+    
+    for (int i = 0; i < self.wishEvents.count; i ++) {
+        Event *event = self.wishEvents[i];
+        if ([cell.singleEvent.id isEqualToString:event.id]) {
+            detailCon.scrollerView.wishButton.selected = YES;
+        }
+    }
+    for (int i = 0; i < self.participateEvents.count; i ++) {
+        Event *event = self.participateEvents[i];
+        if ([cell.singleEvent.id isEqualToString:event.id]) {
+            detailCon.scrollerView.joinButton.selected = YES;
+        }
+    }
     NSLog(@"%@",cell.singleEvent.id);
     [self.navigationController pushViewController:detailCon animated:YES];
-    
 }
 
 #pragma mark -UIPopoverPresentationControllerDelegate
-- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller{
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controlle {
     return UIModalPresentationNone;
 }
 
