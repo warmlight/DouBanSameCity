@@ -10,7 +10,7 @@
 #import "EventDetailScrollerVIew.h"
 #import "Event.h"
 
-@interface EventDetailController : UIViewController
+@interface EventDetailController : UIViewController<JoinWishDelegate>
 @property (strong, nonatomic) EventDetailScrollerVIew *scrollerView;
 @property (strong, nonatomic) Event *event;
 

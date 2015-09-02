@@ -14,6 +14,7 @@
 #import <MapKit/MapKit.h>
 #import "FreeLabel.h"
 #import "FullScreenLargeImageShowUtils.h"
+#import "ResponseCode.h"
 
 #define TitleBoldFont [UIFont fontWithName:@"TrebuchetMS-Bold" size:17];
 #define TitleF [UIFont systemFontOfSize:17]
@@ -26,6 +27,12 @@
 #define Buttonw 100
 #define ButtonImageH 20
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+@protocol JoinWishDelegate <NSObject>
+
+- (ResponseCode *)wish:(UIButton *)sender;
+- (ResponseCode *)participate:(UIButton *)sender;
+@end
 
 @interface EventDetailScrollerVIew : UIScrollView<UITextViewDelegate>
 @property (strong, nonatomic) UILabel *titleLabel;
@@ -40,6 +47,7 @@
 @property (strong, nonatomic) UIVisualEffectView *effectView;
 @property (strong, nonatomic) UIButton *joinButton;
 @property (strong, nonatomic) UIButton *wishButton;
+@property (assign, nonatomic) id <JoinWishDelegate> JoinWishdelegate;
 
 - (CGFloat)setViewFrame_Content:(Event *)event;
 

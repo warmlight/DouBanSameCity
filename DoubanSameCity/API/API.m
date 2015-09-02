@@ -63,11 +63,64 @@
     if (resp.statusCode == 202) {
         ResponseCode *responseCode = [[ResponseCode alloc] init];
         responseCode.code = [NSNumber numberWithInt:202];
-        return nil;
+        return responseCode;
     }else {
         return (retData == nil? nil : [ResponseCode fromJsonData:retData]);
 
     }
 }
+
++ (ResponseCode *)participateEvent:(NSString *)eventId {
+    NSString *url = [BASE_URL stringByAppendingFormat:@"/v2/event/%@/participants",eventId];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:url]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:[@"Bearer " stringByAppendingString:[Config loadAccount].access_token] forHTTPHeaderField:@"Authorization"];
+    NSHTTPURLResponse * resp;
+    NSError * error;
+    NSData * retData =[NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:&error];
+    if (resp.statusCode == 202) {
+        ResponseCode *responseCode = [[ResponseCode alloc] init];
+        responseCode.code = [NSNumber numberWithInt:202];
+        return responseCode;
+    }else {
+        return (retData == nil? nil : [ResponseCode fromJsonData:retData]);
+    }
+}
+
++ (ResponseCode *)didNotWish:(NSString *)eventId {
+    NSString *url = [BASE_URL stringByAppendingFormat:@"/v2/event/%@/wishers",eventId];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
+    [request setValue:[@"Bearer " stringByAppendingString:[Config loadAccount].access_token] forHTTPHeaderField:@"Authorization"];
+    [request setHTTPMethod:@"DELETE"];
+    NSHTTPURLResponse * resp;
+    NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:nil];
+    if (resp.statusCode == 202) {
+        ResponseCode *responseCode = [[ResponseCode alloc] init];
+        responseCode.code = [NSNumber numberWithInt:202];
+        return responseCode;
+    }else {
+        return (received == nil? nil : [ResponseCode fromJsonData:received]);
+    }
+}
+
++ (ResponseCode *)didNotParticipate:(NSString *)eventId {
+    NSString *url = [BASE_URL stringByAppendingFormat:@"/v2/event/%@/participants",eventId];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
+    [request setValue:[@"Bearer " stringByAppendingString:[Config loadAccount].access_token] forHTTPHeaderField:@"Authorization"];
+    [request setHTTPMethod:@"DELETE"];
+    NSHTTPURLResponse * resp;
+    NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:nil];
+    if (resp.statusCode == 202) {
+        ResponseCode *responseCode = [[ResponseCode alloc] init];
+        responseCode.code = [NSNumber numberWithInt:202];
+        return responseCode;
+    }else {
+        return (received == nil? nil : [ResponseCode fromJsonData:received]);
+    }
+}
+
+
+
 
 @end

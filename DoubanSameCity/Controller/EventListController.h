@@ -44,4 +44,5 @@
 @property (strong, nonatomic) TimeTable *timeTable;
 @property (assign, nonatomic) BOOL dayTableIsAdd;
 
+
 @end

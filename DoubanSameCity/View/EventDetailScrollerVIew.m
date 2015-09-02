@@ -7,6 +7,7 @@
 //
 
 #import "EventDetailScrollerVIew.h"
+#import "Toast.h"
 
 //static inline NSRegularExpression * NameRegularExpression() {
 //    static NSRegularExpression *_nameRegularExpression = nil;
@@ -80,6 +81,7 @@
         [self.joinButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
         [self.joinButton setImage:[UIImage imageNamed:@"gray_heart.png"] forState:UIControlStateNormal];
         [self.joinButton setImage:[UIImage imageNamed:@"red_heart.png"] forState:UIControlStateSelected];
+        [self.joinButton addTarget:self action:@selector(joinButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.joinButton];
         
         self.wishButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -90,6 +92,7 @@
         [self.wishButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
         [self.wishButton setImage:[UIImage imageNamed:@"gray_heart"] forState:UIControlStateNormal];
         [self.wishButton setImage:[UIImage imageNamed:@"red_heart"] forState:UIControlStateSelected];
+        [self.wishButton addTarget:self action:@selector(wishButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.wishButton];
         
         
@@ -102,6 +105,41 @@
     return self;
 }
 
+#pragma mark -join wish button click
+- (void)wishButtonClick:(UIButton *)sender {
+    ResponseCode *code;
+    if ([self.JoinWishdelegate respondsToSelector:@selector(wish:)]) {
+        code = [self.JoinWishdelegate wish:sender];
+    }
+    if ([code.code compare:[NSNumber numberWithInt:202]] == NSOrderedSame) {
+        self.wishButton.selected = !self.wishButton.selected;
+        if (self.wishButton.selected) {
+            [[[[Toast makeText:@"感兴趣成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+            self.joinButton.selected = NO;  //感兴趣和参加不能同时，后台会自动处理为一个
+            
+        }else {
+            [[[[Toast makeText:@"取消感兴趣成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+        }
+    }
+}
+
+- (void)joinButtonClick:(UIButton *)sender {
+    ResponseCode *code;
+    if ([self.JoinWishdelegate respondsToSelector:@selector(participate:)]) {
+        code = [self.JoinWishdelegate participate:sender];
+    }
+    if ([code.code compare:[NSNumber numberWithInt:202]] == NSOrderedSame) {
+        self.joinButton.selected = !self.joinButton.selected;
+        if (self.joinButton.selected) {
+            [[[[Toast makeText:@"参加成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+            self.wishButton.selected = NO;  //感兴趣和参加不能同时，后台会自动处理为一个
+        }else {
+            [[[[Toast makeText:@"取消参加成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+        }
+
+    }
+
+}
 
 - (void)tapZoomInImage:(UITapGestureRecognizer *)gesture{
     NSLog(@"tap");
@@ -120,7 +158,7 @@
     //addressbtn
     CGFloat addrX = screenWidth - BigMargin - ButtonH;
     CGFloat addrY = 64;
-    CGFloat addrW = ButtonH;
+    CGFloat addrW = 50;
     CGFloat addrH = addrW;
     self.addressButton.frame = CGRectMake(addrX, addrY, addrW, addrH);
     

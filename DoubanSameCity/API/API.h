@@ -46,8 +46,14 @@
 + (CityList *)get_cityList:(NSNumber *)count start:(NSNumber *)start;
 //用户感兴趣 status 活动是否过期的状态	ongoing, expired
 + (EventList *)get_wishedEvent:(NSNumber *)count start:(NSNumber *)start status:(NSString *)status;
-//用户参加
+//用户参加的活动列表
 + (EventList *)get_participateEvent:(NSNumber *)count start:(NSNumber *)start status:(NSString *)status;
+//参加
++ (ResponseCode *)participateEvent:(NSString *)eventId;
 //想参加
 + (ResponseCode *)wishEvent:(NSString *)eventId;
+//不感兴趣
++ (ResponseCode *)didNotWish:(NSString *)eventId;
+//不参加
++ (ResponseCode *)didNotParticipate:(NSString *)eventId;
 @end

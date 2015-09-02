@@ -10,6 +10,8 @@
 #import "SelectPopoverController.h"
 #import "UIScrollView+MJRefresh.h"
 #import "MJRefresh.h"
+#import "ResponseCode.h"
+#import "ShareEvent.h"
 
 @interface EventListController ()
 @property (strong, nonatomic) SelectPopoverController *popoverVC;
@@ -29,11 +31,7 @@
     NSLog(@"access token :%@", [Config loadAccount].access_token);
     NSLog(@"user id:%@", [Config getLoginUserId]);
     NSLog(@"user largeAvatar :%@", [Config loadUser].large_avatar);
-    
-    [API wishEvent:@"24634909"];
 
-    
-    
 //    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0xFFAEB9);
 //    self.navigationController.navigationBar.alpha = 0.3;
     
@@ -62,10 +60,10 @@
     self.day_type = Future;
     self.locName = [[NSMutableString alloc] init];
     
-//    [self.locName appendString:@"shanghai"];
+    [self.locName appendString:@"shanghai"];
     
     
-    [self initLocationManager];
+//    [self initLocationManager];
     
     
     //table下拉刷新
@@ -109,6 +107,11 @@
     [nc addObserver:self selector:@selector(receivedNotification_timeType:) name:@"time_type" object:nil];
     [nc addObserver:self selector:@selector(receivedNotification_type:) name:@"type" object:nil];
     [nc addObserver:self selector:@selector(receivedNotification_login:) name:@"push_reloadData" object:nil];
+    [nc addObserver:self selector:@selector(receivedNotification_addWishEvent:) name:@"addWishEvent" object:nil];
+    [nc addObserver:self selector:@selector(receivedNotification_deleteWishEvent:) name:@"deleteWishEvent" object:nil];
+    [nc addObserver:self selector:@selector(receivedNotification_addParticipateEvent:) name:@"addParticipateEvent" object:nil];
+    [nc addObserver:self selector:@selector(receivedNotification_deleteParticipateEvent:) name:@"deleteParticipateEvent" object:nil];
+
 }
 
 #pragma mark -notification
@@ -132,6 +135,20 @@
 
 - (void)receivedNotification_timeType:(NSNotification *)notification{
     self.day_type = notification.object;
+    NSString *buttonTitle;
+    //选择时间段后，按钮上的字相应改变
+    if ([self.day_type isEqualToString:Future]) {
+        buttonTitle = @"所有时间段";
+    }else if ([self.day_type isEqualToString:Week]){
+        buttonTitle = @"最近一周";
+    }else if ([self.day_type isEqualToString:Weekend]){
+        buttonTitle = @"周末";
+    }else if ([self.day_type isEqualToString:Tomorrow]){
+        buttonTitle = @"明天";
+    }else if ([self.day_type isEqualToString:Today]){
+        buttonTitle = @"今天";
+    }
+    [self.day_typeButton setTitle:buttonTitle forState:UIControlStateNormal];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"努力加载中";                    // 设置文字
@@ -142,6 +159,29 @@
 
 - (void)receivedNotification_type:(NSNotification *)notification {
     self.type = notification.object;
+    NSString *selectedType;
+    //选择时间段后，按钮上的字相应改变
+    if ([self.type isEqualToString:All]) {
+        selectedType = @"所有类型";
+    }else if ([self.type isEqualToString:Music]){
+        selectedType = @"音乐";
+    }else if ([self.type isEqualToString:XiJu]){
+        selectedType = @"话剧";
+    }else if ([self.type isEqualToString:ZhanLan]){
+        selectedType = @"展览";
+    }else if ([self.type isEqualToString:JiangZuo]){
+        selectedType = @"讲座";
+    }else if ([self.type isEqualToString:JuHui]){
+        selectedType = @"聚会";
+    }else if ([self.type isEqualToString:YunDong]){
+        selectedType = @"运动";
+    }else if ([self.type isEqualToString:LuXing]){
+        selectedType = @"旅行";
+    }else if ([self.type isEqualToString:GongYi]){
+        selectedType = @"公益";
+    }
+    [self.type_Button setTitle:selectedType forState:UIControlStateNormal];
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"努力加载中";                    // 设置文字
@@ -150,12 +190,71 @@
     [self.popoverVC dismissViewControllerAnimated:YES completion:nil];
 }
 
+//通过消息传递来添加、删除感兴趣或者参加的活动，而不是通过再一次的网络请求。
+- (void)receivedNotification_addWishEvent:(NSNotification *)notification {
+    Event *event = notification.object;
+    ShareEvent *shareEvent = [ShareEvent sharedInstance];
+    [shareEvent.wishArray addObject:event];
+//    [self.wishEvents addObject:event];
+}
+
+- (void)receivedNotification_addParticipateEvent:(NSNotification *)notification {
+    Event *event = notification.object;
+    ShareEvent *shareEvent = [ShareEvent sharedInstance];
+    [shareEvent.joinArray addObject:event];
+//    [self.participateEvents addObject:event];
+}
+
+- (void)receivedNotification_deleteWishEvent:(NSNotification *)notification {
+    Event *event = notification.object;
+    ShareEvent *shareEvent = [ShareEvent sharedInstance];
+    
+    for (int i = 0; i < shareEvent.wishArray.count; i++) {
+        Event *e = shareEvent.wishArray[i];
+        if ([e.id isEqualToString:event.id]) {
+            [shareEvent.wishArray removeObject:e];
+            break;
+        }
+    }
+    
+//    for (int i = 0; i < self.wishEvents.count; i++) {
+//        Event *e = self.wishEvents[i];
+//        if (e.id == event.id) {
+//            [self.wishEvents removeObject:e];
+//            break;
+//        }
+//    }
+}
+
+- (void)receivedNotification_deleteParticipateEvent:(NSNotification *)notification {
+    Event *event = notification.object;
+    ShareEvent *shareEvent = [ShareEvent sharedInstance];
+    
+    for (int i = 0; i < shareEvent.joinArray.count; i++) {
+        Event *e = shareEvent.joinArray[i];
+        if ([e.id isEqualToString:event.id]) {
+            [shareEvent.joinArray removeObject:e];
+            break;
+        }
+    }
+    
+//    for (int i = 0; i < self.participateEvents.count; i++) {
+//        Event *e = self.participateEvents[i];
+//        if (e.id == event.id) {
+//            [self.participateEvents removeObject:e];
+//            break;
+//        }
+//    }
+}
 //登陆后要重新拉一遍感兴趣的数据
 - (void)receivedNotification_login:(NSNotification *)notification {
     self.wishHasNext = YES;
     self.participateHasNext = YES;
-    [self.wishEvents removeAllObjects];
-    [self.participateEvents removeAllObjects];
+//    [self.wishEvents removeAllObjects];
+//    [self.participateEvents removeAllObjects];
+    ShareEvent *shareEvent = [ShareEvent sharedInstance];
+    [shareEvent.joinArray removeAllObjects];
+    [shareEvent.wishArray removeAllObjects];
     while (self.wishHasNext) {
         [self getWishEvent:[NSNumber numberWithInt:Count]];
     }
@@ -186,10 +285,12 @@
 
 #pragma mark -get wish event
 - (void) getWishEvent:(NSNumber *)count {
-    EventList *list = [API get_wishedEvent:count start:[NSNumber numberWithInt:self.wishPage *Count] status:@"ongoing"];
+    EventList *list = [API get_wishedEvent:count start:[NSNumber numberWithInt:(int)self.wishPage *Count] status:@"ongoing"];
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[list.events mutableCopy]];
     NSMutableArray *events = [SameCityUtils get_eventArray:array];
-    self.wishEvents = events;
+    ShareEvent *shareEvent = [ShareEvent sharedInstance];
+    shareEvent.wishArray = events;
+//    self.wishEvents = events;
     if (events.count >= 10) {
         self.wishPage ++;
     }else {
@@ -199,10 +300,12 @@
 
 #pragma mark -get participate event
 - (void)getParticipateEvents:(NSNumber *)count {
-    EventList *list = [API get_participateEvent:count start:[NSNumber numberWithInt:self.wishPage *Count] status:@"ongoing"];
+    EventList *list = [API get_participateEvent:count start:[NSNumber numberWithInt:(int)self.wishPage *Count] status:@"ongoing"];
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[list.events mutableCopy]];
     NSMutableArray *events = [SameCityUtils get_eventArray:array];
-    self.participateEvents = events;
+    ShareEvent *shareEvent = [ShareEvent sharedInstance];
+    shareEvent.joinArray = events;
+//    self.participateEvents = events;
     if (events.count >= 10) {
         self.participatePage ++;
     }else {
@@ -278,6 +381,12 @@
     self.day_typeButton.frame = CGRectMake(0, 0, dayBtnW, dayBtnH);
     self.day_typeButton.tag = 100;
     [self.day_typeButton addTarget:self action:@selector(showDayTypeTable:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //两个button中间的分割线
+    CGRect lineFrame = CGRectMake(self.day_typeButton.frame.size.width - 1, 4, 0.5, ButtonH - 8);
+    UIView *lineView = [[UIView alloc] initWithFrame:lineFrame];
+    lineView.backgroundColor = [UIColor lightGrayColor];
+    [self.day_typeButton addSubview:lineView];
     
     //typeButton
     self.type_Button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -422,19 +531,34 @@
     EventCell *cell = (EventCell *)[tableView cellForRowAtIndexPath:indexPath];
        [tableView deselectRowAtIndexPath:indexPath animated:NO];
     [detailCon initUI:cell.singleEvent];
+   
+    ShareEvent *shareEvent = [ShareEvent sharedInstance];
     
-    for (int i = 0; i < self.wishEvents.count; i ++) {
-        Event *event = self.wishEvents[i];
+    for (int i = 0; i < shareEvent.wishArray.count; i ++) {
+        Event *event = shareEvent.wishArray[i];
         if ([cell.singleEvent.id isEqualToString:event.id]) {
             detailCon.scrollerView.wishButton.selected = YES;
         }
     }
-    for (int i = 0; i < self.participateEvents.count; i ++) {
-        Event *event = self.participateEvents[i];
+    for (int i = 0; i < shareEvent.joinArray.count; i ++) {
+        Event *event = shareEvent.joinArray[i];
         if ([cell.singleEvent.id isEqualToString:event.id]) {
             detailCon.scrollerView.joinButton.selected = YES;
         }
     }
+
+//    for (int i = 0; i < self.wishEvents.count; i ++) {
+//        Event *event = self.wishEvents[i];
+//        if ([cell.singleEvent.id isEqualToString:event.id]) {
+//            detailCon.scrollerView.wishButton.selected = YES;
+//        }
+//    }
+//    for (int i = 0; i < self.participateEvents.count; i ++) {
+//        Event *event = self.participateEvents[i];
+//        if ([cell.singleEvent.id isEqualToString:event.id]) {
+//            detailCon.scrollerView.joinButton.selected = YES;
+//        }
+//    }
     NSLog(@"%@",cell.singleEvent.id);
     [self.navigationController pushViewController:detailCon animated:YES];
 }

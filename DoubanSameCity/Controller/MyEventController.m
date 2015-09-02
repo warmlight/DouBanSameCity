@@ -13,6 +13,7 @@
 #import <UIImageView+WebCache.h>
 #import "SameCityUtils.h"
 #import "EventDetailController.h"
+#import "ShareEvent.h"
 
 #define Count 10
 @interface MyEventController ()
@@ -119,6 +120,11 @@
     //第一次进来时拉一遍数据
     dispatch_queue_t queueToDown =  dispatch_queue_create("myqueue", NULL);
     dispatch_async(queueToDown, ^{
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.labelText = @"努力加载中";                    // 设置文字
+        hud.labelFont = [UIFont systemFontOfSize:14];
+        
         [weakSelf getWishEvents:[NSNumber numberWithInt:Count]];
         [weakSelf getParticipateEvents:[NSNumber numberWithInt:Count]];
         dispatch_sync(dispatch_get_main_queue(), ^{
@@ -130,19 +136,64 @@
             if ([weakSelf.participateTableView.footer isRefreshing]) {
                 [weakSelf.participateTableView.footer endRefreshing];
             }
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            
         });
     });
-
+    
+    //接收消息
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(receivedNotificaion_wishAdd:) name:@"wishAdd" object:nil];
+    [nc addObserver:self selector:@selector(receivedNotificaion_wishDelete:) name:@"wishDelete" object:nil];
+    [nc addObserver:self selector:@selector(receivedNotificaion_joinAdd:) name:@"joinAdd" object:nil];
+    [nc addObserver:self selector:@selector(receivedNotificaion_joinDelete:) name:@"joinDelete" object:nil];
     // Do any additional setup after loading the view.
 }
 
-#pragma mark -get wish event
+#pragma mark -handle notification
+- (void)receivedNotificaion_wishAdd :(NSNotification *)notification {
+    Event *event = notification.object;
+    [self.wishEvents insertObject:event atIndex:0];
+    [self.wishTableView reloadData];
+}
+
+- (void)receivedNotificaion_wishDelete :(NSNotification *)notification {
+    Event *event = notification.object;
+    for (int i = 0; i < self.wishEvents.count; i++) {
+        Event *e = self.wishEvents[i];
+        if ([e.id isEqualToString:event.id]) {
+            [self.wishEvents removeObject:e];
+        }
+    }
+    [self.wishTableView reloadData];
+}
+
+- (void)receivedNotificaion_joinAdd :(NSNotification *)notification {
+    Event *event = notification.object;
+    [self.participateEvents insertObject:event atIndex:0];
+    [self.participateTableView reloadData];
+}
+
+- (void)receivedNotificaion_joinDelete :(NSNotification *)notification {
+    Event *event = notification.object;
+    for (int i = 0; i < self.participateEvents.count; i++) {
+        Event *e = self.participateEvents[i];
+        if ([e.id isEqualToString:event.id]) {
+            [self.participateEvents removeObject:e];
+        }
+    }
+    [self.participateTableView reloadData];
+}
+
+#pragma mark -get  event
 - (void)getWishEvents:(NSNumber *)count {
     self.wishPage = 0;
     EventList *list = [API get_wishedEvent:count start:[NSNumber numberWithInt:0] status:@""];
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[list.events mutableCopy]];
     NSMutableArray *events = [SameCityUtils get_eventArray:array];
     self.wishEvents = events;
+    //    ShareEvent *shareEvent = [ShareEvent sharedInstance];
+    //    shareEvent.wishArray = events;
     self.wishPage ++;
 }
 
@@ -164,7 +215,7 @@
     NSMutableArray *events = [SameCityUtils get_eventArray:array];
     self.participateEvents = events;
     self.participatePage ++;
-
+    
 }
 
 - (void)getMoreParticipateEvents:(NSNumber *)count {
@@ -204,7 +255,7 @@
         cell.participant_count_label.text = [NSString stringWithFormat:@"%@", event.participant_count];
         [cell.eventImage sd_setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"place_hold_image.png"]];
         [cell createFrame];
-        return cell;  
+        return cell;
     }else {
         static NSString *identifer = @"participate";
         EventCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
@@ -237,11 +288,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     EventCell *cell = (EventCell *)[tableView cellForRowAtIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     EventDetailController *detailCon = [[EventDetailController alloc] init];
     [detailCon initUI:cell.singleEvent];
+    if (tableView.tag == 100) {
+        detailCon.scrollerView.wishButton.selected = YES;
+        detailCon.scrollerView.joinButton.selected = NO;
+    }else {
+        detailCon.scrollerView.joinButton.selected = YES;
+        detailCon.scrollerView.wishButton.selected = NO;
+    }
     NSLog(@"%@",cell.singleEvent.id);
     [self.navigationController pushViewController:detailCon animated:YES];
     
@@ -252,7 +309,7 @@
     
     UISegmentedControl *control = (UISegmentedControl *)sender;
     if (control == self.segment) {
-        int x = control.selectedSegmentIndex;
+        int x = (int)control.selectedSegmentIndex;
         switch (x) {
             case 0:
                 self.participateTableView.hidden = YES;
@@ -274,13 +331,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
