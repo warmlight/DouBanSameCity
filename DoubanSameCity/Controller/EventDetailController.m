@@ -11,7 +11,7 @@
 
 
 @interface EventDetailController ()
-
+@property (strong, nonatomic) UIView *headView;
 @end
 
 @implementation EventDetailController
@@ -26,6 +26,7 @@
 - (void)initUI:(Event *)event{
     self.event = event;
     self.scrollerView = [[EventDetailScrollerVIew alloc] init];
+    self.scrollerView.delegate = self;
     self.automaticallyAdjustsScrollViewInsets = NO; //让视图从{0， 0}开始显示 而不是从{0， 64}
     CGFloat contentSizeHeigth = [self.scrollerView setViewFrame_Content:event];
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
@@ -38,11 +39,14 @@
     self.scrollerView.JoinWishdelegate = self;
     //    self.scrollerView.backgroundColor = [UIColor orangeColor];
     [self.view addSubview:self.scrollerView];
+    
+    //模拟一个navigationbar
+    CGRect headFrame = CGRectMake(0, 0, self.view.frame.size.width, 64);
+    self.headView = [[UIView alloc] initWithFrame:headFrame];
+    self.headView.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:self.headView];
 }
-//@"wishAdd"
-//@"wishDelete"
-//@"joinAdd"
-//@"joinDelete"
+
 
 - (ResponseCode *)wish:(UIButton *)sender{
     UIButton *wishButton = sender;

@@ -35,19 +35,19 @@
 //    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0xFFAEB9);
 //    self.navigationController.navigationBar.alpha = 0.3;
     
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"add.png"] forBarMetrics:UIBarMetricsCompact];//图片可随便设置？？
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"add.png"] forBarMetrics:UIBarMetricsCompact];//图片可随便设置？？
     self.automaticallyAdjustsScrollViewInsets = NO; //让view的y从0开始而不是从64开始
     
-//    //消除黑线
-//    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
-//        NSArray *list = self.navigationController.navigationBar.subviews;
-//        for (id obj in list) {
-//            if ([obj isKindOfClass:[UIImageView class]]) {
-//                UIImageView *imageView = (UIImageView *)obj;
-//                imageView.hidden = YES;
-//            }
-//        }
-//    }
+    //消除黑线
+    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
+        NSArray *list = self.navigationController.navigationBar.subviews;
+        for (id obj in list) {
+            if ([obj isKindOfClass:[UIImageView class]]) {
+                UIImageView *imageView = (UIImageView *)obj;
+                imageView.hidden = YES;
+            }
+        }
+    }
     self.view.backgroundColor = [UIColor blackColor];
     self.eventsArray = [[NSMutableArray alloc] init];
     self.wishPage = 0;
@@ -341,8 +341,7 @@
 {
     CLLocation *currentLocation = [locations lastObject];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder  reverseGeocodeLocation:currentLocation completionHandler:^(NSArray
-                                                                          *placemarks, NSError *error) {
+    [geocoder  reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         for (CLPlacemark *place in placemarks)
         {
             NSRange range = [place.locality rangeOfString:@"市"];
@@ -369,7 +368,13 @@
     UIVisualEffectView  *effectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
     effectView.frame = headView.frame;
-//    [headView addSubview:effectView];
+    [headView addSubview:effectView];
+    
+    //button顶部的分割线
+    CGRect topLineFrame = CGRectMake(0, 63, self.view.frame.size.width, 0.5);
+    UIView *topLine = [[UIView alloc] initWithFrame:topLineFrame];
+    topLine.backgroundColor = [UIColor lightGrayColor];
+    [effectView addSubview:topLine];
     
     //daybutton
     CGFloat dayBtnW = self.view.frame.size.width / 2;
@@ -387,6 +392,7 @@
     UIView *lineView = [[UIView alloc] initWithFrame:lineFrame];
     lineView.backgroundColor = [UIColor lightGrayColor];
     [self.day_typeButton addSubview:lineView];
+
     
     //typeButton
     self.type_Button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -408,7 +414,7 @@
     UIVisualEffectView  *typeButtonBkg = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
     typeButtonBkg.frame = CGRectMake(dayBtnW, dayBtnY, dayBtnW, dayBtnH);
     [typeButtonBkg addSubview:self.type_Button];
-
+    
     
     //tableView
     UIImageView *image = [[UIImageView alloc] initWithFrame:self.view.frame];
