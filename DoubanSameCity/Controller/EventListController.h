@@ -15,7 +15,6 @@
 #import <UIImageView+WebCache.h>
 #import <MBProgressHUD.h>
 #import <CoreLocation/CoreLocation.h>
-#import "LocationUtils.h"
 #import "Toast.h"
 #import "EventDetailController.h"
 #import "PHJTransformPinyin.h"
@@ -35,7 +34,6 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (assign, nonatomic) int page;
 @property (strong, nonatomic) NSNumber *totalEvent;
-//@property (strong, nonatomic) LocationUtils *lu;
 @property (strong, nonatomic) NSMutableString *locName;
 @property (strong, nonatomic) NSString *type;
 @property (strong, nonatomic) NSString *day_type;

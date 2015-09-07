@@ -111,14 +111,19 @@
     if ([self.JoinWishdelegate respondsToSelector:@selector(wish:)]) {
         code = [self.JoinWishdelegate wish:sender];
     }
-    if ([code.code compare:[NSNumber numberWithInt:202]] == NSOrderedSame) {
-        self.wishButton.selected = !self.wishButton.selected;
-        if (self.wishButton.selected) {
-            [[[[Toast makeText:@"感兴趣成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
-            self.joinButton.selected = NO;  //感兴趣和参加不能同时，后台会自动处理为一个
+    NSNumber *codeNumber = [NSNumber numberWithInt:202];
+    if (code.code != nil) { //如果为空 下面的Nsnumber的比较判断会恒成立，因为NSOrderedSame就是0， nil/ 0 == 0 恒成立
+        if (([code.code compare:codeNumber] == NSOrderedSame)) {
+            self.wishButton.selected = !self.wishButton.selected;
+            if (self.wishButton.selected) {
+                [[[[Toast makeText:@"感兴趣成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+                self.joinButton.selected = NO;  //感兴趣和参加不能同时，后台会自动处理为一个
+                
+            }else {
+                [[[[Toast makeText:@"取消感兴趣成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+            }
+        }else if (([code.code compare:[NSNumber numberWithInt:106]] == NSOrderedSame)) {
             
-        }else {
-            [[[[Toast makeText:@"取消感兴趣成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
         }
     }
 }
@@ -128,7 +133,8 @@
     if ([self.JoinWishdelegate respondsToSelector:@selector(participate:)]) {
         code = [self.JoinWishdelegate participate:sender];
     }
-    if ([code.code compare:[NSNumber numberWithInt:202]] == NSOrderedSame) {
+    NSNumber *codeNumber = [NSNumber numberWithInt:202];
+    if (([code.code compare:codeNumber] == NSOrderedSame) && code.code != nil) {
         self.joinButton.selected = !self.joinButton.selected;
         if (self.joinButton.selected) {
             [[[[Toast makeText:@"参加成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
@@ -156,7 +162,7 @@
     NSDictionary *textAttibute = @{NSFontAttributeName:TextF, NSParagraphStyleAttributeName:paragraphStyle};
     NSDictionary *titleAttibute = @{NSFontAttributeName:TitleF};
     //addressbtn
-    CGFloat addrX = screenWidth - BigMargin - ButtonH;
+    CGFloat addrX = screenWidth - BigMargin - ButtonH - 20;
     CGFloat addrY = 64;
     CGFloat addrW = 50;
     CGFloat addrH = addrW;
@@ -242,16 +248,38 @@
 }
 
 - (void)callMap:(UIButton *)sender{
+    UIAlertController *sheetController = [UIAlertController alertControllerWithTitle:@" " message:@"选择要打开使用的程序" preferredStyle:UIAlertControllerStyleActionSheet];
     
-    MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
-    NSArray *location = [self.event.geo componentsSeparatedByString:@" "];
-    CLLocationCoordinate2D  endCoor = {[location[0] intValue], [location[1] intValue]};
-    MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:endCoor addressDictionary:nil]];
-    toLocation.name = self.event.address;
-    
-    [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
-                   launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
+    UIAlertAction *appleMap = [UIAlertAction actionWithTitle:@"Apple Map" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+        NSArray *location = [self.event.geo componentsSeparatedByString:@" "];
+        CLLocationCoordinate2D  endCoor = {[location[0] intValue], [location[1] intValue]};
+        MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:endCoor addressDictionary:nil]];
+        toLocation.name = self.event.address;
+        
+        [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
+                       launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
 
+    }];
+    UIAlertAction *baiduMap = [UIAlertAction actionWithTitle:@"百度地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSArray *geo = [self.event.geo componentsSeparatedByString:@" "];
+        NSString *stringURL = [NSString stringWithFormat:@"baidumap://map/geocoder?location=%@,%@&coord_type=gcj02&src=guanzhong" ,geo[0], geo[1]];
+        NSString *  urlString = [stringURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *mapUrl = [NSURL URLWithString:urlString];
+        if ([[UIApplication sharedApplication] canOpenURL:mapUrl]){
+            [[UIApplication sharedApplication] openURL:mapUrl];
+        }
+        else{
+            NSLog(@"NO baiduMap");
+        }
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    [sheetController addAction:appleMap];
+    [sheetController addAction:baiduMap];
+    [sheetController addAction:cancelAction];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showSheetView" object:sheetController];
 }
 
 //- (void)createAtributeContentLabel:(Event *)event{

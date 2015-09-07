@@ -12,15 +12,25 @@
 
 @interface EventDetailController ()
 @property (strong, nonatomic) UIView *headView;
+@property (strong, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) UIButton *leftBtn;
 @end
 
 @implementation EventDetailController
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.titleLabel.hidden = YES;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationController.navigationBar.translucent = YES;
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"table_bkg.png"] forBarMetrics:UIBarMetricsCompact];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSheetView:) name:@"showSheetView" object:nil];
     // Do any additional setup after loading the view.
+}
+
+- (void)showSheetView:(NSNotification *)notification {
+    UIAlertController *sheetController = notification.object;
+    [self presentViewController:sheetController animated:YES completion:nil];
 }
 
 - (void)initUI:(Event *)event{
@@ -43,10 +53,29 @@
     //模拟一个navigationbar
     CGRect headFrame = CGRectMake(0, 0, self.view.frame.size.width, 64);
     self.headView = [[UIView alloc] initWithFrame:headFrame];
+    self.headView.alpha = 0;
     self.headView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:self.headView];
+    
+    self.titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];
+    self.titleLabel.textColor=[UIColor blackColor];
+    self.titleLabel.text = @"活动详情";
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView = self.titleLabel;
+    self.navigationItem.titleView.alpha = 0;
+    
+    self.leftBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 30)];
+    [self.leftBtn setTitle:@"返回" forState:UIControlStateNormal];
+    [self.leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.leftBtn addTarget:self action:@selector(leftBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem=[[UIBarButtonItem alloc]initWithCustomView:self.leftBtn];
+    self.navigationItem.leftBarButtonItem=leftItem;
+    self.leftBtn.hidden = YES;
 }
 
+- (void)leftBtnAction {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (ResponseCode *)wish:(UIButton *)sender{
     UIButton *wishButton = sender;
@@ -59,7 +88,6 @@
             NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
             [nc postNotificationName:@"deleteWishEvent" object:weakSelf.event];
             [nc postNotificationName:@"wishDelete" object:weakSelf.event];
-            
         });
         return code;
     }else{
@@ -72,7 +100,6 @@
             
             [nc postNotificationName:@"wishAdd" object:weakSelf.event];
             [nc postNotificationName:@"joinDelete" object:weakSelf.event];
-
         });
         return code;
     }
@@ -106,6 +133,59 @@
         });
         return code;
     }
+}
+
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    self.titleLabel.hidden = NO;
+    self.leftBtn.hidden = NO;
+    CGFloat yOffset  = scrollView.contentOffset.y;
+//    CGFloat xOffset = (yOffset + 300)/2;
+//
+//    if (yOffset < -364) {
+//
+//        CGRect rect = self.scrollerView.effectView.frame;
+//        rect.origin.y = yOffset;
+//        rect.size.height =  -yOffset ;
+//        rect.origin.x = xOffset;
+//        rect.size.width = self.view.frame.size.width + fabs(xOffset)*2;
+//
+//        self.scrollerView.effectView.frame = rect;
+//    }
+//    
+//    
+    CGFloat alpha = yOffset / 300;
+//    [self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:[[UIColor orangeColor]colorWithAlphaComponent:alpha]] forBarMetrics:UIBarMetricsDefault];
+    self.headView.alpha = alpha;
+    self.titleLabel.alpha = alpha;
+    self.leftBtn.alpha = alpha;
+    alpha=fabs(alpha);
+    alpha=fabs(1-alpha);
+    
+    alpha=alpha<0.2? 0:alpha-0.2;
+
+}
+
+- (UIImage *)imageWithColor:(UIColor *)color
+{
+    // 描述矩形
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    
+    // 开启位图上下文
+    UIGraphicsBeginImageContext(rect.size);
+    // 获取位图上下文
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    // 使用color演示填充上下文
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    // 渲染上下文
+    CGContextFillRect(context, rect);
+    // 从上下文中获取图片
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 结束上下文
+    UIGraphicsEndImageContext();
+
+    return theImage;
 }
 
 - (void)didReceiveMemoryWarning {

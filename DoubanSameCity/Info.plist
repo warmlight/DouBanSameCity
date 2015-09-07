@@ -24,6 +24,17 @@
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Location is required to find your city</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>baidumap</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>com.myself.DouBanSameCity</string>
+		</dict>
+	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>请打开定位，获取您当前城市活动</string>
 	<key>UILaunchStoryboardName</key>

@@ -22,7 +22,6 @@
 		CD8C2BE41AF0743500707528 /* SettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C2BE31AF0743500707528 /* SettingController.m */; };
 		CD8D18BF1AF1DD1800F50261 /* information_province.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8D18BC1AF1DD1800F50261 /* information_province.png */; };
 		CD8D18C01AF1DD1800F50261 /* information_province@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8D18BD1AF1DD1800F50261 /* information_province@2x.png */; };
-		CD8D18C11AF1DD1800F50261 /* information_province@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8D18BE1AF1DD1800F50261 /* information_province@3x.png */; };
 		CD8D18C51AF1DD9D00F50261 /* information_nick.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8D18C21AF1DD9D00F50261 /* information_nick.png */; };
 		CD8D18C61AF1DD9D00F50261 /* information_nick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8D18C31AF1DD9D00F50261 /* information_nick@2x.png */; };
 		CD8D18C71AF1DD9D00F50261 /* information_nick@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8D18C41AF1DD9D00F50261 /* information_nick@3x.png */; };
@@ -56,7 +55,6 @@
 		CDBEDAF41AE7382100D0C0D9 /* table_bkg.png in Resources */ = {isa = PBXBuildFile; fileRef = CDBEDAF31AE7382100D0C0D9 /* table_bkg.png */; };
 		CDC0698A1AEDC55600D46185 /* HeadPortraitView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC069891AEDC55600D46185 /* HeadPortraitView.m */; };
 		CDC095CA1AF0A9FF0013526F /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC095C91AF0A9FF0013526F /* avatar.png */; };
-		CDD360E51AE5DC8A001B08FF /* LocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD360E41AE5DC8A001B08FF /* LocationUtils.m */; };
 		CDD360E71AE62D35001B08FF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD360E61AE62D35001B08FF /* MapKit.framework */; };
 		CDD360E91AE62D3D001B08FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD360E81AE62D3D001B08FF /* CoreLocation.framework */; };
 		CDD360ED1AE63BB2001B08FF /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD360EC1AE63BB2001B08FF /* Toast.m */; };
@@ -119,7 +117,6 @@
 		CD8C2BE31AF0743500707528 /* SettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingController.m; sourceTree = "<group>"; };
 		CD8D18BC1AF1DD1800F50261 /* information_province.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_province.png; sourceTree = "<group>"; };
 		CD8D18BD1AF1DD1800F50261 /* information_province@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "information_province@2x.png"; sourceTree = "<group>"; };
-		CD8D18BE1AF1DD1800F50261 /* information_province@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "information_province@3x.png"; sourceTree = "<group>"; };
 		CD8D18C21AF1DD9D00F50261 /* information_nick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_nick.png; sourceTree = "<group>"; };
 		CD8D18C31AF1DD9D00F50261 /* information_nick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "information_nick@2x.png"; sourceTree = "<group>"; };
 		CD8D18C41AF1DD9D00F50261 /* information_nick@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "information_nick@3x.png"; sourceTree = "<group>"; };
@@ -170,8 +167,6 @@
 		CDC069881AEDC55600D46185 /* HeadPortraitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadPortraitView.h; sourceTree = "<group>"; };
 		CDC069891AEDC55600D46185 /* HeadPortraitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadPortraitView.m; sourceTree = "<group>"; };
 		CDC095C91AF0A9FF0013526F /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
-		CDD360E31AE5DC8A001B08FF /* LocationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationUtils.h; sourceTree = "<group>"; };
-		CDD360E41AE5DC8A001B08FF /* LocationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationUtils.m; sourceTree = "<group>"; };
 		CDD360E61AE62D35001B08FF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CDD360E81AE62D3D001B08FF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CDD360EB1AE63BB2001B08FF /* Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toast.h; sourceTree = "<group>"; };
@@ -278,7 +273,6 @@
 				CD8D18C41AF1DD9D00F50261 /* information_nick@3x.png */,
 				CD8D18BC1AF1DD1800F50261 /* information_province.png */,
 				CD8D18BD1AF1DD1800F50261 /* information_province@2x.png */,
-				CD8D18BE1AF1DD1800F50261 /* information_province@3x.png */,
 				CDA7C32F1AF1C758001EF067 /* avatar_default.png */,
 				CDA7C3301AF1C758001EF067 /* avatar_default@2x.png */,
 				CDB9700A1B945C2400795C62 /* red_heart@2x.png */,
@@ -349,8 +343,6 @@
 				CD9F7BE51ADFA7DE0025F34F /* Config.m */,
 				CDED4BCF1AE0F484006AAB9F /* SameCityUtils.h */,
 				CDED4BD01AE0F484006AAB9F /* SameCityUtils.m */,
-				CDD360E31AE5DC8A001B08FF /* LocationUtils.h */,
-				CDD360E41AE5DC8A001B08FF /* LocationUtils.m */,
 				CD57B9481AE87FE700B86701 /* ZoomInUtils.h */,
 				CD57B9491AE87FE700B86701 /* ZoomInUtils.m */,
 				CD57B94B1AE8938E00B86701 /* FullScreenLargeImageShowUtils.h */,
@@ -607,7 +599,6 @@
 				CD8D18C61AF1DD9D00F50261 /* information_nick@2x.png in Resources */,
 				CD8D18C71AF1DD9D00F50261 /* information_nick@3x.png in Resources */,
 				CDA7C3281AF0E1BE001EF067 /* gray_heart.png in Resources */,
-				CD8D18C11AF1DD1800F50261 /* information_province@3x.png in Resources */,
 				CDE14F431AE0B87100B1C60F /* LaunchController.xib in Resources */,
 				CDA7C3351AF1C758001EF067 /* avatar_default_small.png in Resources */,
 				CD57B9531AE8B43300B86701 /* add.png in Resources */,
@@ -678,7 +669,6 @@
 				CDED4BCE1AE0EDE8006AAB9F /* Event.m in Sources */,
 				CDE2D46B1ADDF35E0099FE0C /* main.m in Sources */,
 				CDE14F461AE0CAEE00B1C60F /* EventList.m in Sources */,
-				CDD360E51AE5DC8A001B08FF /* LocationUtils.m in Sources */,
 				CD9F7BDC1ADF89F50025F34F /* HttpUtils.m in Sources */,
 				CD9F7BE61ADFA7DE0025F34F /* Config.m in Sources */,
 				CD8C2BE11AEF39F300707528 /* AboutMeScrollView.m in Sources */,

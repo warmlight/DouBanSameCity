@@ -24,6 +24,9 @@
 @property (strong, nonatomic) NSMutableArray *participateEvents;
 @property (assign, nonatomic) NSUInteger wishPage;
 @property (assign, nonatomic) NSUInteger participatePage;
+@property (assign, nonatomic) BOOL wishHasNext;
+@property (assign, nonatomic) BOOL participateHasNext;
+
 @end
 
 @implementation MyEventController
@@ -70,6 +73,7 @@
                 [weakSelf.wishTableView reloadData];
                 if ([weakSelf.wishTableView.header isRefreshing]) {
                     [weakSelf.wishTableView.header endRefreshing];
+                    [weakSelf.wishTableView.footer resetNoMoreData];
                 }
             });
         });
@@ -83,7 +87,11 @@
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [weakSelf.wishTableView reloadData];
                 if ([weakSelf.wishTableView.footer isRefreshing]) {
-                    [weakSelf.wishTableView.footer endRefreshing];
+                    if (weakSelf.wishHasNext) {
+                        [weakSelf.wishTableView.footer endRefreshing];
+                    }else {
+                        [weakSelf.wishTableView.footer noticeNoMoreData];
+                    }
                 }
             });
         });
@@ -98,6 +106,7 @@
                 [weakSelf.participateTableView reloadData];
                 if ([weakSelf.participateTableView.header isRefreshing]) {
                     [weakSelf.participateTableView.header endRefreshing];
+                    [weakSelf.participateTableView.footer resetNoMoreData];
                 }
             });
         });
@@ -111,7 +120,11 @@
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [weakSelf.participateTableView reloadData];
                 if ([weakSelf.participateTableView.footer isRefreshing]) {
-                    [weakSelf.participateTableView.footer endRefreshing];
+                    if (weakSelf.wishHasNext) {
+                        [weakSelf.participateTableView.footer endRefreshing];
+                    }else {
+                        [weakSelf.participateTableView.footer noticeNoMoreData];
+                    }
                 }
             });
         });
@@ -204,6 +217,11 @@
     if (events.count > 0) {
         [self.wishEvents insertObject:events atIndex:(NSUInteger)[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(Count *self.wishPage, events.count)]];
         self.wishPage++;
+        if (events.count == 10) {
+            self.wishHasNext = YES;
+        }else {
+            self.wishHasNext = NO;
+        }
     }
 }
 
@@ -324,6 +342,7 @@
         }
     }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
