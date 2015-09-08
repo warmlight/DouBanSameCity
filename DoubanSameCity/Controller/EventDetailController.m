@@ -8,18 +8,22 @@
 
 #import "EventDetailController.h"
 #import "API.h"
-
+#import "Toast.h"
+#import "Config.h"
 
 @interface EventDetailController ()
 @property (strong, nonatomic) UIView *headView;
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UIButton *leftBtn;
+@property (strong, nonatomic) UIButton *senderButton;    //暂存被点击的参加、感兴趣按钮
 @end
 
 @implementation EventDetailController
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.titleLabel.hidden = YES;
+    self.leftBtn.hidden = YES;
+    NSLog(@"%@", self.navigationController.viewControllers);
 }
 
 - (void)viewDidLoad {
@@ -63,7 +67,7 @@
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.navigationItem.titleView = self.titleLabel;
     self.navigationItem.titleView.alpha = 0;
-    
+
     self.leftBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 30)];
     [self.leftBtn setTitle:@"返回" forState:UIControlStateNormal];
     [self.leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -77,38 +81,85 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (ResponseCode *)wish:(UIButton *)sender{
+- (void)wish:(UIButton *)sender{
+    self.senderButton = sender;
     UIButton *wishButton = sender;
-    __block __weak ResponseCode *code;
-    __block __weak typeof(self) weakSelf = self;
+    __block ResponseCode *code;
+    __block Account *account;
+    __weak typeof(self) weakSelf = self;
     if (wishButton.selected) {
         dispatch_queue_t queueToWish =  dispatch_queue_create("wishQueue", NULL);
         dispatch_async(queueToWish, ^{
-            code = [API didNotWish:weakSelf.event.id];
             NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
             [nc postNotificationName:@"deleteWishEvent" object:weakSelf.event];
             [nc postNotificationName:@"wishDelete" object:weakSelf.event];
+            code = [API didNotWish:weakSelf.event.id];
+            NSNumber *codeNumber = [NSNumber numberWithInt:202];
+            if (([code.code compare:codeNumber] == NSOrderedSame)) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    sender.selected = !sender.selected;
+                    if (!sender.selected) {
+                        [[[[Toast makeText:@"取消感兴趣成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+                    }
+                });
+            }else if (([code.code compare:[NSNumber numberWithInt:106]] == NSOrderedSame)) {
+                //accesstoken过期，更新
+                //TODO:验证是否对
+                dispatch_queue_t queueToWish =  dispatch_queue_create("refreshToken", NULL);
+                dispatch_async(queueToWish, ^{
+                    account = [API update_access_token];
+                    NSLog(@"更新后的accesstoken = %@", account.access_token);
+                    [Config saveAccount:account];
+                    [weakSelf wish:weakSelf.senderButton];
+                });
+            }else {
+                [[[[Toast makeText:@"未知错误"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+
+            }
         });
-        return code;
     }else{
         dispatch_queue_t queueToDown =  dispatch_queue_create("wishQueue", NULL);
         dispatch_async(queueToDown, ^{
             code = [API wishEvent:weakSelf.event.id];
+            NSLog(@"code.code = %@", code.code);
             NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
             [nc postNotificationName:@"addWishEvent" object:weakSelf.event];
             [nc postNotificationName:@"deleteParticipateEvent" object:weakSelf.event];
             
             [nc postNotificationName:@"wishAdd" object:weakSelf.event];
             [nc postNotificationName:@"joinDelete" object:weakSelf.event];
+            NSNumber *codeNumber = [NSNumber numberWithInt:202];
+            if ([code.code compare:codeNumber] == NSOrderedSame) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    sender.selected = !sender.selected;
+                    if (sender.selected) {
+                        [[[[Toast makeText:@"感兴趣成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+                        weakSelf.scrollerView.joinButton.selected = NO; //感兴趣和参加不能同时，后台会自动处理为一个
+                    }
+                });
+            }else if (([code.code compare:[NSNumber numberWithInt:106]] == NSOrderedSame)) {
+                //accesstoken过期，更新
+                dispatch_queue_t queueToWish =  dispatch_queue_create("refreshToken", NULL);
+                dispatch_async(queueToWish, ^{
+                    account = [API update_access_token];
+                    NSLog(@"更新后的accesstoken = %@", account.access_token);
+                    [Config saveAccount:account];
+                    [weakSelf wish:weakSelf.senderButton];
+                });
+            }else {
+                [[[[Toast makeText:@"未知错误"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+
+            }
         });
-        return code;
     }
 }
 
-- (ResponseCode *)participate:(UIButton *)sender{
+- (void)participate:(UIButton *)sender{
+    self.senderButton = sender;
     UIButton *joinButton = sender;
-    __block __weak ResponseCode *code;
-    __block __weak typeof(self) weakSelf = self;
+    __block ResponseCode *code;
+    __block Account *account;
+    __weak typeof(self) weakSelf = self;
     if (joinButton.selected) {
         dispatch_queue_t queueToJoin = dispatch_queue_create("joinQueue", NULL);
         dispatch_async(queueToJoin, ^{
@@ -116,9 +167,29 @@
             NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
             [nc postNotificationName:@"deleteParticipateEvent" object:weakSelf.event];
             [nc postNotificationName:@"joinDelete" object:weakSelf.event];
-
+            
+            NSNumber *codeNumber = [NSNumber numberWithInt:202];
+            if (([code.code compare:codeNumber] == NSOrderedSame)) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    sender.selected = !sender.selected;
+                    if (!sender.selected) {
+                        [[[[Toast makeText:@"退出参加成功！"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+                    }
+                });
+            }else if (([code.code compare:[NSNumber numberWithInt:106]] == NSOrderedSame)) {
+                //accesstoken过期，更新
+                dispatch_queue_t queueToWish =  dispatch_queue_create("refreshToken", NULL);
+                dispatch_async(queueToWish, ^{
+                    account = [API update_access_token];
+                    NSLog(@"更新后的accesstoken = %@", account.access_token);
+                    [Config saveAccount:account];
+                    [weakSelf wish:weakSelf.senderButton];
+                });
+            }else {
+                [[[[Toast makeText:@"未知错误"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+                
+            }
         });
-        return code;
     }else{
         dispatch_queue_t queueToJoin = dispatch_queue_create("joinQueue", NULL);
         dispatch_async(queueToJoin, ^{
@@ -130,8 +201,28 @@
             [nc postNotificationName:@"joinAdd" object:weakSelf.event];
             [nc postNotificationName:@"wishDelete" object:weakSelf.event];
             
+            NSNumber *codeNumber = [NSNumber numberWithInt:202];
+            if ([code.code compare:codeNumber] == NSOrderedSame) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    sender.selected = !sender.selected;
+                    if (sender.selected) {
+                        [[[[Toast makeText:@"参加成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+                        weakSelf.scrollerView.wishButton.selected = NO; //感兴趣和参加不能同时，后台会自动处理为一个
+                    }
+                });
+            }else if (([code.code compare:[NSNumber numberWithInt:106]] == NSOrderedSame)) {
+                //accesstoken过期，更新
+                dispatch_queue_t queueToWish =  dispatch_queue_create("refreshToken", NULL);
+                dispatch_async(queueToWish, ^{
+                    account = [API update_access_token];
+                    NSLog(@"更新后的accesstoken = %@", account.access_token);
+                    [Config saveAccount:account];
+                    [weakSelf wish:weakSelf.senderButton];
+                });
+            }else {
+                [[[[Toast makeText:@"未知错误"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+            }
         });
-        return code;
     }
 }
 
@@ -141,22 +232,22 @@
     self.titleLabel.hidden = NO;
     self.leftBtn.hidden = NO;
     CGFloat yOffset  = scrollView.contentOffset.y;
-//    CGFloat xOffset = (yOffset + 300)/2;
-//
-//    if (yOffset < -364) {
-//
-//        CGRect rect = self.scrollerView.effectView.frame;
-//        rect.origin.y = yOffset;
-//        rect.size.height =  -yOffset ;
-//        rect.origin.x = xOffset;
-//        rect.size.width = self.view.frame.size.width + fabs(xOffset)*2;
-//
-//        self.scrollerView.effectView.frame = rect;
-//    }
-//    
-//    
+    //    CGFloat xOffset = (yOffset + 300)/2;
+    //
+    //    if (yOffset < -364) {
+    //
+    //        CGRect rect = self.scrollerView.effectView.frame;
+    //        rect.origin.y = yOffset;
+    //        rect.size.height =  -yOffset ;
+    //        rect.origin.x = xOffset;
+    //        rect.size.width = self.view.frame.size.width + fabs(xOffset)*2;
+    //
+    //        self.scrollerView.effectView.frame = rect;
+    //    }
+    //
+    //
     CGFloat alpha = yOffset / 300;
-//    [self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:[[UIColor orangeColor]colorWithAlphaComponent:alpha]] forBarMetrics:UIBarMetricsDefault];
+    //    [self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:[[UIColor orangeColor]colorWithAlphaComponent:alpha]] forBarMetrics:UIBarMetricsDefault];
     self.headView.alpha = alpha;
     self.titleLabel.alpha = alpha;
     self.leftBtn.alpha = alpha;
@@ -164,14 +255,13 @@
     alpha=fabs(1-alpha);
     
     alpha=alpha<0.2? 0:alpha-0.2;
-
+    
 }
 
 - (UIImage *)imageWithColor:(UIColor *)color
 {
     // 描述矩形
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-    
     // 开启位图上下文
     UIGraphicsBeginImageContext(rect.size);
     // 获取位图上下文
@@ -184,7 +274,7 @@
     UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
     // 结束上下文
     UIGraphicsEndImageContext();
-
+    
     return theImage;
 }
 
@@ -194,13 +284,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -16,8 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    TabController *tabCon = [[TabController alloc] init];
-     [self addChildViewController:tabCon];
     // Do any additional setup after loading the view.
 }
 

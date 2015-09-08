@@ -28,6 +28,7 @@
 +(ResponseCode *)fromJsonData: (NSData *)jsonData {
     ResponseCode * result =[[ResponseCode alloc] init];
     [JsonUtils fillJsonToObject:result jsonData:jsonData];
+    NSLog(@"code = %@", result.code);
     return result;
 }
 

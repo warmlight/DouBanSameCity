@@ -30,8 +30,8 @@
 
 @protocol JoinWishDelegate <NSObject>
 
-- (ResponseCode *)wish:(UIButton *)sender;
-- (ResponseCode *)participate:(UIButton *)sender;
+- (void)wish:(UIButton *)sender;
+- (void)participate:(UIButton *)sender;
 @end
 
 @interface EventDetailScrollerVIew : UIScrollView<UITextViewDelegate>

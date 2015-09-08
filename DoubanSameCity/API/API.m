@@ -21,6 +21,17 @@
     return (result == nil? nil : [Account fromJsonData:result[0]]);
 }
 
++ (Account *)update_access_token{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:APIKey forKey:@"client_id"];
+    [params setObject:Secret forKey:@"client_secret"];
+    [params setObject:RedirectURL forKey:@"redirect_uri"];
+    [params setObject:@"refresh_token" forKey:@"grant_type"];
+    [params setObject:[Config loadAccount].refresh_token forKey:@"refresh_token"];
+    NSArray *result = [HttpUtils postSync:@"https://www.douban.com/service/auth2/token" dict:params];
+    return (result == nil? nil : [Account fromJsonData:result[0]]);
+}
+
 + (User *)get_user:(NSString *)id{
     NSString *url = [BASE_URL stringByAppendingFormat:@"/v2/user/%@", id];
     NSArray *result = [HttpUtils getSync:url];
@@ -65,7 +76,9 @@
         responseCode.code = [NSNumber numberWithInt:202];
         return responseCode;
     }else {
-        return (retData == nil? nil : [ResponseCode fromJsonData:retData]);
+       ResponseCode *code = (retData == nil? nil : [ResponseCode fromJsonData:retData]);
+        NSLog(@"请求code = %@", code.code);
+        return code;
 
     }
 }

@@ -41,6 +41,8 @@
 
 @interface API : NSObject
 + (Account*)get_access_token:(NSString *)code;
+//更新access_token
++ (Account *)update_access_token;
 + (User *)get_user:(NSString *)code;
 + (EventList *)get_eventlist:(NSNumber *)count star:(NSNumber *)star loc:(NSString *)loc type:(NSString *)type day_type:(NSString *)day_type;
 + (CityList *)get_cityList:(NSNumber *)count start:(NSNumber *)start;

@@ -25,7 +25,6 @@
 @end
 
 @implementation EventListController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"access token :%@", [Config loadAccount].access_token);
@@ -566,7 +565,13 @@
 //        }
 //    }
     NSLog(@"%@",cell.singleEvent.id);
+    //在切换界面的过程中禁止滑动手势，避免界面卡死
+
     [self.navigationController pushViewController:detailCon animated:YES];
+    //detail界面的leftBarButtonItem是自定义的，会造成侧滑返回效果失效，要在上一个controller push后加上
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    }
 }
 
 #pragma mark -UIPopoverPresentationControllerDelegate

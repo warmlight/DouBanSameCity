@@ -107,44 +107,26 @@
 
 #pragma mark -join wish button click
 - (void)wishButtonClick:(UIButton *)sender {
-    ResponseCode *code;
     if ([self.JoinWishdelegate respondsToSelector:@selector(wish:)]) {
-        code = [self.JoinWishdelegate wish:sender];
-    }
-    NSNumber *codeNumber = [NSNumber numberWithInt:202];
-    if (code.code != nil) { //如果为空 下面的Nsnumber的比较判断会恒成立，因为NSOrderedSame就是0， nil/ 0 == 0 恒成立
-        if (([code.code compare:codeNumber] == NSOrderedSame)) {
-            self.wishButton.selected = !self.wishButton.selected;
-            if (self.wishButton.selected) {
-                [[[[Toast makeText:@"感兴趣成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
-                self.joinButton.selected = NO;  //感兴趣和参加不能同时，后台会自动处理为一个
-                
-            }else {
-                [[[[Toast makeText:@"取消感兴趣成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
-            }
-        }else if (([code.code compare:[NSNumber numberWithInt:106]] == NSOrderedSame)) {
-            
-        }
+        [self.JoinWishdelegate wish:sender];
     }
 }
 
 - (void)joinButtonClick:(UIButton *)sender {
-    ResponseCode *code;
     if ([self.JoinWishdelegate respondsToSelector:@selector(participate:)]) {
-        code = [self.JoinWishdelegate participate:sender];
+        [self.JoinWishdelegate participate:sender];
     }
-    NSNumber *codeNumber = [NSNumber numberWithInt:202];
-    if (([code.code compare:codeNumber] == NSOrderedSame) && code.code != nil) {
-        self.joinButton.selected = !self.joinButton.selected;
-        if (self.joinButton.selected) {
-            [[[[Toast makeText:@"参加成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
-            self.wishButton.selected = NO;  //感兴趣和参加不能同时，后台会自动处理为一个
-        }else {
-            [[[[Toast makeText:@"取消参加成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
-        }
-
-    }
-
+//    NSNumber *codeNumber = [NSNumber numberWithInt:202];
+//    if (([code.code compare:codeNumber] == NSOrderedSame) && code.code != nil) {
+//        self.joinButton.selected = !self.joinButton.selected;
+//        if (self.joinButton.selected) {
+//            [[[[Toast makeText:@"参加成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+//            self.wishButton.selected = NO;  //感兴趣和参加不能同时，后台会自动处理为一个
+//        }else {
+//            [[[[Toast makeText:@"取消参加成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
+//        }
+//
+//    }
 }
 
 - (void)tapZoomInImage:(UITapGestureRecognizer *)gesture{
