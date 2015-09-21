@@ -215,14 +215,6 @@
             break;
         }
     }
-    
-//    for (int i = 0; i < self.wishEvents.count; i++) {
-//        Event *e = self.wishEvents[i];
-//        if (e.id == event.id) {
-//            [self.wishEvents removeObject:e];
-//            break;
-//        }
-//    }
 }
 
 - (void)receivedNotification_deleteParticipateEvent:(NSNotification *)notification {
@@ -236,14 +228,6 @@
             break;
         }
     }
-    
-//    for (int i = 0; i < self.participateEvents.count; i++) {
-//        Event *e = self.participateEvents[i];
-//        if (e.id == event.id) {
-//            [self.participateEvents removeObject:e];
-//            break;
-//        }
-//    }
 }
 //登陆后要重新拉一遍感兴趣的数据
 - (void)receivedNotification_login:(NSNotification *)notification {
@@ -511,6 +495,7 @@
     cell.wish_count_Label.text = [NSString stringWithFormat:@"%@", event.wisher_count];
     cell.participant_count_label.text = [NSString stringWithFormat:@"%@", event.participant_count];
     [cell.eventImage sd_setImageWithURL:[NSURL URLWithString:event.image] placeholderImage:[UIImage imageNamed:@"place_hold_image.png"]];
+    
     [cell createFrame];
     return cell;
     

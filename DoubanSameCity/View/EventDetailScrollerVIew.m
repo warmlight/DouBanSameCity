@@ -116,17 +116,6 @@
     if ([self.JoinWishdelegate respondsToSelector:@selector(participate:)]) {
         [self.JoinWishdelegate participate:sender];
     }
-//    NSNumber *codeNumber = [NSNumber numberWithInt:202];
-//    if (([code.code compare:codeNumber] == NSOrderedSame) && code.code != nil) {
-//        self.joinButton.selected = !self.joinButton.selected;
-//        if (self.joinButton.selected) {
-//            [[[[Toast makeText:@"参加成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
-//            self.wishButton.selected = NO;  //感兴趣和参加不能同时，后台会自动处理为一个
-//        }else {
-//            [[[[Toast makeText:@"取消参加成功"] setGravity:ToastGravityBottom] setDuration:ToastDurationShort] show];
-//        }
-//
-//    }
 }
 
 - (void)tapZoomInImage:(UITapGestureRecognizer *)gesture{

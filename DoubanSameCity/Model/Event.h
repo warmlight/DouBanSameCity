@@ -27,6 +27,7 @@
 @property (strong, nonatomic) NSString *address;
 @property (strong, nonatomic) NSString *image_hlarge;
 @property (strong, nonatomic) NSString *image_lmobile;
+@property (strong, nonatomic) NSString *adapt_url;
 
 +(Event *)fromJsonString: (NSString *)jsonString;
 +(Event *)fromJsonData: (NSData *)jsonData;

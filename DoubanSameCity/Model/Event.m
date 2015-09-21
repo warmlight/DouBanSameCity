@@ -28,6 +28,7 @@
         self.end_time = @"";
         self.image_hlarge = @"";
         self.image_lmobile = @"";
+        self.adapt_url = @"";
     }
     return self;
 }

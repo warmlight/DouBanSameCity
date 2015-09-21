@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C33C494F23B4C4B4A096E48CD425AF440CA290E1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "EA4884386F784AF00DE0D0D3C88B6E19C772BE51" : 0,
+    "C33C494F23B4C4B4A096E48CD425AF440CA290E1" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4909181A-EBDE-4EEC-BF3B-82BF91670F0B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "EA4884386F784AF00DE0D0D3C88B6E19C772BE51" : "",
+    "C33C494F23B4C4B4A096E48CD425AF440CA290E1" : "DoubanSameCity"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "DoubanSameCity",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "DoubanSameCity.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/warmlight\/DouBanSameCity.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C33C494F23B4C4B4A096E48CD425AF440CA290E1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/warmlight\/DoubanSameCity.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EA4884386F784AF00DE0D0D3C88B6E19C772BE51"
+    }
+  ]
+}

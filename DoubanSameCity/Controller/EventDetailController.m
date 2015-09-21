@@ -10,11 +10,14 @@
 #import "API.h"
 #import "Toast.h"
 #import "Config.h"
+#import "shareView.h"
+
 
 @interface EventDetailController ()
 @property (strong, nonatomic) UIView *headView;
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UIButton *leftBtn;
+@property (strong, nonatomic) UIButton *rightBtn;
 @property (strong, nonatomic) UIButton *senderButton;    //暂存被点击的参加、感兴趣按钮
 @end
 
@@ -22,7 +25,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.titleLabel.hidden = YES;
-    self.leftBtn.hidden = YES;
     NSLog(@"%@", self.navigationController.viewControllers);
 }
 
@@ -74,11 +76,143 @@
     [self.leftBtn addTarget:self action:@selector(leftBtnAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftItem=[[UIBarButtonItem alloc]initWithCustomView:self.leftBtn];
     self.navigationItem.leftBarButtonItem=leftItem;
-    self.leftBtn.hidden = YES;
+//    self.leftBtn.hidden = YES;
+    
+    self.rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
+    [self.rightBtn setBackgroundImage:[UIImage imageNamed:@"share_right"] forState:UIControlStateNormal];
+    [self.rightBtn addTarget:self action:@selector(rightBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightBtn];
+    self.navigationItem.rightBarButtonItem = rightItem;
+//    self.rightBtn.hidden = YES;
 }
 
 - (void)leftBtnAction {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)rightBtnAction:(UIButton *)sender {
+    __block id<ISSContent> publishContent;
+    __block Event *blockEvent = self.event;
+    
+    shareView *menuView = [[shareView alloc] init];
+    
+    [menuView addIconWithTiltle:@"新浪" icon:[UIImage imageNamed:@"icon-sina"] selectedBlock:^{
+        publishContent = [ShareSDK content:@"一起去吧"
+                            defaultContent:blockEvent.title
+                                     image:[ShareSDK imageWithUrl:blockEvent.image]
+                                     title:blockEvent.title
+                                       url:blockEvent.adapt_url
+                               description:@"测试"
+                                 mediaType:SSPublishContentMediaTypeNews];
+        
+        
+    [ShareSDK shareContent:publishContent
+                      type:ShareTypeSinaWeibo
+               authOptions:nil
+              shareOptions:nil
+             statusBarTips:YES
+                    result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                        if (state == SSPublishContentStateSuccess)
+                        {
+                            NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"发表成功"));
+                        }
+                        else if (state == SSPublishContentStateFail)
+                        {
+                            NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"发布失败!error code == %d, error code == %@"), [error errorCode], [error errorDescription]);
+                        }
+                        
+                    }];
+
+    }];
+    
+    [menuView addIconWithTiltle:@"QQ" icon:[UIImage imageNamed:@"icon-qq"] selectedBlock:^{
+        publishContent = [ShareSDK content:@"一起去吧"
+                            defaultContent:blockEvent.title
+                                     image:[ShareSDK imageWithUrl:blockEvent.image]
+                                     title:blockEvent.title
+                                       url:blockEvent.adapt_url
+                               description:@"测试"
+                                 mediaType:SSPublishContentMediaTypeNews];
+        
+        
+        [ShareSDK shareContent:publishContent
+                          type:ShareTypeQQ
+                   authOptions:nil
+                  shareOptions:nil
+                 statusBarTips:YES
+                        result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                            if (state == SSPublishContentStateSuccess)
+                            {
+                                NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"发表成功"));
+                            }
+                            else if (state == SSPublishContentStateFail)
+                            {
+                                NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"发布失败!error code == %d, error code == %@"), [error errorCode], [error errorDescription]);
+                            }
+                            
+                        }];
+    }];
+    
+    [menuView addIconWithTiltle:@"微信" icon:[UIImage imageNamed:@"icon-weixin"] selectedBlock:^{
+        publishContent = [ShareSDK content:@"一起去吧"
+                            defaultContent:blockEvent.title
+                                     image:[ShareSDK imageWithUrl:blockEvent.image]
+                                     title:blockEvent.title
+                                       url:blockEvent.adapt_url
+                               description:@"测试"
+                                 mediaType:SSPublishContentMediaTypeNews];
+        
+        
+        [ShareSDK shareContent:publishContent
+                          type:ShareTypeWeixiSession
+                   authOptions:nil
+                  shareOptions:nil
+                 statusBarTips:YES
+                        result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                            if (state == SSPublishContentStateSuccess)
+                            {
+                                NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"发表成功"));
+                            }
+                            else if (state == SSPublishContentStateFail)
+                            {
+                                NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"发布失败!error code == %d, error code == %@"), [error errorCode], [error errorDescription]);
+                            }
+                            
+                        }];
+
+    }];
+    
+    [menuView addIconWithTiltle:@"豆瓣" icon:[UIImage imageNamed:@"icon-douban"] selectedBlock:^{
+        publishContent = [ShareSDK content:@"一起去吧"
+                            defaultContent:blockEvent.title
+                                     image:[ShareSDK imageWithUrl:blockEvent.image]
+                                     title:blockEvent.title
+                                       url:blockEvent.adapt_url
+                               description:@"测试"
+                                 mediaType:SSPublishContentMediaTypeNews];
+        
+        
+        [ShareSDK shareContent:publishContent
+                          type:ShareTypeDouBan
+                   authOptions:nil
+                  shareOptions:nil
+                 statusBarTips:YES
+                        result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                            if (state == SSPublishContentStateSuccess)
+                            {
+                                NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"发表成功"));
+                            }
+                            else if (state == SSPublishContentStateFail)
+                            {
+                                NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"发布失败!error code == %d, error code == %@"), [error errorCode], [error errorDescription]);
+                            }
+                            
+                        }];
+    }];
+    
+    [menuView show];
+
+    
 }
 
 - (void)wish:(UIButton *)sender{
@@ -230,6 +364,7 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     self.titleLabel.hidden = NO;
+    self.rightBtn.hidden = NO;
     self.leftBtn.hidden = NO;
     CGFloat yOffset  = scrollView.contentOffset.y;
     //    CGFloat xOffset = (yOffset + 300)/2;
@@ -250,7 +385,8 @@
     //    [self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:[[UIColor orangeColor]colorWithAlphaComponent:alpha]] forBarMetrics:UIBarMetricsDefault];
     self.headView.alpha = alpha;
     self.titleLabel.alpha = alpha;
-    self.leftBtn.alpha = alpha;
+//    self.leftBtn.alpha = alpha;
+//    self.rightBtn.alpha = alpha;
     alpha=fabs(alpha);
     alpha=fabs(1-alpha);
     

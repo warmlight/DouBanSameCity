@@ -7,8 +7,11 @@
 //
 
 #import "AppDelegate.h"
-
-
+#import <ShareSDK/ShareSDK.h>
+#import "WeiboSDK.h"
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import "WXApi.h"
 @interface AppDelegate ()
 
 @end
@@ -18,7 +21,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    UINavigationController *nav;
 //    if ([Config getLoginUserId]) {//登陆过直接显示launch界面
 //    nav = [[UINavigationController alloc] initWithRootViewController:[[LaunchController alloc] init]];
 //      NSLog(@"%@", [Config loadAccount].access_token);
@@ -28,8 +30,48 @@
 //    nav = [[UINavigationController alloc] initWithRootViewController:[[LaunchController alloc] init]];
     self.window.rootViewController = [[LaunchController alloc] init];
     [self.window makeKeyAndVisible];
+    
+    [ShareSDK registerApp:@"a460bd5923cf"];
+    [ShareSDK connectSinaWeiboWithAppKey:@"3297713090"
+                               appSecret:@"20bdfeb8479e7b05a993f6270a8f548a"
+                             redirectUri:@"http://www.sharesdk.cn"];
+    
+    [ShareSDK  connectSinaWeiboWithAppKey:@"3297713090"
+                                appSecret:@"20bdfeb8479e7b05a993f6270a8f548a"
+                              redirectUri:@"http://www.sharesdk.cn"
+                              weiboSDKCls:[WeiboSDK class]];
+    
+    [ShareSDK connectQQWithQZoneAppKey:@"1104854408"
+                     qqApiInterfaceCls:[QQApiInterface class]
+                       tencentOAuthCls:[TencentOAuth class]];
+    
+    [ShareSDK connectDoubanWithAppKey:@"0c64cd6d91fb7474252e6848b5f25d5c"
+                            appSecret:@"0e0ee1a0742a7637"
+                          redirectUri:@"http://dev.kumoway.com/braininference/infos.php"];
+    
+    [ShareSDK connectWeChatWithAppId:@"wx6d03d0596d338f96"
+                           appSecret:@"cba64cc7e8c8597e99f607fa1f6cbfde"
+                           wechatCls:[WXApi class]];
     // Override point for customization after application launch.
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+      handleOpenURL:(NSURL *)url
+{
+    return [ShareSDK handleOpenURL:url
+                        wxDelegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return [ShareSDK handleOpenURL:url
+                 sourceApplication:sourceApplication
+                        annotation:annotation
+                        wxDelegate:self];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
