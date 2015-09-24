@@ -7,6 +7,7 @@
 //
 
 #import "SettingController.h"
+#import "LoginController.h"
 
 @interface SettingController ()
 
@@ -70,7 +71,8 @@
 }
 
 - (void)switchAccount:(UIButton *)sender{
-    OAutoController *oauto = [[OAutoController alloc] init];
+//    OAutoController *oauto = [[OAutoController alloc] init];
+    LoginController *oauto = [[LoginController alloc] init];
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc postNotificationName:@"push_reloadData" object:nil];
     [self presentViewController:oauto animated:YES completion:nil];

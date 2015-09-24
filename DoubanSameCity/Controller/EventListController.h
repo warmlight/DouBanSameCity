@@ -24,6 +24,7 @@
 #import "AboutMeController.h"
 #import "SettingController.h"
 #import "TimeTable.h"
+#import "LoginController.h"
 
 #define Daytable [tableView isKindOfClass:[TimeTable class]]
 #define Count 10

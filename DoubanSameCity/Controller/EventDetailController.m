@@ -118,7 +118,7 @@
                         }
                         else if (state == SSPublishContentStateFail)
                         {
-                            NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"发布失败!error code == %d, error code == %@"), [error errorCode], [error errorDescription]);
+                            NSLog(NSLocalizedString(@"TEXT_SHARE_FAI ", @"发布失败!error code == %d, error code == %@"), [error errorCode], [error errorDescription]);
                         }
                         
                     }];
@@ -182,33 +182,34 @@
 
     }];
     
-    [menuView addIconWithTiltle:@"豆瓣" icon:[UIImage imageNamed:@"icon-douban"] selectedBlock:^{
-        publishContent = [ShareSDK content:@"一起去吧"
-                            defaultContent:blockEvent.title
-                                     image:[ShareSDK imageWithUrl:blockEvent.image]
-                                     title:blockEvent.title
-                                       url:blockEvent.adapt_url
-                               description:@"测试"
-                                 mediaType:SSPublishContentMediaTypeNews];
-        
-        
-        [ShareSDK shareContent:publishContent
-                          type:ShareTypeDouBan
-                   authOptions:nil
-                  shareOptions:nil
-                 statusBarTips:YES
-                        result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                            if (state == SSPublishContentStateSuccess)
-                            {
-                                NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"发表成功"));
-                            }
-                            else if (state == SSPublishContentStateFail)
-                            {
-                                NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"发布失败!error code == %d, error code == %@"), [error errorCode], [error errorDescription]);
-                            }
-                            
-                        }];
-    }];
+//    [menuView addIconWithTiltle:@"豆瓣" icon:[UIImage imageNamed:@"icon-douban"] selectedBlock:^{
+//        publishContent = [ShareSDK content:@"一起去吧"
+//                            defaultContent:blockEvent.title
+//                                     image:[ShareSDK imageWithUrl:blockEvent.image]
+//                                     title:blockEvent.title
+//                                       url:blockEvent.adapt_url
+//                               description:@"测试"
+//                                 mediaType:SSPublishContentMediaTypeNews];
+//        
+//        
+//        [ShareSDK shareContent:publishContent
+//                          type:ShareTypeDouBan
+//                   authOptions:nil
+//                  shareOptions:nil
+//                 statusBarTips:YES
+//                        result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+//                            if (state == SSPublishContentStateSuccess)
+//                            {
+//                                NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"发表成功"));
+//                            }
+//                            else if (state == SSPublishContentStateFail)
+//                            {
+//                                NSInteger erroCode = [error errorCode];
+//                                NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"发布失败!error code == %d, error code == %@"), [error errorCode], [error errorDescription]);
+//                            }
+//                            
+//                        }];
+//    }];
     
     [menuView show];
 

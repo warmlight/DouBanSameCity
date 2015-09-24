@@ -38,7 +38,6 @@
 		CD1EDAD91BA032140003A654 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD1EDAC51BA032140003A654 /* WeiboSDK.bundle */; };
 		CD1EDADA1BA032140003A654 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1EDAC91BA032140003A654 /* libWeChatSDK.a */; };
 		CD1EDADB1BA032140003A654 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1EDACC1BA032140003A654 /* ShareSDK.framework */; };
-		CD1EDADE1BA12A3C0003A654 /* RERequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1EDADD1BA12A3C0003A654 /* RERequest.m */; };
 		CD1EDAE11BA16A200003A654 /* share_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD1EDADF1BA16A200003A654 /* share_right@2x.png */; };
 		CD1EDAE21BA16A200003A654 /* share_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD1EDAE01BA16A200003A654 /* share_right@3x.png */; };
 		CD1EDAE51BA18CED0003A654 /* ShareListView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1EDAE41BA18CED0003A654 /* ShareListView.m */; };
@@ -109,6 +108,13 @@
 		CDECAF331BB019920061994D /* icon-weixin.png in Resources */ = {isa = PBXBuildFile; fileRef = CDECAF321BB019920061994D /* icon-weixin.png */; settings = {ASSET_TAGS = (); }; };
 		CDECAF361BB019DB0061994D /* icon-qq.png in Resources */ = {isa = PBXBuildFile; fileRef = CDECAF341BB019DB0061994D /* icon-qq.png */; settings = {ASSET_TAGS = (); }; };
 		CDECAF371BB019DB0061994D /* icon-sina.png in Resources */ = {isa = PBXBuildFile; fileRef = CDECAF351BB019DB0061994D /* icon-sina.png */; settings = {ASSET_TAGS = (); }; };
+		CDECAF3A1BB291560061994D /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDECAF391BB291560061994D /* LoginController.m */; settings = {ASSET_TAGS = (); }; };
+		CDECAF3C1BB2934D0061994D /* owl-login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDECAF3B1BB2934D0061994D /* owl-login@2x.png */; settings = {ASSET_TAGS = (); }; };
+		CDECAF3E1BB293590061994D /* owl-login-arm-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDECAF3D1BB293590061994D /* owl-login-arm-right@2x.png */; settings = {ASSET_TAGS = (); }; };
+		CDECAF401BB293670061994D /* owl-login-arm-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDECAF3F1BB293670061994D /* owl-login-arm-left@2x.png */; settings = {ASSET_TAGS = (); }; };
+		CDECAF421BB2937A0061994D /* iconfont-user.png in Resources */ = {isa = PBXBuildFile; fileRef = CDECAF411BB2937A0061994D /* iconfont-user.png */; settings = {ASSET_TAGS = (); }; };
+		CDECAF441BB293860061994D /* iconfont-password.png in Resources */ = {isa = PBXBuildFile; fileRef = CDECAF431BB293860061994D /* iconfont-password.png */; settings = {ASSET_TAGS = (); }; };
+		CDECAF461BB293A10061994D /* icon_hand.png in Resources */ = {isa = PBXBuildFile; fileRef = CDECAF451BB293A10061994D /* icon_hand.png */; settings = {ASSET_TAGS = (); }; };
 		CDED4BC91AE0E5CC006AAB9F /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED4BC81AE0E5CC006AAB9F /* RootViewController.m */; };
 		CDED4BCB1AE0EA80006AAB9F /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDED4BCA1AE0EA80006AAB9F /* menu@2x.png */; };
 		CDED4BCE1AE0EDE8006AAB9F /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED4BCD1AE0EDE8006AAB9F /* Event.m */; };
@@ -175,8 +181,6 @@
 		CD1EDACA1BA032140003A654 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		CD1EDACB1BA032140003A654 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		CD1EDACC1BA032140003A654 /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
-		CD1EDADC1BA12A3C0003A654 /* RERequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RERequest.h; sourceTree = "<group>"; };
-		CD1EDADD1BA12A3C0003A654 /* RERequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RERequest.m; sourceTree = "<group>"; };
 		CD1EDADF1BA16A200003A654 /* share_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_right@2x.png"; sourceTree = "<group>"; };
 		CD1EDAE01BA16A200003A654 /* share_right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_right@3x.png"; sourceTree = "<group>"; };
 		CD1EDAE31BA18CED0003A654 /* ShareListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareListView.h; sourceTree = "<group>"; };
@@ -289,6 +293,14 @@
 		CDECAF321BB019920061994D /* icon-weixin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-weixin.png"; sourceTree = "<group>"; };
 		CDECAF341BB019DB0061994D /* icon-qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-qq.png"; sourceTree = "<group>"; };
 		CDECAF351BB019DB0061994D /* icon-sina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-sina.png"; sourceTree = "<group>"; };
+		CDECAF381BB291560061994D /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
+		CDECAF391BB291560061994D /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		CDECAF3B1BB2934D0061994D /* owl-login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "owl-login@2x.png"; sourceTree = "<group>"; };
+		CDECAF3D1BB293590061994D /* owl-login-arm-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "owl-login-arm-right@2x.png"; sourceTree = "<group>"; };
+		CDECAF3F1BB293670061994D /* owl-login-arm-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "owl-login-arm-left@2x.png"; sourceTree = "<group>"; };
+		CDECAF411BB2937A0061994D /* iconfont-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-user.png"; sourceTree = "<group>"; };
+		CDECAF431BB293860061994D /* iconfont-password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-password.png"; sourceTree = "<group>"; };
+		CDECAF451BB293A10061994D /* icon_hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_hand.png; sourceTree = "<group>"; };
 		CDED4BC71AE0E5CC006AAB9F /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		CDED4BC81AE0E5CC006AAB9F /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		CDED4BCA1AE0EA80006AAB9F /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
@@ -309,6 +321,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD1EDAA01BA028C60003A654 /* JavaScriptCore.framework in Frameworks */,
 				CD1EDACF1BA032140003A654 /* SinaWeiboConnection.framework in Frameworks */,
 				CD1EDAD51BA032140003A654 /* ShareSDKCoreService.framework in Frameworks */,
 				CD1EDADA1BA032140003A654 /* libWeChatSDK.a in Frameworks */,
@@ -319,7 +332,6 @@
 				CD1EDAA21BA028D00003A654 /* libstdc++.dylib in Frameworks */,
 				CD1EDAD11BA032140003A654 /* AGCommon.framework in Frameworks */,
 				CD1EDACE1BA032140003A654 /* QQConnection.framework in Frameworks */,
-				CD1EDAA01BA028C60003A654 /* JavaScriptCore.framework in Frameworks */,
 				CD1EDA9E1BA028BE0003A654 /* Security.framework in Frameworks */,
 				CD1EDAD01BA032140003A654 /* WeChatConnection.framework in Frameworks */,
 				CD1EDA9C1BA028B80003A654 /* libz.1.2.5.dylib in Frameworks */,
@@ -473,6 +485,12 @@
 		CD9F7BBA1ADF50AA0025F34F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CDECAF431BB293860061994D /* iconfont-password.png */,
+				CDECAF451BB293A10061994D /* icon_hand.png */,
+				CDECAF411BB2937A0061994D /* iconfont-user.png */,
+				CDECAF3F1BB293670061994D /* owl-login-arm-left@2x.png */,
+				CDECAF3D1BB293590061994D /* owl-login-arm-right@2x.png */,
+				CDECAF3B1BB2934D0061994D /* owl-login@2x.png */,
 				CDECAF301BB016C90061994D /* icon-douban.png */,
 				CDECAF341BB019DB0061994D /* icon-qq.png */,
 				CDECAF351BB019DB0061994D /* icon-sina.png */,
@@ -535,6 +553,8 @@
 				CD8C2BE31AF0743500707528 /* SettingController.m */,
 				CDB443321B870F3A00DCB934 /* SelectPopoverController.h */,
 				CDB443331B870F3A00DCB934 /* SelectPopoverController.m */,
+				CDECAF381BB291560061994D /* LoginController.h */,
+				CDECAF391BB291560061994D /* LoginController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -562,8 +582,6 @@
 				CD57B9581AE8D4AE00B86701 /* PHJTransformPinyin.m */,
 				CDC069881AEDC55600D46185 /* HeadPortraitView.h */,
 				CDC069891AEDC55600D46185 /* HeadPortraitView.m */,
-				CD1EDADC1BA12A3C0003A654 /* RERequest.h */,
-				CD1EDADD1BA12A3C0003A654 /* RERequest.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -799,6 +817,7 @@
 				CD1EDAE21BA16A200003A654 /* share_right@3x.png in Resources */,
 				CDA7C3331AF1C758001EF067 /* avatar_default.png in Resources */,
 				CDA7C3341AF1C758001EF067 /* avatar_default@2x.png in Resources */,
+				CDECAF461BB293A10061994D /* icon_hand.png in Resources */,
 				CDECAF311BB016C90061994D /* icon-douban.png in Resources */,
 				CDE2D4741ADDF35F0099FE0C /* Main.storyboard in Resources */,
 				CD8D18C51AF1DD9D00F50261 /* information_nick.png in Resources */,
@@ -814,11 +833,16 @@
 				CDED4BCB1AE0EA80006AAB9F /* menu@2x.png in Resources */,
 				CD1EDAE11BA16A200003A654 /* share_right@2x.png in Resources */,
 				CDA7C3361AF1C758001EF067 /* avatar_default_small@2x.png in Resources */,
+				CDECAF441BB293860061994D /* iconfont-password.png in Resources */,
+				CDECAF3C1BB2934D0061994D /* owl-login@2x.png in Resources */,
 				CDC095CA1AF0A9FF0013526F /* avatar.png in Resources */,
 				CD1EDAD21BA032140003A654 /* ShareSDKLocalizable.strings in Resources */,
 				CD1EDAD71BA032140003A654 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				CD1EDAD91BA032140003A654 /* WeiboSDK.bundle in Resources */,
+				CDECAF3E1BB293590061994D /* owl-login-arm-right@2x.png in Resources */,
+				CDECAF421BB2937A0061994D /* iconfont-user.png in Resources */,
 				CDECAF361BB019DB0061994D /* icon-qq.png in Resources */,
+				CDECAF401BB293670061994D /* owl-login-arm-left@2x.png in Resources */,
 				CDB401FD1AE7924D0067E61F /* owner.png in Resources */,
 				CD8D18C01AF1DD1800F50261 /* information_province@2x.png in Resources */,
 				CDE2D4761ADDF35F0099FE0C /* Images.xcassets in Resources */,
@@ -908,6 +932,7 @@
 				CD9F7BE91ADFBF6B0025F34F /* User.m in Sources */,
 				CD9F7BDD1ADF89F50025F34F /* JsonUtils.m in Sources */,
 				CDE14F581AE0D20B00B1C60F /* SideMenu.m in Sources */,
+				CDECAF3A1BB291560061994D /* LoginController.m in Sources */,
 				CDD975101AE486CD00C8C79C /* EventCell.m in Sources */,
 				CD1EDAE51BA18CED0003A654 /* ShareListView.m in Sources */,
 				CD9F7BC21ADF5AE20025F34F /* LaunchController.m in Sources */,
@@ -921,7 +946,6 @@
 				CD57B9561AE8D06800B86701 /* CityList.m in Sources */,
 				CD9F7BD01ADF87CB0025F34F /* API.m in Sources */,
 				CD9F7BE31ADFA78A0025F34F /* ConfigUtils.m in Sources */,
-				CD1EDADE1BA12A3C0003A654 /* RERequest.m in Sources */,
 				CD57B94A1AE87FE700B86701 /* ZoomInUtils.m in Sources */,
 				CDB443341B870F3A00DCB934 /* SelectPopoverController.m in Sources */,
 				CDB4433C1B8C46A400DCB934 /* ResponseCode.m in Sources */,

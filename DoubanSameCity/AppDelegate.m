@@ -31,6 +31,9 @@
     self.window.rootViewController = [[LaunchController alloc] init];
     [self.window makeKeyAndVisible];
     
+    
+    
+    
     [ShareSDK registerApp:@"a460bd5923cf"];
     [ShareSDK connectSinaWeiboWithAppKey:@"3297713090"
                                appSecret:@"20bdfeb8479e7b05a993f6270a8f548a"
@@ -47,7 +50,7 @@
     
     [ShareSDK connectDoubanWithAppKey:@"0c64cd6d91fb7474252e6848b5f25d5c"
                             appSecret:@"0e0ee1a0742a7637"
-                          redirectUri:@"http://dev.kumoway.com/braininference/infos.php"];
+                          redirectUri:@"https://www.douban.com/"];
     
     [ShareSDK connectWeChatWithAppId:@"wx6d03d0596d338f96"
                            appSecret:@"cba64cc7e8c8597e99f607fa1f6cbfde"

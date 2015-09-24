@@ -31,6 +31,7 @@
     NSLog(@"user id:%@", [Config getLoginUserId]);
     NSLog(@"user largeAvatar :%@", [Config loadUser].large_avatar);
 
+    [API login:@"462451377@qq.com" password:@"462451377"];
 //    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0xFFAEB9);
 //    self.navigationController.navigationBar.alpha = 0.3;
     
@@ -115,7 +116,8 @@
 
 #pragma mark -notification
 - (void)receivedNotificaion:(NSNotification *)nofiticaiton{
-    OAutoController *oauto = [[OAutoController alloc] init];
+//    OAutoController *oauto = [[OAutoController alloc] init];
+    LoginController *oauto = [[LoginController alloc] init];
     [self presentViewController:oauto animated:NO completion:nil];
     [self.sideMenuViewController hideMenuViewController];
 }

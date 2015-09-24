@@ -58,4 +58,6 @@
 + (ResponseCode *)didNotWish:(NSString *)eventId;
 //不参加
 + (ResponseCode *)didNotParticipate:(NSString *)eventId;
+
++ (NSInteger)login:(NSString *)mail password:(NSString *)pasword;
 @end

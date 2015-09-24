@@ -34,7 +34,7 @@
         shareIcon *icon = self.buttonArray[i];
         icon.frame = [self iconFrmae:i];
         [self gameCenterBubble:icon];
-        [UIView animateWithDuration:1.5 delay:0.0f usingSpringWithDamping:0.3f initialSpringVelocity:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:1.5 delay:0.0f usingSpringWithDamping:0.5f initialSpringVelocity:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             CGPoint center = icon.center;
             center.x += 200;
             icon.center = center;
@@ -63,7 +63,7 @@
 
 
 - (void)removeFrommCenter:(shareIcon *)button {
-    [UIView animateWithDuration:0.4 delay:0.0f usingSpringWithDamping:0.5f initialSpringVelocity:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.6 delay:0.0f usingSpringWithDamping:0.6f initialSpringVelocity:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGPoint center = button.center;
         center.x += 300;
         button.center = center;

@@ -133,7 +133,32 @@
     }
 }
 
++ (NSInteger)login:(NSString *)mail password:(NSString *)pasword{
+    NSURL *url = [NSURL URLWithString:@"https://www.douban.com/service/auth2/auth"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
+    request.HTTPMethod = @"POST";
+    NSString *param=[NSString stringWithFormat:@"user_alias=%@&user_passwd=%@&client_id=%@&redirect_uri=%@&response_type=code",mail,pasword,APIKey,RedirectURL];
+    NSData *postData = [param dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPBody = postData;
 
-
+    //把拼接后的字符串转换为data，设置请求体
+    NSHTTPURLResponse *response;
+   [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: nil];
+    if ([response respondsToSelector:@selector(allHeaderFields)]) {
+        NSLog(@"%@", response.URL);
+        NSString *localurl = [[NSString alloc] initWithFormat:@"%@",response.URL];
+        NSRange range = [localurl rangeOfString:@"code="];
+        if (range.length) {
+            NSInteger index = range.location + range.length;
+            NSString *token = [localurl substringFromIndex:index];
+            Account *account = [API get_access_token:token];
+            User *user = [API get_user:account.douban_user_id];
+            [account toString];
+            [Config saveAccount:account];                   //存储account
+            [Config saveUser:user];
+        }
+    }
+    return response.statusCode;
+}
 
 @end
