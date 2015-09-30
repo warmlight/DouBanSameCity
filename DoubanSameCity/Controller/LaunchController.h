@@ -14,7 +14,7 @@
 #import "RootViewController.h"
 
 
-@interface LaunchController : UIViewController
+@interface LaunchController : UIViewController<SideMenuDelegate>
 {
     UIImageView *_wallpaperView;
     FBShimmeringView *_shimmeringView;

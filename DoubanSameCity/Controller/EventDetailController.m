@@ -30,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSheetView:) name:@"showSheetView" object:nil];
     // Do any additional setup after loading the view.
 }
@@ -243,7 +244,7 @@
                 dispatch_queue_t queueToWish =  dispatch_queue_create("refreshToken", NULL);
                 dispatch_async(queueToWish, ^{
                     account = [API update_access_token];
-                    NSLog(@"更新后的accesstoken = %@", account.access_token);
+                    NSLog(@"*************************更新后的accesstoken = %@", account.access_token);
                     [Config saveAccount:account];
                     [weakSelf wish:weakSelf.senderButton];
                 });
@@ -277,7 +278,7 @@
                 dispatch_queue_t queueToWish =  dispatch_queue_create("refreshToken", NULL);
                 dispatch_async(queueToWish, ^{
                     account = [API update_access_token];
-                    NSLog(@"更新后的accesstoken = %@", account.access_token);
+                    NSLog(@"************************更新后的accesstoken = %@", account.access_token);
                     [Config saveAccount:account];
                     [weakSelf wish:weakSelf.senderButton];
                 });
@@ -365,8 +366,8 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     self.titleLabel.hidden = NO;
-    self.rightBtn.hidden = NO;
-    self.leftBtn.hidden = NO;
+//    self.rightBtn.hidden = NO;
+//    self.leftBtn.hidden = NO;
     CGFloat yOffset  = scrollView.contentOffset.y;
     //    CGFloat xOffset = (yOffset + 300)/2;
     //

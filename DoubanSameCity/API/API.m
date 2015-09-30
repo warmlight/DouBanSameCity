@@ -8,6 +8,8 @@
 
 #import "API.h"
 #import "Config.h"
+#import "CityList.h"
+#import "City.h"
 
 @implementation API
 + (Account*)get_access_token:(NSString *)code{
@@ -159,6 +161,13 @@
         }
     }
     return response.statusCode;
+}
+
++ (CityList *)getSearchCity:(NSString *)keyWords cout:(NSNumber *)count start:(NSNumber *)start{
+    NSString *url = [BASE_URL stringByAppendingFormat:@"/v2/loc/search?count=%@&start=%@&apikey=%@&q=%@", count,start,APIKey,keyWords];
+    url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSArray *result = [HttpUtils getSync:url];
+    return (result == nil? nil : [CityList fromJsonData:result[0]]);
 }
 
 @end

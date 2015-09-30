@@ -115,6 +115,8 @@
 		CDECAF421BB2937A0061994D /* iconfont-user.png in Resources */ = {isa = PBXBuildFile; fileRef = CDECAF411BB2937A0061994D /* iconfont-user.png */; settings = {ASSET_TAGS = (); }; };
 		CDECAF441BB293860061994D /* iconfont-password.png in Resources */ = {isa = PBXBuildFile; fileRef = CDECAF431BB293860061994D /* iconfont-password.png */; settings = {ASSET_TAGS = (); }; };
 		CDECAF461BB293A10061994D /* icon_hand.png in Resources */ = {isa = PBXBuildFile; fileRef = CDECAF451BB293A10061994D /* icon_hand.png */; settings = {ASSET_TAGS = (); }; };
+		CDECAF4D1BB3EED80061994D /* LocationSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDECAF4C1BB3EED80061994D /* LocationSelectViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CDECAF4F1BB4E44C0061994D /* location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDECAF4E1BB4E44C0061994D /* location@2x.png */; settings = {ASSET_TAGS = (); }; };
 		CDED4BC91AE0E5CC006AAB9F /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED4BC81AE0E5CC006AAB9F /* RootViewController.m */; };
 		CDED4BCB1AE0EA80006AAB9F /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDED4BCA1AE0EA80006AAB9F /* menu@2x.png */; };
 		CDED4BCE1AE0EDE8006AAB9F /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED4BCD1AE0EDE8006AAB9F /* Event.m */; };
@@ -301,6 +303,9 @@
 		CDECAF411BB2937A0061994D /* iconfont-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-user.png"; sourceTree = "<group>"; };
 		CDECAF431BB293860061994D /* iconfont-password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-password.png"; sourceTree = "<group>"; };
 		CDECAF451BB293A10061994D /* icon_hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_hand.png; sourceTree = "<group>"; };
+		CDECAF4B1BB3EED80061994D /* LocationSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSelectViewController.h; sourceTree = "<group>"; };
+		CDECAF4C1BB3EED80061994D /* LocationSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSelectViewController.m; sourceTree = "<group>"; };
+		CDECAF4E1BB4E44C0061994D /* location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location@2x.png"; sourceTree = "<group>"; };
 		CDED4BC71AE0E5CC006AAB9F /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		CDED4BC81AE0E5CC006AAB9F /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		CDED4BCA1AE0EA80006AAB9F /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
@@ -485,6 +490,7 @@
 		CD9F7BBA1ADF50AA0025F34F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CDECAF4E1BB4E44C0061994D /* location@2x.png */,
 				CDECAF431BB293860061994D /* iconfont-password.png */,
 				CDECAF451BB293A10061994D /* icon_hand.png */,
 				CDECAF411BB2937A0061994D /* iconfont-user.png */,
@@ -555,6 +561,8 @@
 				CDB443331B870F3A00DCB934 /* SelectPopoverController.m */,
 				CDECAF381BB291560061994D /* LoginController.h */,
 				CDECAF391BB291560061994D /* LoginController.m */,
+				CDECAF4B1BB3EED80061994D /* LocationSelectViewController.h */,
+				CDECAF4C1BB3EED80061994D /* LocationSelectViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -818,6 +826,7 @@
 				CDA7C3331AF1C758001EF067 /* avatar_default.png in Resources */,
 				CDA7C3341AF1C758001EF067 /* avatar_default@2x.png in Resources */,
 				CDECAF461BB293A10061994D /* icon_hand.png in Resources */,
+				CDECAF4F1BB4E44C0061994D /* location@2x.png in Resources */,
 				CDECAF311BB016C90061994D /* icon-douban.png in Resources */,
 				CDE2D4741ADDF35F0099FE0C /* Main.storyboard in Resources */,
 				CD8D18C51AF1DD9D00F50261 /* information_nick.png in Resources */,
@@ -928,6 +937,7 @@
 				CD9F7BDC1ADF89F50025F34F /* HttpUtils.m in Sources */,
 				CD9F7BE61ADFA7DE0025F34F /* Config.m in Sources */,
 				CD8C2BE11AEF39F300707528 /* AboutMeScrollView.m in Sources */,
+				CDECAF4D1BB3EED80061994D /* LocationSelectViewController.m in Sources */,
 				CDB443371B87237C00DCB934 /* TypeTable.m in Sources */,
 				CD9F7BE91ADFBF6B0025F34F /* User.m in Sources */,
 				CD9F7BDD1ADF89F50025F34F /* JsonUtils.m in Sources */,
@@ -1092,7 +1102,7 @@
 					"$(PROJECT_DIR)/DoubanSameCity/API/Source/ShareSDK/UI",
 				);
 				INFOPLIST_FILE = DoubanSameCity/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1122,7 +1132,7 @@
 					"$(PROJECT_DIR)/DoubanSameCity/API/Source/ShareSDK/UI",
 				);
 				INFOPLIST_FILE = DoubanSameCity/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -12,6 +12,7 @@
 #import "MJRefresh.h"
 #import "ResponseCode.h"
 #import "ShareEvent.h"
+#import "LocationSelectViewController.h"
 
 @interface EventListController ()
 @property (strong, nonatomic) SelectPopoverController *popoverVC;
@@ -25,13 +26,14 @@
 @end
 
 @implementation EventListController
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     NSLog(@"access token :%@", [Config loadAccount].access_token);
     NSLog(@"user id:%@", [Config getLoginUserId]);
     NSLog(@"user largeAvatar :%@", [Config loadUser].large_avatar);
 
-    [API login:@"462451377@qq.com" password:@"462451377"];
 //    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0xFFAEB9);
 //    self.navigationController.navigationBar.alpha = 0.3;
     
@@ -111,7 +113,8 @@
     [nc addObserver:self selector:@selector(receivedNotification_deleteWishEvent:) name:@"deleteWishEvent" object:nil];
     [nc addObserver:self selector:@selector(receivedNotification_addParticipateEvent:) name:@"addParticipateEvent" object:nil];
     [nc addObserver:self selector:@selector(receivedNotification_deleteParticipateEvent:) name:@"deleteParticipateEvent" object:nil];
-
+    [nc addObserver:self selector:@selector(receivedNotification_pushLocationVC:) name:@"push_locationVC" object:nil];
+    [nc addObserver:self selector:@selector(receivedNotification_SelectLocation:) name:@"SelectLocation" object:nil];
 }
 
 #pragma mark -notification
@@ -154,7 +157,7 @@
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"努力加载中";                    // 设置文字
     hud.labelFont = [UIFont systemFontOfSize:14];
-    [self fristTimeReload];
+    [self firstTimeReload];
     [self.popoverVC dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -187,7 +190,7 @@
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"努力加载中";                    // 设置文字
     hud.labelFont = [UIFont systemFontOfSize:14];
-    [self fristTimeReload];
+    [self firstTimeReload];
     [self.popoverVC dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -248,7 +251,28 @@
     }
 }
 
-- (void)fristTimeReload{
+- (void)receivedNotification_pushLocationVC:(NSNotification *)notification {
+    LocationSelectViewController *locationVC = [[LocationSelectViewController alloc] init];
+    [self.navigationController pushViewController:locationVC animated:YES];
+}
+
+- (void)receivedNotification_SelectLocation:(NSNotification *)notification {
+    NSString *locStr = notification.object;
+    NSArray *array = [[locStr transformToPinyin] componentsSeparatedByString:@" "];
+    self.locName = [[NSMutableString alloc] init];
+    for (int i = 0; i < array.count; i ++) {
+        [self.locName appendString:array[i]];
+    }
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"努力加载中";                    // 设置文字
+    hud.labelFont = [UIFont systemFontOfSize:14];
+    self.page = 0;
+    [self firstTimeReload];
+}
+
+#pragma mark -进页面第一次时拉数据
+- (void)firstTimeReload{
     //显示页面的时候异步加载
     __block __weak typeof(self) weakSelf = self;
     dispatch_queue_t queue =  dispatch_queue_create("myqueue", NULL);
@@ -339,7 +363,7 @@
                     [self.locName appendString:array[i]];
                 }
                 [manager stopUpdatingLocation];
-                [self fristTimeReload];
+                [self firstTimeReload];
             });
         }
     }];

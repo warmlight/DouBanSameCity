@@ -131,16 +131,16 @@
     }];
     
     //第一次进来时拉一遍数据
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"努力加载中";                    // 设置文字
+    hud.labelFont = [UIFont systemFontOfSize:14];
     dispatch_queue_t queueToDown =  dispatch_queue_create("myqueue", NULL);
     dispatch_async(queueToDown, ^{
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeIndeterminate;
-        hud.labelText = @"努力加载中";                    // 设置文字
-        hud.labelFont = [UIFont systemFontOfSize:14];
-        
         [weakSelf getWishEvents:[NSNumber numberWithInt:Count]];
         [weakSelf getParticipateEvents:[NSNumber numberWithInt:Count]];
         dispatch_sync(dispatch_get_main_queue(), ^{
+
             [weakSelf.wishTableView reloadData];
             [weakSelf.participateTableView reloadData];
             if ([weakSelf.wishTableView.header isRefreshing]) {

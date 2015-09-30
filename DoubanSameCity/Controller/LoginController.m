@@ -11,6 +11,7 @@
 #import "API.h"
 #import "Config.h"
 #import "Toast.h"
+#import "SettingController.h"
 
 
 #define mainSize    [UIScreen mainScreen].bounds.size
@@ -130,7 +131,10 @@
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 if ([Config getLoginUserId]) {
-                    [self dismissViewControllerAnimated:NO completion:nil];
+                    NSUInteger index = self.navigationController.viewControllers.count;
+                    SettingController *settingVC = self.navigationController.viewControllers[index - 2];
+                    [self.navigationController popToViewController:settingVC animated:YES];
+//                    [self dismissViewControllerAnimated:NO completion:nil];
                     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
                     [nc postNotificationName:@"push_reloadData" object:nil];
                 }

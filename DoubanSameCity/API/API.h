@@ -60,4 +60,7 @@
 + (ResponseCode *)didNotParticipate:(NSString *)eventId;
 
 + (NSInteger)login:(NSString *)mail password:(NSString *)pasword;
+//搜索city
++ (CityList *)getSearchCity:(NSString *)keyWords cout:(NSNumber *)count start:(NSNumber *)start;
+
 @end

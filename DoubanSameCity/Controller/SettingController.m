@@ -75,8 +75,8 @@
     LoginController *oauto = [[LoginController alloc] init];
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc postNotificationName:@"push_reloadData" object:nil];
-    [self presentViewController:oauto animated:YES completion:nil];
-    
+//    [self presentViewController:oauto animated:YES completion:nil];
+    [self.navigationController pushViewController:oauto animated:YES];
 }
 
 #pragma mark -tableDelegate Datasource

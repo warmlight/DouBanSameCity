@@ -37,9 +37,20 @@
     
     self.navigationItem.title = @"活动";
     
+    //menu
     UIImage * img = [UIImage imageNamed:@"menu.png"];
     UIBarButtonItem * menuButton = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStyleDone target:self action:@selector(presentLeftMenuViewController:)];
     self.navigationItem.leftBarButtonItem = menuButton;
+    
+    //定位按钮
+    UIImage * location = [UIImage imageNamed:@"location"];
+    UIBarButtonItem * locationButton = [[UIBarButtonItem alloc] initWithImage:location style:UIBarButtonItemStyleDone target:self action:@selector(pushLocationController)];
+    self.navigationItem.rightBarButtonItem = locationButton;
+}
+
+- (void)pushLocationController {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:@"push_locationVC" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

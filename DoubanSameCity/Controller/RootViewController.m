@@ -25,6 +25,7 @@
         self.contentViewShadowOffset = CGSizeMake(0, 0);
         self.contentViewShadowOpacity = 0.6;
         self.scaleBackgroundImageView = YES;
+//        self.panGestureEnabled = NO;
         
         TabController *tabVC = [[TabController alloc] init];
         self.contentViewController = [[NavigationController alloc] initWithRootViewController:tabVC];

@@ -61,8 +61,6 @@
 //    NavigationController *nav = [[NavigationController alloc] init];
     RootViewController *root = [[RootViewController alloc] init];
     [self presentViewController:root animated:NO completion:nil];
-
-    
 }
 
 - (void)updateViewConstraints
